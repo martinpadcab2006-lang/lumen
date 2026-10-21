@@ -5,14 +5,14 @@ import { QUICK_QUIZ_LENGTH, parseScore, possibleScores, resultChallenge, resultH
 
 export const generateStaticParams = () => possibleScores.map((score) => ({ puntos: String(score) }));
 
-export const generateMetadata = async ({ params }: PageProps<"/curiosos/quiz/resultado/[puntos]">): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: PageProps<"/descubre/quiz/resultado/[puntos]">): Promise<Metadata> => {
   const score = parseScore((await params).puntos);
   if (score === null) return {};
   const title = `${resultHeadline(score)} en el quiz de Lumen`;
   return { title, description: "¿Cuánto sabes del cristianismo? Cinco preguntas de historia y cultura.", openGraph: { title } };
 };
 
-export default async function QuizResultPage({ params }: PageProps<"/curiosos/quiz/resultado/[puntos]">) {
+export default async function QuizResultPage({ params }: PageProps<"/descubre/quiz/resultado/[puntos]">) {
   const score = parseScore((await params).puntos);
   if (score === null) notFound();
 
@@ -26,13 +26,13 @@ export default async function QuizResultPage({ params }: PageProps<"/curiosos/qu
         {score === QUICK_QUIZ_LENGTH ? resultChallenge(score) : `${resultHeadline(score)} ${resultChallenge(score)}`}
       </p>
       <Link
-        href="/curiosos/quiz"
+        href="/descubre/quiz"
         className="mt-10 inline-flex rounded-full bg-tinta px-7 py-3.5 text-lg font-bold text-niebla transition-transform active:scale-[0.97]"
       >
         Aceptar el reto
       </Link>
       <p className="mt-6">
-        <Link href="/curiosos" className="text-piedra hover:text-tinta hover:underline">
+        <Link href="/descubre/curiosidades" className="text-piedra hover:text-tinta hover:underline">
           O lee antes algunas historias de un minuto
         </Link>
       </p>

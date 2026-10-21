@@ -5,7 +5,7 @@ import { POST_SIZE, renderCard, topicHex } from "@/lib/share-image";
 export const generateStaticParams = () => pills.map((pill) => ({ slug: pill.slug }));
 
 /** Tarjeta vertical (1080 × 1350) lista para subir a Instagram o TikTok. */
-export async function GET(_request: Request, { params }: RouteContext<"/curiosos/[slug]/imagen">) {
+export async function GET(_request: Request, { params }: RouteContext<"/descubre/curiosidades/[slug]/imagen">) {
   const { slug } = await params;
   const pill = findPill(slug);
   if (!pill) notFound();

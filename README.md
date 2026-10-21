@@ -6,8 +6,8 @@ Tiene tres puertas, cada una con su forma de contar:
 
 | Sección | Para quién | Enfoque |
 | --- | --- | --- |
-| **Curiosos** (`/curiosos`) | Gente que llega desde redes sociales | Histórico y cultural. Historias de un minuto con imagen para Instagram/TikTok y quiz rápido para compartir |
-| **Colegios** (`/colegios`) | Primaria, ESO y Bachillerato | Desde la fe cristiana, con lo que comparten las iglesias |
+| **Descubre** (`/descubre`) | Público general, sobre todo desde redes sociales | Histórico y cultural. La historia como una serie, curiosidades con imagen para Instagram/TikTok y quiz rápido |
+| **Colegios** (`/colegios`) | Primaria, ESO y Bachillerato | Desde la fe católica |
 | **Universidad** (`/universidad`) | Estudiantes universitarios | Histórico y cultural, con más profundidad |
 
 Herramientas comunes: línea del tiempo de las iglesias (inicio), mapa de la expansión (`/mapa`), comparador de iglesias (`/comparador`), fichas de cada iglesia (`/iglesias/...`) y quiz (`/quiz`).
@@ -30,7 +30,9 @@ Abre http://localhost:3000.
 
 | Archivo | Qué contiene |
 | --- | --- |
-| `src/content/pills.ts` | Las historias de un minuto de Curiosos |
+| `src/content/history.ts` | La serie de 12 capítulos de historia |
+| `src/content/chapters/` | Cada capítulo, con sus cinco versiones, imágenes, vídeos, podcasts y películas |
+| `src/content/pills.ts` | Las curiosidades de un minuto |
 | `src/content/quiz.ts` | Las preguntas del quiz |
 | `src/content/churches.ts` | Las fichas de cada iglesia (y el comparador) |
 | `src/content/milestones.ts` | Los puntos del mapa |
@@ -41,6 +43,7 @@ Para añadir o corregir contenido, basta con editar los archivos de `src/content
 
 ## Criterios del contenido
 
-- En Curiosos y Universidad, lo que viene de la tradición o de la fe se marca como tal («según la tradición», «según los evangelios»).
+- En Descubre y Universidad, lo que viene de la tradición o de la fe se marca como tal («según la tradición», «según los evangelios»).
 - Las fechas antiguas llevan «c.» cuando son aproximadas.
 - Las cifras de fieles son estimaciones.
+- Cada vídeo, podcast o película tiene `reviewed: false` hasta que alguien lo comprueba. Para que un vídeo empiece en un minuto concreto, se pone `startAt` en segundos.

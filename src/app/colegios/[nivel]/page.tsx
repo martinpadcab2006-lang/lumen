@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageIntro } from "@/components/page-intro";
+import { SeriesList } from "@/components/series-list";
 import { UnitList } from "@/components/unit-list";
 import { findLevel, levels } from "@/content/levels";
 
@@ -24,14 +25,24 @@ export default async function LevelPage({ params }: PageProps<"/colegios/[nivel]
       <p className="mt-2 text-piedra">{level.ages}</p>
 
       <div className="mt-12 grid gap-12 lg:grid-cols-[1.6fr_1fr]">
-        <section aria-labelledby="unidades">
-          <h2 id="unidades" className="text-2xl font-bold">
-            Unidades
-          </h2>
-          <div className="mt-5">
-            <UnitList units={level.units} />
-          </div>
-        </section>
+        <div className="space-y-14">
+          <section aria-labelledby="historia">
+            <h2 id="historia" className="text-2xl font-bold">
+              La historia del cristianismo
+            </h2>
+            <div className="mt-5">
+              <SeriesList audience={level.slug} />
+            </div>
+          </section>
+          <section aria-labelledby="unidades">
+            <h2 id="unidades" className="text-2xl font-bold">
+              Más temas
+            </h2>
+            <div className="mt-5">
+              <UnitList units={level.units} />
+            </div>
+          </section>
+        </div>
 
         <aside className="space-y-10">
           <section aria-labelledby="herramientas">

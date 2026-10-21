@@ -7,7 +7,7 @@ import { findPill, pills, relatedPills, topicColor, topicName } from "@/content/
 
 export const generateStaticParams = () => pills.map((pill) => ({ slug: pill.slug }));
 
-export const generateMetadata = async ({ params }: PageProps<"/curiosos/[slug]">): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: PageProps<"/descubre/curiosidades/[slug]">): Promise<Metadata> => {
   const { slug } = await params;
   const pill = findPill(slug);
   if (!pill) return {};
@@ -18,7 +18,7 @@ export const generateMetadata = async ({ params }: PageProps<"/curiosos/[slug]">
   };
 };
 
-export default async function PillPage({ params }: PageProps<"/curiosos/[slug]">) {
+export default async function PillPage({ params }: PageProps<"/descubre/curiosidades/[slug]">) {
   const { slug } = await params;
   const pill = findPill(slug);
   if (!pill) notFound();
@@ -27,8 +27,8 @@ export default async function PillPage({ params }: PageProps<"/curiosos/[slug]">
 
   return (
     <article className="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
-      <Link href="/curiosos" className="text-piedra hover:text-tinta hover:underline">
-        Volver a todas las historias
+      <Link href="/descubre/curiosidades" className="text-piedra hover:text-tinta hover:underline">
+        Volver a las curiosidades
       </Link>
 
       <div className="mt-8 max-w-3xl">
@@ -52,9 +52,9 @@ export default async function PillPage({ params }: PageProps<"/curiosos/[slug]">
           </p>
           <div className="mt-4">
             <ShareButtons
-              path={`/curiosos/${pill.slug}`}
+              path={`/descubre/curiosidades/${pill.slug}`}
               text={pill.title}
-              imagePath={`/curiosos/${pill.slug}/imagen`}
+              imagePath={`/descubre/curiosidades/${pill.slug}/imagen`}
               imageFileName={`lumen-${pill.slug}.png`}
             />
           </div>

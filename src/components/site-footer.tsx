@@ -6,15 +6,15 @@ export const SiteFooter = () => (
       <div className="max-w-prose space-y-3">
         <p className="font-display text-lg font-semibold text-tinta">Cómo contamos las cosas</p>
         <p>
-          En <strong className="font-semibold text-tinta">Curiosos</strong> y{" "}
+          En <strong className="font-semibold text-tinta">Descubre</strong> y{" "}
           <strong className="font-semibold text-tinta">Universidad</strong> explicamos el cristianismo desde la
-          historia y la cultura. En <strong className="font-semibold text-tinta">Colegios</strong>, desde la fe
-          cristiana: lo que comparten las distintas iglesias, y cuando lo viven de otra manera, lo decimos.
+          historia y la cultura, y distinguimos lo que afirma la fe de lo que establece la investigación histórica.
+          En <strong className="font-semibold text-tinta">Colegios</strong> lo contamos desde la fe católica.
         </p>
         <p>Las fechas con «c.» son aproximadas y las cifras de fieles son estimaciones.</p>
       </div>
       <nav aria-label="Pie de página" className="flex flex-col gap-2">
-        <Link className="hover:text-tinta" href="/curiosos">Curiosos</Link>
+        <Link className="hover:text-tinta" href="/descubre">Descubre</Link>
         <Link className="hover:text-tinta" href="/colegios">Colegios: Primaria, ESO y Bachillerato</Link>
         <Link className="hover:text-tinta" href="/universidad">Universidad</Link>
         <Link className="hover:text-tinta" href="/comparador">Las iglesias cristianas</Link>

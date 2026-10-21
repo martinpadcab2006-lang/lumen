@@ -5,7 +5,7 @@ import { QUICK_QUIZ_LENGTH, parseScore, possibleScores, resultHeadline } from "@
 export const generateStaticParams = () => possibleScores.map((score) => ({ puntos: String(score) }));
 
 /** Tarjeta vertical del resultado, para subir a Instagram o TikTok. */
-export async function GET(_request: Request, { params }: RouteContext<"/curiosos/quiz/resultado/[puntos]/imagen">) {
+export async function GET(_request: Request, { params }: RouteContext<"/descubre/quiz/resultado/[puntos]/imagen">) {
   const score = parseScore((await params).puntos);
   if (score === null) notFound();
   return renderCard(

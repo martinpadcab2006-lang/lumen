@@ -11,10 +11,7 @@ export type Level = {
   tools: readonly { href: string; title: string; howTo: string }[];
 };
 
-/**
- * La sección de colegios se cuenta desde la fe cristiana: lo que comparten las
- * distintas iglesias. Cuando una iglesia lo vive de otra manera, se dice.
- */
+/** La sección de colegios se cuenta desde la fe católica, como la asignatura de Religión. */
 export const levels: readonly Level[] = [
   {
     slug: "primaria",

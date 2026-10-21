@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
+import { SeriesList } from "@/components/series-list";
 import { UnitList } from "@/components/unit-list";
 import { universityUnits } from "@/content/levels";
 
@@ -24,14 +25,24 @@ export default function UniversityPage() {
       />
 
       <div className="mt-12 grid gap-12 lg:grid-cols-[1.6fr_1fr]">
-        <section aria-labelledby="temas">
-          <h2 id="temas" className="text-2xl font-bold">
-            Temas
-          </h2>
-          <div className="mt-5">
-            <UnitList units={universityUnits} />
-          </div>
-        </section>
+        <div className="space-y-14">
+          <section aria-labelledby="historia">
+            <h2 id="historia" className="text-2xl font-bold">
+              Historia del cristianismo
+            </h2>
+            <div className="mt-5">
+              <SeriesList audience="universidad" />
+            </div>
+          </section>
+          <section aria-labelledby="temas">
+            <h2 id="temas" className="text-2xl font-bold">
+              Temas monográficos
+            </h2>
+            <div className="mt-5">
+              <UnitList units={universityUnits} />
+            </div>
+          </section>
+        </div>
 
         <aside aria-labelledby="ya-disponible">
           <h2 id="ya-disponible" className="text-2xl font-bold">

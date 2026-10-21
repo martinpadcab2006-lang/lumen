@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Lumen",
   },
   description:
-    "Historia, fe y cultura del cristianismo para curiosos, colegios y universidad: píldoras para redes, mapa, línea del tiempo, comparador de iglesias y quiz.",
+    "Historia, fe y cultura del cristianismo contada como una serie, con vídeos, mapas y arte. Para todos, para colegios y para la universidad.",
   openGraph: { siteName: "Lumen", locale: "es_ES", type: "website" },
 };
 

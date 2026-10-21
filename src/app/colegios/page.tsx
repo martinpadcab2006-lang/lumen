@@ -5,7 +5,7 @@ import { levels } from "@/content/levels";
 
 export const metadata: Metadata = {
   title: "Colegios",
-  description: "Unidades sobre el cristianismo para Primaria, ESO y Bachillerato, contadas desde la fe cristiana.",
+  description: "El cristianismo para Primaria, ESO y Bachillerato, contado desde la fe católica.",
 };
 
 export default function SchoolsPage() {
@@ -13,7 +13,7 @@ export default function SchoolsPage() {
     <div className="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
       <PageIntro
         title="Colegios"
-        lead="Unidades para clase de Religión, contadas desde la fe cristiana: lo que comparten las distintas iglesias, y cuando lo viven de otra manera, lo explicamos. Elige tu etapa."
+        lead="Para la clase de Religión: la historia del cristianismo y sus grandes temas, contados desde la fe católica y adaptados a cada etapa. Elige la tuya."
       />
 
       <ul className="mt-12 grid gap-5 lg:grid-cols-3">
@@ -26,7 +26,7 @@ export default function SchoolsPage() {
               <span className="text-sm text-piedra">{level.ages}</span>
               <span className="mt-1 font-display text-4xl font-bold tracking-tight group-hover:underline">{level.name}</span>
               <span className="mt-3 flex-1 text-piedra">{level.intro}</span>
-              <span className="mt-6 font-bold">{level.units.length} unidades</span>
+              <span className="mt-6 font-bold">Historia del cristianismo y {level.units.length} temas</span>
             </Link>
           </li>
         ))}
@@ -37,8 +37,8 @@ export default function SchoolsPage() {
           Para el profesorado
         </h2>
         <p className="mt-3">
-          Cada unidad tendrá explicación para el alumnado, actividades, una ficha imprimible y un quiz. Mientras las
-          preparamos, ya puedes usar en clase el mapa, el comparador de iglesias y el quiz.
+          Cada capítulo y cada tema traen explicación adaptada a la etapa, imágenes, vídeos, actividades y un quiz. El
+          capítulo 1 de la historia ya está disponible en las tres etapas.
         </p>
       </section>
     </div>

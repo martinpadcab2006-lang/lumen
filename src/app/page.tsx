@@ -6,10 +6,16 @@ import { pills } from "@/content/pills";
 
 type DoorLink = { href: string; label: string };
 
+const discoverLinks: readonly DoorLink[] = [
+  { href: "/descubre/historia", label: "La historia, como una serie" },
+  { href: "/descubre/curiosidades", label: "Curiosidades de un minuto" },
+  { href: "/descubre/quiz", label: "Quiz rápido" },
+];
+
 const universityLinks: readonly DoorLink[] = [
+  { href: "/universidad/historia/el-mundo-de-jesus", label: "Historia del cristianismo" },
   { href: "/comparador", label: "Comparador de iglesias" },
   { href: "/mapa", label: "Mapa de la expansión" },
-  { href: "/#linea-del-tiempo", label: "Línea del tiempo" },
 ];
 
 export default function HomePage() {
@@ -28,30 +34,30 @@ export default function HomePage() {
 
       <section aria-label="Tres formas de entrar" className="mx-auto mt-10 grid max-w-6xl gap-5 px-4 sm:px-6 lg:grid-cols-3">
         <div className="flex flex-col rounded-3xl bg-lapis p-7 text-niebla sm:p-8">
-          <h2 className="text-3xl font-bold tracking-tight">Curiosos</h2>
+          <h2 className="text-3xl font-bold tracking-tight">Descubre</h2>
           <p className="mt-2 opacity-85">
-            Historias de un minuto sobre fiestas, símbolos e historia. Para leer y compartir.
+            Para todos. La historia del cristianismo contada como una serie, y curiosidades para compartir.
           </p>
-          <ul className="mt-6 flex-1 space-y-3">
-            {pills.slice(3, 6).map((pill) => (
-              <li key={pill.slug}>
-                <Link href={`/curiosos/${pill.slug}`} className="font-display text-lg font-semibold leading-snug hover:underline">
-                  {pill.title}
+          <ul className="mt-6 flex-1 divide-y divide-current/20 border-y border-current/20">
+            {discoverLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="block py-3 font-display text-xl font-semibold hover:underline">
+                  {link.label}
                 </Link>
               </li>
             ))}
           </ul>
           <Link
-            href="/curiosos"
+            href="/descubre"
             className="mt-7 self-start rounded-full bg-niebla px-5 py-2.5 font-bold text-lapis transition-transform active:scale-[0.97]"
           >
-            Ver todas las historias
+            Entrar en Descubre
           </Link>
         </div>
 
         <div className="flex flex-col rounded-3xl border-2 border-tinta p-7 sm:p-8">
           <h2 className="text-3xl font-bold tracking-tight">Colegios</h2>
-          <p className="mt-2 text-piedra">Unidades para clase, contadas desde la fe cristiana.</p>
+          <p className="mt-2 text-piedra">Para la clase de Religión, contado desde la fe católica.</p>
           <ul className="mt-6 flex-1 divide-y divide-linea border-y border-linea">
             {levels.map((level) => (
               <li key={level.slug}>
@@ -97,9 +103,9 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 pt-24 sm:px-6">
         <div className="flex flex-wrap items-baseline justify-between gap-4">
-          <h2 className="text-3xl font-bold tracking-tight">Para leer en un minuto</h2>
-          <Link href="/curiosos" className="font-bold hover:underline">
-            Todas las historias
+          <h2 className="text-3xl font-bold tracking-tight">Curiosidades de un minuto</h2>
+          <Link href="/descubre/curiosidades" className="font-bold hover:underline">
+            Todas las curiosidades
           </Link>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-3">

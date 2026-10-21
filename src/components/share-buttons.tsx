@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 type ShareButtonsProps = {
-  /** Ruta dentro de la web, por ejemplo «/curiosos/el-pez-simbolo-cristiano». */
+  /** Ruta dentro de la web, por ejemplo «/descubre/curiosidades/el-pez-simbolo-cristiano». */
   path: string;
   text: string;
   /** Ruta de una imagen para descargar y subir a Instagram o TikTok. */

@@ -3,7 +3,7 @@ import { topicColor, topicName, type Pill } from "@/content/pills";
 
 export const PillCard = ({ pill }: { pill: Pill }) => (
   <Link
-    href={`/curiosos/${pill.slug}`}
+    href={`/descubre/curiosidades/${pill.slug}`}
     className="group flex flex-col rounded-3xl bg-superficie p-6 ring-1 ring-linea transition-[box-shadow] hover:ring-2 hover:ring-tinta"
     style={{ borderTop: `6px solid ${topicColor[pill.topic]}` }}
   >

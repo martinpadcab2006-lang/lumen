@@ -7,7 +7,9 @@ import { ShareButtons } from "./share-buttons";
 
 type QuizProps = {
   quizId: string;
-  count: number;
+  /** Preguntas fijas, en este orden. Si no se pasan, se eligen `count` al azar del banco general. */
+  questions?: readonly QuizQuestion[];
+  count?: number;
   /** Muestra los botones para compartir el resultado en redes. */
   shareable?: boolean;
 };
@@ -59,9 +61,9 @@ const Results = ({
         <div className="mt-8 border-t border-linea pt-6">
           <p className="mb-3 font-bold">Reta a alguien a superarte</p>
           <ShareButtons
-            path={`/curiosos/quiz/resultado/${score}`}
+            path={`/descubre/quiz/resultado/${score}`}
             text={`He acertado ${score} de ${questions.length} en el quiz de Lumen sobre el cristianismo. ¿Me superas?`}
-            imagePath={`/curiosos/quiz/resultado/${score}/imagen`}
+            imagePath={`/descubre/quiz/resultado/${score}/imagen`}
             imageFileName={`lumen-quiz-${score}-de-${questions.length}.png`}
           />
         </div>
@@ -87,14 +89,14 @@ const Results = ({
   </div>
 );
 
-export const Quiz = ({ quizId, count, shareable = false }: QuizProps) => {
+export const Quiz = ({ quizId, questions: fixedQuestions, count = 5, shareable = false }: QuizProps) => {
   const [questions, setQuestions] = useState<readonly QuizQuestion[] | null>(null);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [finished, setFinished] = useState(false);
 
   const start = () => {
-    setQuestions(pickQuestions(count));
+    setQuestions(fixedQuestions ?? pickQuestions(count));
     setIndex(0);
     setAnswers({});
     setFinished(false);
@@ -103,9 +105,9 @@ export const Quiz = ({ quizId, count, shareable = false }: QuizProps) => {
   if (!questions) {
     return (
       <div className="max-w-3xl rounded-3xl bg-superficie p-7 ring-1 ring-linea sm:p-10">
-        <p className="font-display text-3xl font-bold tracking-tight">{count} preguntas, sin prisa</p>
+        <p className="font-display text-3xl font-bold tracking-tight">{fixedQuestions?.length ?? count} preguntas, sin prisa</p>
         <p className="mt-2 text-piedra">
-          Después de cada respuesta verás la explicación. Cada partida trae preguntas distintas.
+          Después de cada respuesta verás la explicación.{fixedQuestions ? "" : " Cada partida trae preguntas distintas."}
         </p>
         <button type="button" onClick={start} className={`${primaryButton} mt-6`}>
           Empezar

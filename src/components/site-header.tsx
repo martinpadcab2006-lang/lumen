@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 type NavItem = { href: string; label: string };
 
 const navItems: readonly NavItem[] = [
-  { href: "/curiosos", label: "Curiosos" },
+  { href: "/descubre", label: "Descubre" },
   { href: "/colegios", label: "Colegios" },
   { href: "/universidad", label: "Universidad" },
   { href: "/mapa", label: "Mapa" },
