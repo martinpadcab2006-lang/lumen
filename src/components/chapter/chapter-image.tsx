@@ -1,4 +1,5 @@
 import type { ArtImage, ChapterImage as ChapterImageData, PhotoImage } from "@/content/chapter-types";
+import { SafeImg } from "./safe-img";
 
 export const commonsImageUrl = (file: string, width: number): string =>
   `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`;
@@ -8,8 +9,7 @@ const commonsPageUrl = (file: string): string => `https://commons.wikimedia.org/
 const Photo = ({ image }: { image: PhotoImage }) => (
   <figure className="my-8">
     {/* Imagen externa de Wikimedia Commons: se carga tal cual, con su crédito. */}
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img
+    <SafeImg
       src={commonsImageUrl(image.commonsFile, 1200)}
       alt={image.alt}
       loading="lazy"
@@ -27,8 +27,7 @@ const Photo = ({ image }: { image: PhotoImage }) => (
 /** Las obras de arte se cuelgan como en un museo: marco oscuro y cartela. */
 const Artwork = ({ image }: { image: ArtImage }) => (
   <figure className="my-10 rounded-3xl bg-[#1d1a17] p-4 sm:p-8">
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img
+    <SafeImg
       src={commonsImageUrl(image.commonsFile, 1400)}
       alt={image.alt}
       loading="lazy"

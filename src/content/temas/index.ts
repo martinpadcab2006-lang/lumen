@@ -4,9 +4,19 @@ import type { Tema } from "../tema-types";
 import { elPuebloDeJesus } from "./primaria-1/el-pueblo-de-jesus";
 import { esperamosLaNavidad } from "./primaria-1/esperamos-la-navidad";
 import { nosConocemos } from "./primaria-1/nos-conocemos";
+import { cuaresmaYSemanaSanta } from "./primaria-1/cuaresma-y-semana-santa";
+import { jesusCreceYTieneAmigos } from "./primaria-1/jesus-crece-y-tiene-amigos";
+import { querernosYPerdonar } from "./primaria-1/querernos-y-perdonar";
 
 /** Los temas ya escritos. */
-export const temas: readonly Tema[] = [nosConocemos, elPuebloDeJesus, esperamosLaNavidad];
+export const temas: readonly Tema[] = [
+  nosConocemos,
+  elPuebloDeJesus,
+  esperamosLaNavidad,
+  jesusCreceYTieneAmigos,
+  querernosYPerdonar,
+  cuaresmaYSemanaSanta,
+];
 
 export const findTema = (level: string, slug: string): Tema | undefined =>
   temas.find((tema) => tema.level === level && tema.slug === slug);

@@ -409,6 +409,109 @@ scenes["belen"] = svg(
     "Un belén en casa: el portal con María, José y el Niño, la estrella, los pastores con ovejas, casitas y un río de papel de plata.",
 )
 
+# 14. Juan bautiza en el río Jordán
+water = rect(0, 560, W, 190, "url(#rio)") + "".join(path(f"M {x},{y} q 20,-8 40,0", extra='stroke="#ffffff" stroke-width="4" opacity="0.4" stroke-linecap="round"') for x, y in ((90, 610), (300, 690), (820, 640), (1040, 700), (560, 720)))
+scenes["rio"] = svg(
+    rect(0, 0, W, H, "url(#cielo)") + cloud(250, 120) + cloud(900, 90, 0.9) + birds(600, 150)
+    + path("M 0,380 Q 300,320 600,370 T 1200,350 L 1200,600 L 0,600 Z", "#c9b98f")
+    + path("M 0,470 Q 300,430 600,480 T 1200,470 L 1200,600 L 0,600 Z", "#b7c68b")
+    + olive(1080, 560, 0.9) + olive(140, 540, 0.8)
+    + person(170, 600, 0.7, skin=C["skin2"], hair="beard", tunic=C["linen2"], left="down", right="down", look=1)
+    + person(270, 600, 0.66, skin=C["skin3"], hair="veil", tunic="#d8b07a", mantle=C["blue"], left="front", right="down", look=1)
+    + person(1000, 600, 0.68, skin=C["skin1"], hair="short", tunic=C["ochre"], left="down", right="down", look=-1)
+    + person(520, 760, 1.0, skin=C["skin2"], hair="beard", tunic="#8b6b4a", belt="#4a3424", left="down", right="up", look=1)
+    + ellipse(590, 455, 30, 12, "#8a5a3b") + "".join(line(585 + k * 6, 470, 600 + k * 9, 540, "#cfe8f2", 3, 'opacity="0.8"') for k in range(4))
+    + person(680, 760, 0.92, skin=C["skin1"], hair="short", tunic="#efe6d6", left="front", right="front", look=-1)
+    + water,
+    "En el río Jordán, Juan el Bautista bautiza a un hombre mientras mucha gente espera en la orilla.",
+    sky("cielo", "#bfe0f0", "#f3ead6") + '<linearGradient id="rio" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fb0c8" stop-opacity="0.85"/><stop offset="1" stop-color="#4f7f99"/></linearGradient>',
+)
+
+# 15. El pastor encuentra la oveja perdida
+rocks = "".join(ellipse(x, y, rx, ry, c) for x, y, rx, ry, c in ((780, 610, 120, 60, "#a29a8c"), (900, 640, 90, 50, "#8f877a"), (260, 650, 110, 55, "#a29a8c"), (1100, 600, 80, 45, "#8f877a")))
+scenes["pastor"] = svg(
+    rect(0, 0, W, H, "url(#cielo)") + circle(1030, 130, 55, "#f8d77e") + cloud(300, 110)
+    + path("M 0,420 Q 300,300 650,390 T 1200,360 L 1200,750 L 0,750 Z", "#a9ba7a")
+    + path("M 0,560 Q 400,500 800,560 T 1200,560 L 1200,750 L 0,750 Z", "#97ab68") + rocks
+    + sheep(120, 560, 0.55) + sheep(200, 590, 0.5) + sheep(90, 610, 0.5) + sheep(170, 640, 0.55)
+    + g(sheep(0, 0, 1.0), t="translate(590,440) scale(2.2,1.3)")
+    + person(600, 720, 1.05, skin=C["skin2"], hair="beard", tunic=C["linen2"], mantle="#8b6b4a", left="up", right="up", look=0, mouth="open")
+    + "".join(path(f"M {x},{y} c -10,-14 -30,-6 -22,8 l 22,20 l 22,-20 c 8,-14 -12,-22 -22,-8 z", "#e8907c") for x, y in ((470, 300), (740, 280))),
+    "Un pastor ha encontrado a su oveja perdida y la lleva feliz sobre los hombros; al fondo espera el rebaño.",
+    sky("cielo", "#bfe0f0", "#f3ead6"),
+)
+
+# 16. Zaqueo en el árbol
+scenes["zaqueo"] = svg(
+    rect(0, 0, W, H, "url(#cielo)") + cloud(200, 100) + circle(1080, 110, 50, "#f8d77e")
+    + rect(0, 520, W, 230, C["sand"]) + house(40, 540, 230, 200) + house(980, 540, 200, 180, shade=1)
+    + path("M 620,540 Q 600,400 640,300 L 690,300 Q 660,420 700,540 Z", C["trunk"]) + path("M 650,330 Q 560,280 520,230", extra=f'stroke="{C["trunk"]}" stroke-width="22" stroke-linecap="round"') + path("M 670,320 Q 760,270 800,220", extra=f'stroke="{C["trunk"]}" stroke-width="22" stroke-linecap="round"')
+    + ellipse(660, 200, 260, 120, C["leaf2"]) + ellipse(520, 230, 130, 80, C["leaf"])
+    + ellipse(700, 120, 140, 70, C["leaf"]) + ellipse(820, 200, 110, 60, C["leaf"])
+    + person(500, 300, 0.6, skin=C["skin1"], hair="beard", tunic=C["ochre"], stripe=C["red"], left="up", right="down", look=1, mouth="open")
+    + ellipse(505, 300, 70, 26, C["leaf2"])
+    + person(300, 720, 0.8, skin=C["skin2"], hair="beard", tunic=C["linen2"], left="down", right="up", look=1)
+    + person(420, 730, 0.75, skin=C["skin3"], hair="veil", tunic="#d8b07a", mantle=C["blue"], left="front", right="down", look=1)
+    + person(880, 730, 0.75, skin=C["skin1"], hair="short", tunic="#9fb3c4", left="down", right="down", look=-1)
+    + person(1010, 735, 0.7, skin=C["skin3"], hair="veil", tunic="#e5a477", mantle="#c7684d", left="down", right="front", look=-1),
+    "Zaqueo, un hombre bajito, se ha subido a un árbol para ver pasar a Jesús entre la gente.",
+    sky("cielo", "#bfe0f0", "#f3ead6"),
+)
+
+# 17. Hacer las paces
+hearts = "".join(path(f"M {x},{y} c -10,-14 -30,-6 -22,8 l 22,20 l 22,-20 c 8,-14 -12,-22 -22,-8 z", c) for x, y, c in ((560, 280, "#e8907c"), (620, 240, "#f2b53a"), (680, 290, "#e8907c")))
+scenes["paces"] = svg(
+    rect(0, 0, W, H, "url(#cielo)") + cloud(900, 120) + birds(240, 120)
+    + path("M 0,430 Q 300,350 600,410 T 1200,390 L 1200,750 L 0,750 Z", "#b7c68b")
+    + house(60, 560, 280, 240) + house(860, 560, 280, 220, shade=1) + rect(0, 540, W, 210, C["sand"])
+    + person(530, 720, 0.95, skin=C["skin1"], hair="curly", tunic=C["linen"], stripe=C["rust"], left="down", right="out", mouth="open", look=1)
+    + person(735, 720, 0.92, skin=C["skin2"], hair="short", tunic="#c9d3a3", left="out", right="down", mouth="open", look=-1)
+    + hearts + circle(340, 700, 18, "#c2593b") + path("M 330,688 q 10,-12 20,0", extra='stroke="#8a3a25" stroke-width="3"'),
+    "Dos niños de Nazaret que se habían enfadado se dan la mano y sonríen; junto a ellos, su pelota.",
+    sky("cielo", "#bfe0f0", "#f6e9cf"),
+)
+
+# 18. Domingo de Ramos
+def palm(x, y, s=1):
+    leaves = "".join(path(f"M 0,{-20 - k * 22} q {side * 40},-6 {side * 70},18", extra='stroke="#c7a54a" stroke-width="8" stroke-linecap="round"') for k in range(6) for side in (-1, 1))
+    return g(line(0, 0, 0, -170, "#b8963c", 8), leaves, t=f"translate({x},{y}) scale({s})")
+def olive_branch(x, y, s=1):
+    return g(line(0, 0, 0, -140, "#6e5138", 6), *[ellipse(side * 18, -30 - k * 22, 18, 8, "#7e9150", f'transform="rotate({side * 30} {side * 18} {-30 - k * 22})"') for k in range(5) for side in (-1, 1)], t=f"translate({x},{y}) scale({s})")
+scenes["ramos"] = svg(
+    rect(0, 0, W, H, "url(#cielo)") + cloud(200, 120) + circle(1060, 110, 50, "#f8d77e")
+    + rect(330, 150, 540, 420, "#f4efe4") + path("M 330,150 L 600,40 L 870,150 Z", "#e2d6bf") + rect(560, 0, 80, 150, "#f4efe4") + path("M 560,0 L 600,-40 L 640,0 Z", "#e2d6bf")
+    + path("M 520,570 L 520,380 Q 600,300 680,380 L 680,570 Z", "#7c5034") + circle(600, 230, 48, "#bcd3e3") + line(600, 182, 600, 278, "#8a7a5c", 4) + line(552, 230, 648, 230, "#8a7a5c", 4)
+    + rect(0, 560, W, 190, "#d9c9a8")
+    + palm(250, 640, 1) + person(230, 720, 0.75, skin=C["skin1"], hair="curly", tunic="#e4574b", belt="#e4574b", left="down", right="up", mouth="open")
+    + olive_branch(445, 600, 1.1) + person(430, 720, 0.7, skin=C["skin3"], hair="short", tunic="#4f8fd1", belt="#4f8fd1", left="up", right="down", mouth="open")
+    + palm(790, 630, 1.05) + person(780, 720, 0.74, skin=C["skin2"], hair="curly", tunic="#f2b53a", belt="#f2b53a", left="down", right="up", mouth="open", look=-1)
+    + olive_branch(985, 610, 1.05) + person(970, 725, 0.72, skin="#e2b48c", hair="short", tunic="#59a36b", belt="#59a36b", left="up", right="down", look=-1),
+    "Niños de hoy con palmas y ramas de olivo celebran el Domingo de Ramos a la puerta de una iglesia.",
+    sky("cielo", "#bfe0f0", "#f6e9cf"),
+)
+
+# 19. Procesión de Semana Santa
+def nazareno(x, y, s=1, robe="#f3efe6", cap="#5b2a6e"):
+    return g(path("M -40,0 L -30,-200 L 30,-200 L 40,0 Z", robe), path("M -26,-196 L 0,-330 L 26,-196 Z", cap), rect(-30, -205, 60, 26, cap, 6),
+             rect(-10, -240, 7, 8, "#1b1b1b", 3), rect(4, -240, 7, 8, "#1b1b1b", 3), rect(-48, -120, 96, 12, cap, 5),
+             rect(30, -150, 12, 120, "#f8f1df", 3), path("M 36,-152 Q 46,-166 36,-180 Q 26,-166 36,-152 Z", "#f6c24b"), circle(36, -164, 26, "url(#luz)"),
+             t=f"translate({x},{y}) scale({s})")
+candles = "".join(rect(x, 300, 10, 60, "#f8f1df", 3) + path(f"M {x+5},298 Q {x+12},288 {x+5},278 Q {x-2},288 {x+5},298 Z", "#f6c24b") + circle(x + 5, 290, 18, "url(#luz)") for x in range(560, 960, 34))
+scenes["procesion"] = svg(
+    rect(0, 0, W, H, "url(#noche)") + "".join(circle(x, y, 2.2, "#fff6d8") for x, y in ((80, 60), (200, 110), (330, 50), (1120, 90), (1010, 40)))
+    + rect(0, 120, 300, 520, "#e9e4da") + rect(30, 220, 70, 110, "#5e6b85", 4) + rect(170, 220, 70, 110, "#5e6b85", 4) + rect(20, 330, 90, 10, "#3b3b3b") + rect(160, 330, 90, 10, "#3b3b3b")
+    + rect(980, 140, 220, 500, "#ece6dc") + rect(1020, 240, 70, 110, "#5e6b85", 4) + rect(1010, 350, 90, 10, "#3b3b3b")
+    + rect(0, 600, W, 150, "#5b5a62")
+    + rect(520, 360, 470, 200, "#d4a53a", 10) + rect(500, 540, 510, 100, "#6b1f2e", 8) + "".join(circle(540 + k * 52, 380, 14, "#c0392b") for k in range(9))
+    + candles + line(540, 360, 540, 130, "#d4a53a", 6) + line(970, 360, 970, 130, "#d4a53a", 6) + rect(520, 110, 470, 40, "#6b1f2e", 6) + "".join(rect(530 + k * 30, 150, 8, 22, "#d4a53a", 3) for k in range(15))
+    + path("M 755,360 L 690,180 Q 755,140 820,180 Z", "#f3efe6") + path("M 700,360 L 755,190 L 810,360 Z", "#2c3f7a") + circle(755, 200, 26, C["skin3"]) + path("M 729,196 Q 755,160 781,196", extra='stroke="#f3efe6" stroke-width="10"') + path("M 732,176 L 755,150 L 778,176 L 770,168 L 755,158 L 740,168 Z", "#e3b341")
+    + nazareno(150, 700, 0.8) + nazareno(330, 690, 0.8) + nazareno(430, 705, 0.75, cap="#2c3f7a")
+    + person(1080, 735, 0.75, skin=C["skin1"], hair="short", tunic="#4f8fd1", belt="#4f8fd1", left="down", right="down", look=-1)
+    + person(1170, 740, 0.6, skin=C["skin1"], hair="curly", tunic="#e4574b", belt="#e4574b", left="up", right="down", look=-1, mouth="open"),
+    "De noche, un paso con flores y velas avanza por una calle; delante van nazarenos con cirios y una familia lo mira desde la acera.",
+    sky("noche", "#141c3c", "#2c3866") + '<radialGradient id="luz"><stop offset="0" stop-color="#ffe29a" stop-opacity="0.85"/><stop offset="1" stop-color="#ffe29a" stop-opacity="0"/></radialGradient>',
+)
+
 os.makedirs(OUT, exist_ok=True)
 for name, content in scenes.items():
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:
