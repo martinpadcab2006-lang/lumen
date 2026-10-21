@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { chapterPath, type Audience } from "@/content/chapter-types";
+import { chapterPath, type ChapterAudience } from "@/content/chapter-types";
 import { isWritten, series } from "@/content/history";
 
 /** La serie de doce capítulos. Es una secuencia, por eso va numerada. */
-export const SeriesList = ({ audience }: { audience: Audience }) => (
+export const SeriesList = ({ audience }: { audience: ChapterAudience }) => (
   <ol className="divide-y divide-linea border-y border-linea">
     {series.map((chapter) => {
       const written = isWritten(chapter.slug);

@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { PageIntro } from "@/components/page-intro";
 import { teacherGuidePath } from "@/content/chapter-types";
-import { chapters } from "@/content/history";
 import { levels } from "@/content/levels";
+import { isTemaWritten } from "@/content/temas";
 import { hasTeacherAccess, teacherPasswordConfigured } from "@/lib/teacher-access";
 import { enterTeacherZone, leaveTeacherZone } from "./actions";
 
@@ -52,21 +52,34 @@ const GuideIndex = () => (
         <h2 id={`guias-${level.slug}`} className="text-2xl font-bold">
           {level.name} <span className="text-base font-normal text-piedra">· {level.ages}</span>
         </h2>
-        <ul className="mt-4 grid gap-4 md:grid-cols-2">
-          {chapters.map((chapter) => (
-            <li key={chapter.slug}>
-              <Link
-                href={teacherGuidePath(level.slug, chapter.slug)}
-                className="group block rounded-3xl border-2 border-tinta p-6 hover:bg-superficie"
-              >
-                <span className="text-sm text-piedra">Capítulo {chapter.number}</span>
-                <span className="mt-1 block font-display text-xl font-semibold group-hover:underline">
-                  {chapter.versions[level.slug].title}
+        <ul className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {level.programme.map((item) => {
+            const written = isTemaWritten(level.slug, item.slug);
+            const content = (
+              <>
+                <span className="text-sm text-piedra">
+                  Tema {item.number} · {item.trimester}.º trimestre
                 </span>
-                <span className="mt-2 block text-piedra">{chapter.teacherGuides[level.slug].duration}</span>
-              </Link>
-            </li>
-          ))}
+                <span className={`mt-1 block font-display text-lg font-semibold ${written ? "group-hover:underline" : ""}`}>
+                  {item.title}
+                </span>
+                <span className={`mt-2 block text-sm font-bold ${written ? "text-lapis" : "text-piedra"}`}>
+                  {written ? "Abrir la guía" : "En preparación"}
+                </span>
+              </>
+            );
+            return (
+              <li key={item.slug}>
+                {written ? (
+                  <Link href={teacherGuidePath(level.slug, item.slug)} className="group block h-full rounded-3xl border-2 border-tinta p-5 hover:bg-superficie">
+                    {content}
+                  </Link>
+                ) : (
+                  <div className="block h-full rounded-3xl p-5 opacity-70 ring-1 ring-linea">{content}</div>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </section>
     ))}
@@ -101,7 +114,7 @@ export default function TeachersPage({ searchParams }: PageProps<"/profesores">)
       <PageIntro
         back={{ href: "/colegios", label: "Colegios" }}
         title="Zona Profesores"
-        lead="Guías para dar cada capítulo en clase: objetivos, una sesión paso a paso, dinámicas, soluciones, rúbrica y adaptaciones. Se pueden imprimir."
+        lead="Guías para dar cada tema en clase: objetivos, currículo, perfil IB, las sesiones paso a paso, dinámicas, soluciones, rúbrica y adaptaciones. Se pueden imprimir."
       />
       <div className="mt-10">
         <Suspense fallback={<p className="text-piedra">Cargando…</p>}>

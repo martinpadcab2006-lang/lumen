@@ -1,16 +1,18 @@
-import type { Block, Chapter } from "@/content/chapter-types";
+import type { Block, Library } from "@/content/chapter-types";
+import { buildHolyLandMap } from "@/lib/holy-land-map";
 import { ChapterImage, commonsImageUrl } from "./chapter-image";
+import { HolyLandMapView } from "./holy-land-map-view";
 
 /** "grande" es para los más pequeños: letra mayor y más aire entre líneas. */
 export type ReadingSize = "normal" | "grande";
 
-type BlockContext = { chapter: Chapter; narratorName?: string; size: ReadingSize };
+export type BlockContext = { library: Library; narratorName?: string; size: ReadingSize };
 
 const paragraphClass = (size: ReadingSize) =>
   size === "grande" ? "max-w-[60ch] text-2xl leading-loose" : "max-w-[68ch] text-lg leading-relaxed";
 
-const Illustration = ({ id, chapter }: { id: string; chapter: Chapter }) => {
-  const illustration = chapter.illustrations[id];
+const Illustration = ({ id, library }: { id: string; library: Library }) => {
+  const illustration = library.illustrations[id];
   if (!illustration) return null;
   if (illustration.src) {
     return (
@@ -55,10 +57,10 @@ const NarratorAvatar = ({ name }: { name: string }) => {
   );
 };
 
-const CharacterCard = ({ id, chapter }: { id: string; chapter: Chapter }) => {
-  const character = chapter.characters[id];
+const CharacterCard = ({ id, library }: { id: string; library: Library }) => {
+  const character = library.characters[id];
   if (!character) return null;
-  const image = character.image ? chapter.images[character.image] : undefined;
+  const image = character.image ? library.images[character.image] : undefined;
   return (
     <aside className="my-8 flex max-w-[68ch] gap-5 rounded-3xl bg-superficie p-5 ring-1 ring-linea sm:p-6">
       {image && (
@@ -83,16 +85,16 @@ const CharacterCard = ({ id, chapter }: { id: string; chapter: Chapter }) => {
 };
 
 const BlockView = ({ block, context }: { block: Block; context: BlockContext }) => {
-  const { chapter, size } = context;
+  const { library, size } = context;
   switch (block.type) {
     case "p":
       return <p className={paragraphClass(size)}>{block.text}</p>;
     case "image": {
-      const image = chapter.images[block.id];
+      const image = library.images[block.id];
       return image ? <ChapterImage image={image} /> : null;
     }
     case "illustration":
-      return <Illustration id={block.id} chapter={chapter} />;
+      return <Illustration id={block.id} library={library} />;
     case "fact":
       return (
         <aside className="my-6 max-w-[60ch] rounded-2xl border-l-4 border-alba bg-superficie px-5 py-4">
@@ -101,7 +103,13 @@ const BlockView = ({ block, context }: { block: Block; context: BlockContext }) 
         </aside>
       );
     case "character":
-      return <CharacterCard id={block.id} chapter={chapter} />;
+      return <CharacterCard id={block.id} library={library} />;
+    case "map":
+      return library.places ? (
+        <figure className="my-8 max-w-md overflow-hidden rounded-3xl ring-1 ring-linea">
+          <HolyLandMapView map={buildHolyLandMap(library.places)} activePlace={block.place ?? null} />
+        </figure>
+      ) : null;
     case "numbers":
       return (
         <section className="my-8 rounded-3xl bg-lapis-suave p-6 sm:p-8">

@@ -40,7 +40,9 @@ Las guías del profesor (`/profesores`) se abren con una sola contraseña compar
 | `src/content/quiz.ts` | Las preguntas del quiz |
 | `src/content/churches.ts` | Las fichas de cada iglesia (y el comparador) |
 | `src/content/milestones.ts` | Los puntos del mapa |
-| `src/content/levels.ts` | Las unidades de Primaria, ESO, Bachillerato y Universidad |
+| `src/content/levels.ts` | La programación de Colegios: los ciclos y sus temas por trimestre |
+| `src/content/temas/` | Cada tema escrito: arranque, tres lecciones, tarea final, quiz y guía del profesor |
+| `scripts/ilustraciones.py` | Genera los dibujos de `public/ilustraciones` (`python3 scripts/ilustraciones.py public/ilustraciones`) |
 | `supabase/migrations/` | Cambios de la base de datos |
 
 Para añadir o corregir contenido, basta con editar los archivos de `src/content/`.

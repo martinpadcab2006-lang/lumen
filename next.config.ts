@@ -18,7 +18,10 @@ const nextConfig: NextConfig = {
     { source: "/curiosos/:slug", destination: "/descubre/curiosidades/:slug", permanent: true },
     { source: "/religiones/:slug", destination: "/comparador", permanent: true },
     { source: "/colegios/primaria", destination: "/colegios", permanent: true },
-    { source: "/colegios/primaria/historia/:capitulo", destination: "/colegios/primaria-2/historia/:capitulo", permanent: true },
+    { source: "/colegios/primaria/historia/:capitulo", destination: "/colegios", permanent: false },
+    { source: "/colegios/eso", destination: "/colegios/eso-1", permanent: false },
+    { source: "/colegios/eso/:rest*", destination: "/colegios/eso-1", permanent: false },
+    { source: "/colegios/:nivel/historia/:capitulo", destination: "/colegios/:nivel", permanent: false },
   ],
   turbopack: {
     rules: {

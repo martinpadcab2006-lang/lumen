@@ -284,7 +284,7 @@ export const media: Chapter["media"] = [
     url: "https://www.youtube.com/watch?v=A37HqEjTSu4",
     youtubeId: "A37HqEjTSu4",
     note: "Un recorrido por las regiones de la tierra de Jesús, su gente y su cultura.",
-    audiences: ["eso", "bachillerato", "universidad", "descubre"],
+    audiences: ["eso-1", "bachillerato", "universidad", "descubre"],
     reviewed: false,
   },
   {
@@ -294,7 +294,7 @@ export const media: Chapter["media"] = [
     url: "https://www.youtube.com/watch?v=n96S63sHvGg",
     youtubeId: "n96S63sHvGg",
     note: "Cómo estaba organizada la sociedad: familias, oficios, ricos y pobres.",
-    audiences: ["descubre", "eso", "primaria-2"],
+    audiences: ["descubre", "eso-1", "primaria-2"],
     reviewed: false,
   },
   {
@@ -304,7 +304,7 @@ export const media: Chapter["media"] = [
     url: "https://www.youtube.com/watch?v=FNgYQXOWgX4",
     youtubeId: "FNgYQXOWgX4",
     note: "Dibujos animados sobre cómo creció Jesús en Nazaret.",
-    audiences: ["primaria-1", "primaria-2"],
+    audiences: ["primaria-1", "primaria-2", "primaria-3"],
     reviewed: false,
   },
   {
@@ -313,7 +313,7 @@ export const media: Chapter["media"] = [
     by: "Docuhistoria (iVoox)",
     url: "https://www.ivoox.com/en/palestina-tiempo-jesus-geografia-historia-y-audios-mp3_rf_96250016_1.html",
     note: "Para escuchar en el autobús: la tierra de Jesús, región a región.",
-    audiences: ["descubre", "eso", "bachillerato", "universidad"],
+    audiences: ["descubre", "eso-1", "bachillerato", "universidad"],
     reviewed: false,
   },
   {
@@ -343,7 +343,7 @@ export const media: Chapter["media"] = [
     trailerYoutubeId: "sIvArkHt_G0",
     whereToWatch: "https://www.justwatch.com/es/buscar?q=The%20Chosen",
     note: "Serie que recrea con mucho detalle la vida diaria en Galilea: pescadores, recaudadores de impuestos, fariseos y soldados romanos.",
-    audiences: ["descubre", "eso", "bachillerato"],
+    audiences: ["descubre", "eso-1", "bachillerato"],
     reviewed: false,
   },
   {

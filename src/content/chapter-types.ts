@@ -1,31 +1,32 @@
 import type { QuizQuestion } from "./quiz";
 
-/** Las formas de contar cada tema. */
-export type Audience = "descubre" | "primaria-1" | "primaria-2" | "eso" | "bachillerato" | "universidad";
+/** Los ciclos de Colegios, como en el currículo: Primaria en tres, ESO en dos y Bachillerato. */
+export type SchoolAudience = "primaria-1" | "primaria-2" | "primaria-3" | "eso-1" | "eso-2" | "bachillerato";
 
-export type SchoolAudience = Extract<Audience, "primaria-1" | "primaria-2" | "eso" | "bachillerato">;
+/** Los capítulos de historia se leen en Descubre y en Universidad; en Colegios van dentro de los temas. */
+export type ChapterAudience = "descubre" | "universidad";
+
+/** Todos los públicos, para marcar a quién sirve cada vídeo o podcast. */
+export type Audience = ChapterAudience | SchoolAudience;
 
 export const audienceName: Readonly<Record<Audience, string>> = {
   descubre: "Descubre",
-  "primaria-1": "Primaria 1.º–3.º",
-  "primaria-2": "Primaria 4.º–6.º",
-  eso: "ESO",
-  bachillerato: "Bachillerato",
   universidad: "Universidad",
+  "primaria-1": "Primaria 1.º–2.º",
+  "primaria-2": "Primaria 3.º–4.º",
+  "primaria-3": "Primaria 5.º–6.º",
+  "eso-1": "ESO 1.º–2.º",
+  "eso-2": "ESO 3.º–4.º",
+  bachillerato: "Bachillerato",
 };
 
-export const isSchoolAudience = (audience: Audience): audience is SchoolAudience =>
-  audience === "primaria-1" || audience === "primaria-2" || audience === "eso" || audience === "bachillerato";
+/** Ruta de un capítulo de historia. */
+export const chapterPath = (audience: ChapterAudience, slug: string): string =>
+  audience === "descubre" ? `/descubre/historia/${slug}` : `/universidad/historia/${slug}`;
 
-/** Ruta de un capítulo de historia para cada público. */
-export const chapterPath = (audience: Audience, slug: string): string => {
-  if (audience === "descubre") return `/descubre/historia/${slug}`;
-  if (audience === "universidad") return `/universidad/historia/${slug}`;
-  return `/colegios/${audience}/historia/${slug}`;
-};
+export const temaPath = (level: SchoolAudience, slug: string): string => `/colegios/${level}/${slug}`;
 
-export const teacherGuidePath = (audience: SchoolAudience, slug: string): string =>
-  `/profesores/${audience}/${slug}`;
+export const teacherGuidePath = (level: SchoolAudience, slug: string): string => `/profesores/${level}/${slug}`;
 
 /** Un lugar del mapa de la época. */
 export type Place = { name: string; lat: number; lon: number };
@@ -108,7 +109,9 @@ export type Block =
   | { type: "quote"; text: string; source: string }
   | { type: "words"; items: readonly { term: string; meaning: string }[] }
   | { type: "narrator"; text: string }
-  | { type: "story"; title: string; paragraphs: readonly string[] };
+  | { type: "story"; title: string; paragraphs: readonly string[] }
+  /** Mapa de la tierra de Jesús con un lugar destacado. */
+  | { type: "map"; place?: string };
 
 export type Section = { stop: string; heading: string; blocks: readonly Block[] };
 
@@ -119,8 +122,6 @@ export type ChapterVersion = {
   /** Resumen de un minuto, arriba del todo. */
   inAMinute: readonly string[];
   intro: string;
-  /** Narrador inventado para Primaria. */
-  narrator?: { name: string; presentation: string };
   sections: readonly Section[];
   activities?: readonly string[];
   debates?: readonly { question: string; positions: string }[];
@@ -132,16 +133,12 @@ export type ChapterVersion = {
   next: string;
 };
 
-/** Guía para el profesor: solo se ve en la Zona Profesores. */
-export type TeacherGuide = {
-  goals: readonly string[];
-  duration: string;
-  materials: readonly string[];
-  session: readonly { minutes: number; title: string; description: string }[];
-  dynamics: readonly { title: string; description: string }[];
-  answers: readonly string[];
-  rubric: readonly { criterion: string; levels: readonly [string, string, string] }[];
-  adaptations: { support: string; extension: string };
+/** Imágenes, dibujos y personajes que pueden citar los bloques de un capítulo o de un tema. */
+export type Library = {
+  images: Readonly<Record<string, ChapterImage>>;
+  illustrations: Readonly<Record<string, Illustration>>;
+  characters: Readonly<Record<string, Character>>;
+  places?: Readonly<Record<string, Place>>;
 };
 
 export type Chapter = {
@@ -155,8 +152,7 @@ export type Chapter = {
   illustrations: Readonly<Record<string, Illustration>>;
   characters: Readonly<Record<string, Character>>;
   media: readonly Media[];
-  versions: Readonly<Record<Audience, ChapterVersion>>;
-  teacherGuides: Readonly<Record<SchoolAudience, TeacherGuide>>;
+  versions: Readonly<Record<ChapterAudience, ChapterVersion>>;
 };
 
 /** Ficha corta de un capítulo para los índices, esté escrito o no. */

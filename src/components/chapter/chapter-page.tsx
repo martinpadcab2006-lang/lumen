@@ -1,44 +1,23 @@
 import Link from "next/link";
-import {
-  audienceName,
-  chapterPath,
-  isSchoolAudience,
-  teacherGuidePath,
-  type Audience,
-  type Chapter,
-} from "@/content/chapter-types";
+import { audienceName, chapterPath, type Chapter, type ChapterAudience } from "@/content/chapter-types";
 import { nextInSeries } from "@/content/history";
 import { findPill, type Pill } from "@/content/pills";
 import { buildHolyLandMap } from "@/lib/holy-land-map";
 import { PillCard } from "../pill-card";
 import { Quiz } from "../quiz";
-import { Blocks, type ReadingSize } from "./blocks";
+import { Blocks } from "./blocks";
 import { ChapterReader } from "./chapter-reader";
 import { HolyLandMapView } from "./holy-land-map-view";
 import { MediaShelf } from "./media-shelf";
 
-const audiences: readonly Audience[] = ["descubre", "primaria-1", "primaria-2", "eso", "bachillerato", "universidad"];
+const audiences: readonly ChapterAudience[] = ["descubre", "universidad"];
 
-const backLink = (audience: Audience): { href: string; label: string } => {
-  switch (audience) {
-    case "descubre":
-      return { href: "/descubre/historia", label: "La historia del cristianismo" };
-    case "universidad":
-      return { href: "/universidad", label: "Universidad" };
-    case "primaria-1":
-    case "primaria-2":
-    case "eso":
-    case "bachillerato":
-      return { href: `/colegios/${audience}`, label: audienceName[audience] };
-  }
-};
+const backLink = (audience: ChapterAudience): { href: string; label: string } =>
+  audience === "descubre"
+    ? { href: "/descubre/historia", label: "La historia del cristianismo" }
+    : { href: "/universidad", label: "Universidad" };
 
-const voiceNote = (audience: Audience): string =>
-  audience === "descubre" || audience === "universidad"
-    ? "Contado desde la historia y la cultura."
-    : "Contado desde la fe católica.";
-
-type ChapterPageProps = { chapter: Chapter; audience: Audience };
+type ChapterPageProps = { chapter: Chapter; audience: ChapterAudience };
 
 export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
   const version = chapter.versions[audience];
@@ -46,15 +25,13 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
   const media = chapter.media.filter((item) => item.audiences.includes(audience));
   const next = nextInSeries(chapter.number);
   const back = backLink(audience);
-  const size: ReadingSize = audience === "primaria-1" ? "grande" : "normal";
-  const context = { chapter, narratorName: version.narrator?.name, size };
+  const context = { library: chapter, size: "normal" as const };
   const sections = version.sections.map((section) => ({
     heading: section.heading,
     stop: section.stop,
     content: <Blocks blocks={section.blocks} context={context} />,
   }));
   const related = (version.relatedPills ?? []).map(findPill).filter((pill): pill is Pill => pill !== undefined);
-  const isKids = audience === "primaria-1" || audience === "primaria-2";
 
   return (
     <article className="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
@@ -67,23 +44,12 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
           Capítulo {chapter.number}, {chapter.period}
         </p>
         <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-6xl">{version.title}</h1>
-        <p className={`mt-5 leading-relaxed ${size === "grande" ? "text-2xl" : "text-xl"}`}>{version.intro}</p>
-        {version.narrator && <p className="mt-4 text-sm text-piedra">{version.narrator.presentation}</p>}
+        <p className="mt-5 text-xl leading-relaxed">{version.intro}</p>
       </header>
 
-      {isSchoolAudience(audience) && (
-        <p className="mt-6">
-          <Link
-            href={teacherGuidePath(audience, chapter.slug)}
-            className="inline-flex items-center gap-2 rounded-full bg-tinta px-4 py-2 text-sm font-semibold text-niebla hover:bg-lapis"
-          >
-            <span aria-hidden>🔒</span> Guía para el profesor
-          </Link>
-        </p>
-      )}
 
       <nav aria-label="Este capítulo en otras versiones" className="mt-8 flex flex-wrap items-center gap-2 text-sm">
-        <span className="mr-1 text-piedra">{voiceNote(audience)} Otras versiones:</span>
+        <span className="mr-1 text-piedra">Contado desde la historia y la cultura. Otra versión:</span>
         {audiences.map((other) => (
           <Link
             key={other}
@@ -114,15 +80,15 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
       </div>
 
       <div className="mt-14">
-        <ChapterReader sections={sections} stops={chapter.stops} places={chapter.places} map={map} large={size === "grande"} />
+        <ChapterReader sections={sections} stops={chapter.stops} places={chapter.places} map={map} />
       </div>
 
       {version.activities && (
         <section aria-labelledby="actividades" className="mt-16 max-w-4xl">
           <h2 id="actividades" className="text-3xl font-bold tracking-tight">
-            {isKids ? "Ahora te toca a ti" : "Actividades"}
+            Actividades
           </h2>
-          <ol className={`mt-6 list-decimal space-y-3 pl-6 marker:font-bold ${size === "grande" ? "text-2xl" : "text-lg"}`}>
+          <ol className="mt-6 list-decimal space-y-3 pl-6 text-lg marker:font-bold">
             {version.activities.map((activity) => (
               <li key={activity}>{activity}</li>
             ))}

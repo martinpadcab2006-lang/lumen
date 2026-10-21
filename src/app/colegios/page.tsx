@@ -16,7 +16,7 @@ export default function SchoolsPage() {
         lead="Para la clase de Religión: la historia del cristianismo y sus grandes temas, contados desde la fe católica y adaptados a cada etapa. Elige la tuya."
       />
 
-      <ul className="mt-12 grid gap-5 md:grid-cols-2">
+      <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {levels.map((level) => (
           <li key={level.slug}>
             <Link
@@ -26,7 +26,7 @@ export default function SchoolsPage() {
               <span className="text-sm text-piedra">{level.ages}</span>
               <span className="mt-1 font-display text-4xl font-bold tracking-tight group-hover:underline">{level.name}</span>
               <span className="mt-3 flex-1 text-piedra">{level.intro}</span>
-              <span className="mt-6 font-bold">Historia del cristianismo y {level.units.length} temas</span>
+              <span className="mt-6 font-bold">{level.programme.length} temas en tres trimestres</span>
             </Link>
           </li>
         ))}
@@ -37,9 +37,11 @@ export default function SchoolsPage() {
           Para el profesorado
         </h2>
         <p className="mt-3">
-          Cada capítulo trae explicación adaptada a la etapa, imágenes, vídeos, actividades y un quiz. Además, cada
-          capítulo tiene una guía para el profesor (objetivos, una sesión de 50 minutos paso a paso, dinámicas,
-          soluciones y rúbrica), que solo se abre con la contraseña del profesorado.
+          La programación sigue el currículo de Religión Católica: Primaria en tres ciclos, ESO en dos y Bachillerato,
+          con tres temas por trimestre (cinco en Bachillerato). Cada tema dura unas cuatro semanas: una pregunta para
+          empezar, tres lecciones con imágenes, vídeos y actividades, una tarea final y un quiz. Cada tema tiene además
+          una guía para el profesor (currículo, perfil IB, sesiones paso a paso, dinámicas, soluciones y rúbrica), que
+          solo se abre con la contraseña del profesorado.
         </p>
         <p className="mt-5">
           <Link href="/profesores" className="font-bold underline hover:text-lapis">

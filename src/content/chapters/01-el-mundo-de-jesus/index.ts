@@ -1,9 +1,6 @@
 import type { Chapter } from "../../chapter-types";
 import { descubre } from "./descubre";
-import { bachillerato, eso } from "./eso-bachillerato";
-import { primaria1, primaria2 } from "./primaria";
 import { characters, illustrations, images, media, places, stops } from "./shared";
-import { teacherGuides } from "./teacher-guides";
 import { universidad } from "./universidad";
 
 export const chapter01: Chapter = {
@@ -17,13 +14,5 @@ export const chapter01: Chapter = {
   illustrations,
   characters,
   media,
-  versions: {
-    descubre,
-    "primaria-1": primaria1,
-    "primaria-2": primaria2,
-    eso,
-    bachillerato,
-    universidad,
-  },
-  teacherGuides,
+  versions: { descubre, universidad },
 };
