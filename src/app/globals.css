@@ -15,15 +15,22 @@
   --linea: #cfd6e2;
   --superficie: #f8f9fb;
   --tierra: #dbe1ea;
+  --acierto: #17804f;
+  --fallo: #b3261e;
 
-  --rel-hinduismo: #dc6a16;
-  --rel-judaismo: #2f66d6;
-  --rel-budismo: #c4950c;
-  --rel-confucianismo: #8a5a2b;
-  --rel-taoismo: #2f8a84;
-  --rel-cristianismo: #b4234c;
-  --rel-islam: #13855f;
-  --rel-sijismo: #6c43b8;
+  --rama-primer-milenio: #7d6b55;
+  --rama-catolica: #b4234c;
+  --rama-ortodoxa: #2f66d6;
+  --rama-orientales: #13855f;
+  --rama-protestante: #d0610f;
+  --rama-anglicana: #6c43b8;
+
+  --tema-fiestas: #b7791f;
+  --tema-simbolos: #2b44a0;
+  --tema-historia: #8a5a2b;
+  --tema-biblia: #13855f;
+  --tema-costumbres: #b4234c;
+  --tema-iglesias: #6c43b8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,15 +45,22 @@
     --linea: #2c365a;
     --superficie: #171f3a;
     --tierra: #2a355e;
+    --acierto: #4cc48a;
+    --fallo: #ef6b62;
 
-    --rel-hinduismo: #f08a3e;
-    --rel-judaismo: #6b95f0;
-    --rel-budismo: #e3b737;
-    --rel-confucianismo: #c48b57;
-    --rel-taoismo: #4fbdb4;
-    --rel-cristianismo: #e2557c;
-    --rel-islam: #3cbf8e;
-    --rel-sijismo: #a283e6;
+    --rama-primer-milenio: #b9a68d;
+    --rama-catolica: #e2557c;
+    --rama-ortodoxa: #6b95f0;
+    --rama-orientales: #3cbf8e;
+    --rama-protestante: #f08a3e;
+    --rama-anglicana: #a283e6;
+
+    --tema-fiestas: #e3b737;
+    --tema-simbolos: #9fb2f2;
+    --tema-historia: #c48b57;
+    --tema-biblia: #3cbf8e;
+    --tema-costumbres: #e2557c;
+    --tema-iglesias: #a283e6;
   }
 }
 
@@ -61,8 +75,8 @@
   --color-linea: var(--linea);
   --color-superficie: var(--superficie);
   --color-tierra: var(--tierra);
-  --color-acierto: var(--rel-islam);
-  --color-fallo: var(--rel-cristianismo);
+  --color-acierto: var(--acierto);
+  --color-fallo: var(--fallo);
 
   --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", system-ui, sans-serif;
   --font-sans: "Lexend Variable", "Lexend", system-ui, sans-serif;

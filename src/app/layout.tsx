@@ -5,13 +5,19 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Lumen: las religiones del mundo, para entenderlas",
+    default: "Lumen: el cristianismo, contado a fondo",
     template: "%s | Lumen",
   },
   description:
-    "Mapas, líneas del tiempo, comparador y quiz para estudiar las religiones del mundo en clase o por curiosidad.",
+    "Historia, fe y cultura del cristianismo para curiosos, colegios y universidad: píldoras para redes, mapa, línea del tiempo, comparador de iglesias y quiz.",
+  openGraph: { siteName: "Lumen", locale: "es_ES", type: "website" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

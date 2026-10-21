@@ -53,7 +53,7 @@ export const buildMapGeometry = (): MapGeometry => {
     borders: roundPathNumbers(toPath(borders) ?? ""),
     milestones: milestones.map((milestone, index) => {
       const [x, y] = projection([milestone.lon, milestone.lat]) ?? [0, 0];
-      return { ...milestone, id: `${milestone.religion}-${index}`, x, y };
+      return { ...milestone, id: `${milestone.branch}-${index}`, x, y };
     }),
   };
 };

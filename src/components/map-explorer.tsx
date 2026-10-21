@@ -1,17 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { religions, type ReligionSlug } from "@/content/religions";
-import type { MapGeometry, ProjectedMilestone } from "@/lib/map-geometry";
+import { branchColor, branchName, type BranchSlug } from "@/content/churches";
+import type { MapGeometry } from "@/lib/map-geometry";
 import { TIMELINE_END, TIMELINE_START, formatMilestoneYear, formatYear } from "@/lib/years";
 
-const PLAY_YEARS_PER_SECOND = 220;
+const PLAY_YEARS_PER_SECOND = 160;
 
-const colorOf = (slug: ReligionSlug): string =>
-  religions.find((religion) => religion.slug === slug)?.color ?? "currentColor";
-
-const nameOf = (slug: ReligionSlug): string =>
-  religions.find((religion) => religion.slug === slug)?.name ?? slug;
+const branches = Object.keys(branchName) as BranchSlug[];
 
 const usePlayback = (year: number, setYear: (update: (current: number) => number) => void) => {
   const [wantsToPlay, setWantsToPlay] = useState(false);
@@ -46,41 +42,27 @@ const usePlayback = (year: number, setYear: (update: (current: number) => number
   return { playing, toggle, stop: () => setWantsToPlay(false) };
 };
 
-const routeFor = (points: readonly ProjectedMilestone[]): string =>
-  points.map((point, index) => `${index === 0 ? "M" : "L"}${point.x.toFixed(1)},${point.y.toFixed(1)}`).join(" ");
-
 type MapExplorerProps = { geometry: MapGeometry };
 
 export const MapExplorer = ({ geometry }: MapExplorerProps) => {
-  const [rawYear, setRawYear] = useState<number>(-500);
+  const [rawYear, setRawYear] = useState<number>(325);
   const year = Math.round(rawYear);
-  const [hidden, setHidden] = useState<ReadonlySet<ReligionSlug>>(new Set());
+  const [hidden, setHidden] = useState<ReadonlySet<BranchSlug>>(new Set());
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const { playing, toggle, stop } = usePlayback(year, setRawYear);
 
   const visible = useMemo(
     () =>
       geometry.milestones
-        .filter((milestone) => milestone.year <= year && !hidden.has(milestone.religion))
+        .filter((milestone) => milestone.year <= year && !hidden.has(milestone.branch))
         .sort((a, b) => a.year - b.year),
     [geometry.milestones, year, hidden],
-  );
-
-  const routes = useMemo(
-    () =>
-      religions
-        .map((religion) => ({
-          slug: religion.slug,
-          points: visible.filter((milestone) => milestone.religion === religion.slug),
-        }))
-        .filter((route) => route.points.length > 1),
-    [visible],
   );
 
   const newest = visible.at(-1);
   const selected = visible.find((milestone) => milestone.id === selectedId) ?? newest;
 
-  const toggleReligion = (slug: ReligionSlug) =>
+  const toggleBranch = (slug: BranchSlug) =>
     setHidden((current) => {
       const next = new Set(current);
       if (next.has(slug)) next.delete(slug);
@@ -100,18 +82,6 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
           >
             <path d={geometry.land} className="fill-tierra" />
             <path d={geometry.borders} className="fill-none stroke-superficie" strokeWidth={0.7} />
-            {routes.map((route) => (
-              <path
-                key={route.slug}
-                d={routeFor(route.points)}
-                fill="none"
-                stroke={colorOf(route.slug)}
-                strokeWidth={1.4}
-                strokeDasharray="3 4"
-                strokeLinecap="round"
-                opacity={0.7}
-              />
-            ))}
             {visible.map((milestone) => {
               const isSelected = milestone.id === selected?.id;
               const age = year - milestone.year;
@@ -123,10 +93,10 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
                   className="cursor-pointer"
                   onClick={() => setSelectedId(milestone.id)}
                 >
-                  <circle r={glow} fill={colorOf(milestone.religion)} opacity={0.22} />
+                  <circle r={glow} fill={branchColor[milestone.branch]} opacity={0.22} />
                   <circle
                     r={isSelected ? 9 : 6.5}
-                    fill={colorOf(milestone.religion)}
+                    fill={branchColor[milestone.branch]}
                     stroke="var(--superficie)"
                     strokeWidth={1.5}
                   />
@@ -173,22 +143,22 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
         </div>
 
         <fieldset>
-          <legend className="mb-2 font-bold">Tradiciones en el mapa</legend>
+          <legend className="mb-2 font-bold">Iglesias en el mapa</legend>
           <div className="flex flex-wrap gap-2">
-            {religions.map((religion) => {
-              const shown = !hidden.has(religion.slug);
+            {branches.map((branch) => {
+              const shown = !hidden.has(branch);
               return (
                 <button
-                  key={religion.slug}
+                  key={branch}
                   type="button"
                   aria-pressed={shown}
-                  onClick={() => toggleReligion(religion.slug)}
+                  onClick={() => toggleBranch(branch)}
                   className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
                     shown ? "border-tinta" : "border-linea text-piedra line-through"
                   }`}
                 >
-                  <span aria-hidden className="size-2.5 rounded-full" style={{ background: religion.color }} />
-                  {religion.name}
+                  <span aria-hidden className="size-2.5 rounded-full" style={{ background: branchColor[branch] }} />
+                  {branchName[branch]}
                 </button>
               );
             })}
@@ -199,8 +169,8 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
       <aside className="space-y-6">
         {selected ? (
           <div className="rounded-3xl bg-superficie p-6 ring-1 ring-linea">
-            <p className="font-bold" style={{ color: colorOf(selected.religion) }}>
-              {nameOf(selected.religion)}
+            <p className="font-bold" style={{ color: branchColor[selected.branch] }}>
+              {branchName[selected.branch]}
             </p>
             <h2 className="mt-1 text-2xl font-bold">{selected.place}</h2>
             <p className="tabular-nums text-piedra">{formatMilestoneYear(selected.year, selected.approximate)}</p>
@@ -224,7 +194,7 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
                     milestone.id === selected?.id ? "bg-niebla-honda" : ""
                   }`}
                 >
-                  <span aria-hidden className="size-2 shrink-0 rounded-full" style={{ background: colorOf(milestone.religion) }} />
+                  <span aria-hidden className="size-2 shrink-0 rounded-full" style={{ background: branchColor[milestone.branch] }} />
                   <span className="w-20 shrink-0 text-sm tabular-nums text-piedra">
                     {formatMilestoneYear(milestone.year, milestone.approximate)}
                   </span>

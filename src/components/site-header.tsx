@@ -6,15 +6,15 @@ import { usePathname } from "next/navigation";
 type NavItem = { href: string; label: string };
 
 const navItems: readonly NavItem[] = [
-  { href: "/aprende", label: "Aprende" },
-  { href: "/descubre", label: "Descubre" },
-  { href: "/aprende/mapa", label: "Mapa" },
-  { href: "/aprende/comparador", label: "Comparador" },
-  { href: "/aprende/quiz", label: "Quiz" },
+  { href: "/curiosos", label: "Curiosos" },
+  { href: "/colegios", label: "Colegios" },
+  { href: "/universidad", label: "Universidad" },
+  { href: "/mapa", label: "Mapa" },
+  { href: "/comparador", label: "Iglesias" },
 ];
 
 const isActive = (pathname: string, href: string): boolean =>
-  href === "/aprende" ? pathname === href : pathname.startsWith(href);
+  pathname === href || pathname.startsWith(`${href}/`) || (href === "/comparador" && pathname.startsWith("/iglesias"));
 
 export const SiteHeader = () => {
   const pathname = usePathname();

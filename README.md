@@ -1,22 +1,22 @@
 # Lumen
 
-Web interactiva para estudiar las religiones del mundo, en clase o por curiosidad. Explica cada tradición desde la historia y la cultura, sin defender ninguna.
+Web para conocer a fondo el cristianismo: su historia, su fe y su cultura.
 
-Tiene dos partes:
+Tiene tres puertas, cada una con su forma de contar:
 
-- **Aprende** (`/aprende`), para colegios y universidades: mapa con línea del tiempo, comparador, quiz y fichas de cada religión.
-- **Descubre** (`/descubre`), para quien quiere divulgar o simplemente leer: curiosidades, fiestas del año y mitos comparados.
+| Sección | Para quién | Enfoque |
+| --- | --- | --- |
+| **Curiosos** (`/curiosos`) | Gente que llega desde redes sociales | Histórico y cultural. Historias de un minuto con imagen para Instagram/TikTok y quiz rápido para compartir |
+| **Colegios** (`/colegios`) | Primaria, ESO y Bachillerato | Desde la fe cristiana, con lo que comparten las iglesias |
+| **Universidad** (`/universidad`) | Estudiantes universitarios | Histórico y cultural, con más profundidad |
+
+Herramientas comunes: línea del tiempo de las iglesias (inicio), mapa de la expansión (`/mapa`), comparador de iglesias (`/comparador`), fichas de cada iglesia (`/iglesias/...`) y quiz (`/quiz`).
 
 ## Tecnología
 
-- Next.js 16 (App Router) + TypeScript
-- Tailwind CSS 4
-- Supabase para la base de datos (de momento, resultados anónimos del quiz)
-- Desplegado en Vercel
+Next.js 16 + TypeScript + Tailwind CSS 4, Supabase (resultados anónimos del quiz) y Vercel.
 
 ## Arrancarlo en tu ordenador
-
-Necesitas Node.js 20 o superior.
 
 ```bash
 npm install
@@ -24,21 +24,23 @@ cp .env.example .env.local   # y pega la clave publicable de Supabase
 npm run dev
 ```
 
-Abre http://localhost:3000. Sin la clave de Supabase la web funciona igual; solo no guarda los resultados del quiz.
+Abre http://localhost:3000.
 
 ## Dónde está cada cosa
 
-| Carpeta | Qué contiene |
+| Archivo | Qué contiene |
 | --- | --- |
-| `src/content/` | Todo el contenido: religiones, hitos del mapa, preguntas del quiz, curiosidades y fiestas |
-| `src/app/` | Las páginas |
-| `src/components/` | Las piezas interactivas (línea del tiempo, mapa, comparador, quiz) |
-| `supabase/migrations/` | Los cambios de la base de datos, en SQL |
+| `src/content/pills.ts` | Las historias de un minuto de Curiosos |
+| `src/content/quiz.ts` | Las preguntas del quiz |
+| `src/content/churches.ts` | Las fichas de cada iglesia (y el comparador) |
+| `src/content/milestones.ts` | Los puntos del mapa |
+| `src/content/levels.ts` | Las unidades de Primaria, ESO, Bachillerato y Universidad |
+| `supabase/migrations/` | Cambios de la base de datos |
 
-Para añadir o corregir contenido basta con editar los archivos de `src/content/`.
+Para añadir o corregir contenido, basta con editar los archivos de `src/content/`.
 
 ## Criterios del contenido
 
-- Si algo viene de la tradición de una fe y no de datos históricos, se dice («según la tradición»).
+- En Curiosos y Universidad, lo que viene de la tradición o de la fe se marca como tal («según la tradición», «según los evangelios»).
 - Las fechas antiguas llevan «c.» cuando son aproximadas.
-- Las cifras de seguidores son estimaciones de 2020 (Pew Research Center).
+- Las cifras de fieles son estimaciones.

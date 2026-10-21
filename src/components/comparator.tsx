@@ -3,29 +3,29 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { findReligion, religions, type Religion, type ReligionSlug } from "@/content/religions";
+import { churches, findChurch, type Church, type ChurchSlug } from "@/content/churches";
 
-type Row = { label: string; pick: (religion: Religion) => string };
+type Row = { label: string; pick: (church: Church) => string };
 
 const rows: readonly Row[] = [
-  { label: "Dónde nace", pick: (r) => r.originPlace },
-  { label: "Cuándo", pick: (r) => r.originNote },
-  { label: "Figura fundadora", pick: (r) => r.founder },
-  { label: "Lo divino", pick: (r) => r.divine },
-  { label: "Textos sagrados", pick: (r) => r.texts },
-  { label: "Lugar de culto", pick: (r) => r.worship },
-  { label: "Fiestas", pick: (r) => r.festival },
-  { label: "Después de la muerte", pick: (r) => r.afterlife },
-  { label: "Seguidores hoy", pick: (r) => r.followers },
-  { label: "Símbolo", pick: (r) => r.symbol },
+  { label: "Cómo nace", pick: (c) => c.splitNote },
+  { label: "Quién la guía", pick: (c) => c.authority },
+  { label: "La Biblia", pick: (c) => c.bible },
+  { label: "Sacramentos", pick: (c) => c.sacraments },
+  { label: "Sacerdotes y pastores", pick: (c) => c.clergy },
+  { label: "María", pick: (c) => c.mary },
+  { label: "Imágenes", pick: (c) => c.images },
+  { label: "Eucaristía", pick: (c) => c.eucharist },
+  { label: "Fieles hoy", pick: (c) => c.followers },
+  { label: "Dónde está", pick: (c) => c.where },
 ];
 
-const DEFAULT_A: ReligionSlug = "cristianismo";
-const DEFAULT_B: ReligionSlug = "islam";
+const DEFAULT_A: ChurchSlug = "catolica";
+const DEFAULT_B: ChurchSlug = "protestante";
 
-type ComparatorProps = { initialA?: ReligionSlug; initialB?: ReligionSlug };
+type ComparatorProps = { initialA?: ChurchSlug; initialB?: ChurchSlug };
 
-const ReligionSelect = ({
+const ChurchSelect = ({
   id,
   label,
   value,
@@ -34,9 +34,9 @@ const ReligionSelect = ({
 }: {
   id: string;
   label: string;
-  value: ReligionSlug;
-  exclude: ReligionSlug;
-  onChange: (slug: ReligionSlug) => void;
+  value: ChurchSlug;
+  exclude: ChurchSlug;
+  onChange: (slug: ChurchSlug) => void;
 }) => (
   <div className="flex-1">
     <label htmlFor={id} className="mb-1.5 block text-sm text-piedra">
@@ -46,14 +46,14 @@ const ReligionSelect = ({
       id={id}
       value={value}
       onChange={(event) => {
-        const religion = findReligion(event.target.value);
-        if (religion) onChange(religion.slug);
+        const church = findChurch(event.target.value);
+        if (church) onChange(church.slug);
       }}
       className="w-full rounded-xl border-2 border-tinta bg-superficie px-3 py-2.5 font-display text-lg font-semibold"
     >
-      {religions.map((religion) => (
-        <option key={religion.slug} value={religion.slug} disabled={religion.slug === exclude}>
-          {religion.name}
+      {churches.map((church) => (
+        <option key={church.slug} value={church.slug} disabled={church.slug === exclude}>
+          {church.name}
         </option>
       ))}
     </select>
@@ -61,10 +61,10 @@ const ReligionSelect = ({
 );
 
 export const Comparator = ({ initialA = DEFAULT_A, initialB = DEFAULT_B }: ComparatorProps) => {
-  const [slugA, setSlugA] = useState<ReligionSlug>(initialA);
-  const [slugB, setSlugB] = useState<ReligionSlug>(initialA === initialB ? DEFAULT_B : initialB);
-  const a = findReligion(slugA);
-  const b = findReligion(slugB);
+  const [slugA, setSlugA] = useState<ChurchSlug>(initialA);
+  const [slugB, setSlugB] = useState<ChurchSlug>(initialA === initialB ? DEFAULT_B : initialB);
+  const a = findChurch(slugA);
+  const b = findChurch(slugB);
   if (!a || !b) return null;
 
   const swap = () => {
@@ -75,7 +75,7 @@ export const Comparator = ({ initialA = DEFAULT_A, initialB = DEFAULT_B }: Compa
   return (
     <div className="space-y-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
-        <ReligionSelect id="religion-a" label="Primera religión" value={slugA} exclude={slugB} onChange={setSlugA} />
+        <ChurchSelect id="iglesia-a" label="Primera iglesia" value={slugA} exclude={slugB} onChange={setSlugA} />
         <button
           type="button"
           onClick={swap}
@@ -83,20 +83,20 @@ export const Comparator = ({ initialA = DEFAULT_A, initialB = DEFAULT_B }: Compa
         >
           Intercambiar
         </button>
-        <ReligionSelect id="religion-b" label="Segunda religión" value={slugB} exclude={slugA} onChange={setSlugB} />
+        <ChurchSelect id="iglesia-b" label="Segunda iglesia" value={slugB} exclude={slugA} onChange={setSlugB} />
       </div>
 
       <div className="overflow-hidden rounded-3xl ring-1 ring-linea">
         <div className="grid grid-cols-2 md:grid-cols-[12rem_1fr_1fr]">
           <div className="hidden bg-superficie md:block" />
-          {[a, b].map((religion) => (
+          {[a, b].map((church) => (
             <Link
-              key={religion.slug}
-              href={`/religiones/${religion.slug}`}
+              key={church.slug}
+              href={`/iglesias/${church.slug}`}
               className="border-t-8 bg-superficie px-5 py-4 font-display text-2xl font-bold hover:underline"
-              style={{ borderColor: religion.color }}
+              style={{ borderColor: church.color }}
             >
-              {religion.name}
+              {church.shortName}
             </Link>
           ))}
         </div>
@@ -119,8 +119,8 @@ export const Comparator = ({ initialA = DEFAULT_A, initialB = DEFAULT_B }: Compa
 
 export const ComparatorFromSearchParams = () => {
   const searchParams = useSearchParams();
-  const a = findReligion(searchParams.get("a") ?? "");
-  const b = findReligion(searchParams.get("b") ?? "");
+  const a = findChurch(searchParams.get("a") ?? "");
+  const b = findChurch(searchParams.get("b") ?? "");
   const initialA = a?.slug ?? DEFAULT_A;
   const initialB = b?.slug ?? (initialA === DEFAULT_B ? DEFAULT_A : DEFAULT_B);
   return <Comparator key={`${initialA}-${initialB}`} initialA={initialA} initialB={initialB} />;
