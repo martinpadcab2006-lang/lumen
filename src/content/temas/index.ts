@@ -2,9 +2,11 @@ import type { SchoolAudience } from "../chapter-types";
 import { findLevel, type Level, type TemaSummary } from "../levels";
 import type { Tema } from "../tema-types";
 import { elPuebloDeJesus } from "./primaria-1/el-pueblo-de-jesus";
+import { esperamosLaNavidad } from "./primaria-1/esperamos-la-navidad";
+import { nosConocemos } from "./primaria-1/nos-conocemos";
 
 /** Los temas ya escritos. */
-export const temas: readonly Tema[] = [elPuebloDeJesus];
+export const temas: readonly Tema[] = [nosConocemos, elPuebloDeJesus, esperamosLaNavidad];
 
 export const findTema = (level: string, slug: string): Tema | undefined =>
   temas.find((tema) => tema.level === level && tema.slug === slug);

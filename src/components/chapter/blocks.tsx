@@ -9,7 +9,7 @@ export type ReadingSize = "normal" | "grande";
 export type BlockContext = { library: Library; narratorName?: string; size: ReadingSize };
 
 const paragraphClass = (size: ReadingSize) =>
-  size === "grande" ? "max-w-[60ch] text-2xl leading-loose" : "max-w-[68ch] text-lg leading-relaxed";
+  size === "grande" ? "max-w-[60ch] text-xl leading-relaxed sm:text-2xl sm:leading-loose" : "max-w-[68ch] text-lg leading-relaxed";
 
 const Illustration = ({ id, library }: { id: string; library: Library }) => {
   const illustration = library.illustrations[id];

@@ -39,7 +39,7 @@ const tema = (
 /**
  * La sección de colegios se cuenta desde la fe católica, como la asignatura de Religión.
  * Sigue el currículo de Religión Católica (Resolución de 21 de junio de 2022, BOE 24-6-2022):
- * Primaria en tres ciclos, ESO en dos y Bachillerato. Tres temas por trimestre (cinco en Bachillerato).
+ * Primaria en tres ciclos, ESO en dos y Bachillerato. Tres temas por trimestre en todas las etapas.
  */
 export const levels: readonly Level[] = [
   {
@@ -151,21 +151,15 @@ export const levels: readonly Level[] = [
     ages: "De 16 a 18 años",
     intro: "Pensar las grandes preguntas desde la fe cristiana: el sentido, la relación entre fe y razón, la ética y el compromiso con la sociedad.",
     programme: [
-      tema(1, 1, "la-pregunta-por-el-sentido", "La pregunta por el sentido", "Qué es la experiencia religiosa y por qué el ser humano se pregunta por Dios.", "1, 5"),
+      tema(1, 1, "el-sentido-y-las-religiones", "El sentido de la vida y las religiones", "Por qué el ser humano se pregunta por Dios, qué es la experiencia religiosa y cómo dialogar con otras creencias.", "1, 5"),
       tema(2, 1, "que-es-el-ser-humano", "¿Qué es el ser humano?", "Antropología cristiana: dignidad, libertad y relaciones.", "1, 2"),
-      tema(3, 1, "las-religiones-del-mundo", "Las religiones del mundo", "Qué tiene de propio el cristianismo y cómo dialogar con otras creencias.", "5"),
-      tema(4, 1, "jesus-historia-y-fe", "Jesús de Nazaret: historia y fe", "El contexto, las fuentes y la fe de la Iglesia en Cristo.", "6", "el-mundo-de-jesus"),
-      tema(5, 1, "el-nacimiento-de-la-iglesia", "El nacimiento de la Iglesia", "Primeras comunidades, mártires, Nicea y el Credo.", "4, 6", "los-primeros-cristianos"),
-      tema(6, 2, "fe-y-razon", "Fe y razón", "En qué se diferencian los métodos de la teología y de la ciencia.", "6"),
-      tema(7, 2, "fe-y-ciencia-en-la-historia", "Fe y ciencia en la historia", "Galileo, Darwin y Lemaître, el sacerdote del Big Bang.", "6", "razones-y-revoluciones"),
-      tema(8, 2, "fe-y-arte", "Fe y arte", "Leer cuadros, templos y música sobre la Biblia y la vida de Jesús.", "4"),
-      tema(9, 2, "iglesia-y-poder", "Iglesia y poder en la historia", "De Constantino a la Reforma; Iglesia y Estado, laicidad.", "3", "religion-del-imperio"),
-      tema(10, 2, "doctrina-social-de-la-iglesia", "Doctrina Social de la Iglesia", "Trabajo, economía, bien común y pobreza.", "3"),
-      tema(11, 3, "iglesia-y-democracia", "Iglesia y democracia", "El Vaticano II, la libertad religiosa y la Iglesia en la sociedad plural.", "3", "el-siglo-xx"),
-      tema(12, 3, "bioetica", "Bioética y dignidad de la vida", "Grandes debates de hoy desde la visión cristiana.", "1, 3"),
-      tema(13, 3, "ecologia-integral", "Ecología integral", "La encíclica Laudato si' y el cuidado de la casa común.", "3"),
-      tema(14, 3, "cristianismo-en-el-siglo-xxi", "El cristianismo en el siglo XXI", "Secularización, nuevas comunidades y un cristianismo cada vez más del Sur.", "4, 5", "el-cristianismo-hoy"),
-      tema(15, 3, "mi-proyecto-de-vida", "Mi proyecto de vida", "Vocación, compromiso y sentido; tarea final del curso.", "1, 2"),
+      tema(3, 1, "jesus-y-el-nacimiento-de-la-iglesia", "Jesús y el nacimiento de la Iglesia", "El contexto, las fuentes y la fe en Cristo; primeras comunidades, mártires, Nicea y el Credo.", "4, 6", "jesus-de-nazaret"),
+      tema(4, 2, "fe-razon-y-ciencia", "Fe, razón y ciencia", "Los métodos de la teología y de la ciencia; Galileo, Darwin y Lemaître, el sacerdote del Big Bang.", "6", "razones-y-revoluciones"),
+      tema(5, 2, "fe-y-arte", "Fe y arte", "Leer cuadros, templos y música sobre la Biblia y la vida de Jesús.", "4"),
+      tema(6, 2, "iglesia-poder-y-democracia", "Iglesia, poder y democracia", "De Constantino al Vaticano II: Iglesia y Estado, laicidad y libertad religiosa.", "3", "religion-del-imperio"),
+      tema(7, 3, "doctrina-social-y-ecologia", "Doctrina Social y ecología integral", "Trabajo, economía, bien común y pobreza; la Laudato si' y el cuidado de la casa común.", "3"),
+      tema(8, 3, "bioetica", "Bioética y dignidad de la vida", "Grandes debates de hoy desde la visión cristiana.", "1, 3"),
+      tema(9, 3, "el-cristianismo-hoy-y-mi-proyecto", "El cristianismo hoy y mi proyecto de vida", "Un cristianismo cada vez más del Sur, la secularización y la propia vocación; tarea final del curso.", "1, 2, 4, 5", "el-cristianismo-hoy"),
     ],
     tools: [
       { href: "/comparador", title: "Comparador de iglesias", howTo: "Para el tema de las religiones y el del cristianismo hoy." },

@@ -37,9 +37,10 @@ HANDS = {"down": (60, -105), "up": (78, -300), "out": (108, -175), "front": (28,
 
 def person(x, y, s=1.0, skin=C["skin1"], hair="curly", tunic=C["linen"], sleeve=None, stripe=None,
            belt=C["brown"], mantle=None, left="down", right="down", seated=False, mouth="smile",
-           helmet=False, armor=False, flip=False, look=0):
+           helmet=False, armor=False, flip=False, look=0, hair_color=None):
     """Persona de frente, pies en (x, y). look desplaza los ojos (-1 izquierda, 1 derecha)."""
     sleeve = sleeve or tunic
+    HC = hair_color or C["hair"]
     dy = 80 if seated else 0
     p = []
     # piernas (de pie); sentado, el regazo se dibuja después de la túnica
@@ -90,18 +91,18 @@ def person(x, y, s=1.0, skin=C["skin1"], hair="curly", tunic=C["linen"], sleeve=
     if hair == "curly":
         for a in range(190, 355, 22):
             r = math.radians(a)
-            p.append(circle(37 * math.cos(r), hy_ + 37 * math.sin(r), 17, C["hair"]))
+            p.append(circle(37 * math.cos(r), hy_ + 37 * math.sin(r), 17, HC))
     if hair in ("short", "beard"):
-        p.append(path(f"M -41,{hy_+4} Q -44,{hy_-48} 0,{hy_-46} Q 44,{hy_-48} 41,{hy_+4} Z", C["hair"]))
+        p.append(path(f"M -41,{hy_+4} Q -44,{hy_-48} 0,{hy_-46} Q 44,{hy_-48} 41,{hy_+4} Z", HC))
     p.append(circle(hx_, hy_, 40, skin))
     if hair == "curly":
         for a in range(205, 340, 26):
             r = math.radians(a)
-            p.append(circle(30 * math.cos(r), hy_ - 8 + 30 * math.sin(r), 13, C["hair"]))
+            p.append(circle(30 * math.cos(r), hy_ - 8 + 30 * math.sin(r), 13, HC))
     if hair in ("short", "beard"):
-        p.append(path(f"M -38,{hy_-6} Q -30,{hy_-44} 0,{hy_-42} Q 30,{hy_-44} 38,{hy_-6} Q 20,{hy_-24} 0,{hy_-22} Q -20,{hy_-24} -38,{hy_-6} Z", C["hair"]))
+        p.append(path(f"M -38,{hy_-6} Q -30,{hy_-44} 0,{hy_-42} Q 30,{hy_-44} 38,{hy_-6} Q 20,{hy_-24} 0,{hy_-22} Q -20,{hy_-24} -38,{hy_-6} Z", HC))
     if hair == "beard":
-        p.append(path(f"M -38,{hy_+2} Q -36,{hy_+48} 0,{hy_+52} Q 36,{hy_+48} 38,{hy_+2} Q 30,{hy_+28} 0,{hy_+24} Q -30,{hy_+28} -38,{hy_+2} Z", C["hair"]))
+        p.append(path(f"M -38,{hy_+2} Q -36,{hy_+48} 0,{hy_+52} Q 36,{hy_+48} 38,{hy_+2} Q 30,{hy_+28} 0,{hy_+24} Q -30,{hy_+28} -38,{hy_+2} Z", HC))
     if hair == "veil" and mantle:
         p.append(path(f"M -42,{hy_+6} Q -46,{hy_-50} 0,{hy_-52} Q 46,{hy_-50} 42,{hy_+6} Q 34,{hy_-26} 0,{hy_-30} Q -34,{hy_-26} -42,{hy_+6} Z", mantle))
     if helmet:
@@ -321,6 +322,91 @@ scenes["juegos"] = svg(
     + person(1000, 720, 0.7, skin=C["skin2"], hair="short", tunic=C["ochre"], left="up", right="up", mouth="open", look=-1),
     "Niños de Nazaret juegan a las tabas sentados en la calle, delante de sus casas de piedra.",
     sky("cielo", "#bfe0f0", "#f6e9cf"),
+)
+
+def sheep(x, y, s=1):
+    wool = "".join(circle(dx, dy, 22, "#f7f3ea") for dx, dy in ((-30, 0), (-10, -12), (12, -12), (30, 0), (0, 8), (-20, 10), (20, 10)))
+    return g(rect(-28, 10, 9, 34, "#3b3330", 4), rect(18, 10, 9, 34, "#3b3330", 4), wool,
+             ellipse(46, -6, 16, 20, "#3b3330"), ellipse(36, -18, 9, 5, "#3b3330"), circle(50, -10, 3, "#f7f3ea"), t=f"translate({x},{y}) scale({s})")
+
+def flower(x, y, col):
+    return g(line(0, 0, 0, -36, "#5c7a3a", 4), *[circle(9 * math.cos(math.radians(a)), -40 + 9 * math.sin(math.radians(a)), 7, col) for a in range(0, 360, 72)], circle(0, -40, 5, "#f6c24b"), t=f"translate({x},{y})")
+
+# 9. Amigos de Nazaret de la mano
+scenes["amigos"] = svg(
+    rect(0, 0, W, H, "url(#cielo)") + cloud(220, 110) + cloud(950, 160, 0.8) + circle(1050, 90, 50, "#f6d47a")
+    + path("M 0,430 Q 300,350 600,410 T 1200,390 L 1200,750 L 0,750 Z", "#b7c68b")
+    + house(60, 560, 260, 230) + house(880, 560, 260, 210, shade=1)
+    + rect(0, 540, W, 210, C["sand"])
+    + person(345, 700, 0.78, skin=C["skin3"], hair="veil", tunic="#e5a477", mantle="#c7684d", left="up", right="out", mouth="open")
+    + person(505, 700, 0.8, skin=C["skin1"], hair="curly", tunic=C["linen"], stripe=C["rust"], left="out", right="out", mouth="open")
+    + person(668, 700, 0.74, skin=C["skin2"], hair="short", tunic=C["ochre"], left="out", right="out")
+    + person(830, 700, 0.8, skin="#e2b48c", hair="veil", tunic="#c9d3a3", mantle=C["blue"], left="out", right="up", mouth="open"),
+    "Cuatro niños de Nazaret, distintos entre sí, se dan la mano en la calle de su pueblo.",
+    sky("cielo", "#bfe0f0", "#f6e9cf"),
+)
+
+# 10. Natán y su abuelo miran las estrellas
+import random
+random.seed(7)
+stars = "".join(circle(random.randint(10, 1190), random.randint(10, 420), random.choice((1.5, 2, 2.5, 3.5)), "#fff6d8", f'opacity="{random.choice((0.6, 0.8, 1))}"') for _ in range(140))
+scenes["estrellas"] = svg(
+    rect(0, 0, W, H, "url(#noche)") + stars
+    + circle(960, 140, 46, "#fff1bf") + circle(982, 126, 42, "#1d2750")
+    + path("M 0,470 Q 300,400 600,450 T 1200,430 L 1200,750 L 0,750 Z", "#2f3b5c")
+    + path("M 0,560 Q 400,520 800,560 T 1200,560 L 1200,750 L 0,750 Z", "#3a4a63")
+    + house(80, 600, 220, 180, shade=1).replace(C["stone2"], "#6d6a77").replace(C["stone3"], "#4f4c5a")
+    + person(560, 700, 0.95, skin=C["skin2"], hair="beard", hair_color="#e9e4dc", tunic="#9c8f7a", mantle="#5b6a86", seated=True, left="down", right="up", look=1)
+    + person(760, 700, 0.75, skin=C["skin1"], hair="curly", tunic=C["linen"], stripe=C["rust"], seated=True, left="down", right="down", mouth="open", look=-1),
+    "De noche, Natán y su abuelo miran juntos el cielo lleno de estrellas.",
+    sky("noche", "#101736", "#33406b"),
+)
+
+# 11. La naturaleza: el mundo que Dios nos regala
+scenes["naturaleza"] = svg(
+    rect(0, 0, W, H, "url(#cielo)") + circle(170, 120, 62, "#f8d77e") + circle(170, 120, 95, "#f8d77e", 'opacity="0.25"') + cloud(620, 100) + birds(840, 120) + birds(420, 180)
+    + path("M 0,380 Q 250,300 520,370 T 1200,340 L 1200,750 L 0,750 Z", "#b7c68b")
+    + ellipse(930, 525, 330, 75, "#7fa3b8")
+    + fish(830, 520, 1.3, "#c9a85c", -20) + fish(980, 540, 1.2, "#a3b6c2", 15) + path("M 1060,500 q 15,-30 30,0", extra='stroke="#ffffff" stroke-width="4" opacity="0.6" stroke-linecap="round"')
+    + path("M 0,520 Q 300,470 560,560 Q 800,620 1200,610 L 1200,750 L 0,750 Z", "#a3b571")
+    + olive(130, 600, 1.1) + olive(560, 560, 0.8)
+    + sheep(330, 610) + sheep(450, 650, 0.85) + donkey(780, 700, 0.7, load=False)
+    + "".join(flower(x, 720, c) for x, c in ((60, "#e8907c"), (220, "#f6c24b"), (420, "#c7a4e6"), (620, "#e8907c"), (960, "#f6c24b"), (1100, "#c7a4e6"), (1160, "#e8907c"))),
+    "Un paisaje lleno de vida: el sol, el cielo con pájaros, un lago con peces, árboles, flores, ovejas y un burro.",
+    sky("cielo", "#bfe0f0", "#f3ead6"),
+)
+
+# 12. La corona de Adviento
+leaves = "".join(ellipse(600 + 210 * math.cos(math.radians(a)), 560 + 60 * math.sin(math.radians(a)), 46, 22, ["#3f6b3a", "#557f45", "#2f5a2f"][k % 3], f'transform="rotate({a + 90} {600 + 210 * math.cos(math.radians(a)):.1f} {560 + 60 * math.sin(math.radians(a)):.1f})"') for k, a in enumerate(range(0, 360, 15)))
+def candle(x, col, lit):
+    flame = path(f"M {x},300 Q {x+16},330 {x},350 Q {x-16},330 {x},300 Z", "#f6c24b") + circle(x, 336, 40, "url(#luz)") if lit else ""
+    return rect(x - 22, 360, 44, 190, col, 8) + line(x, 350, x, 362, "#3b3330", 3) + flame
+scenes["corona"] = svg(
+    rect(0, 0, W, H, "#e9dcc4") + rect(80, 60, 300, 260, "#22305a", 10) + "".join(circle(x, y, 2.5, "#fff6d8") for x, y in ((130, 110), (200, 160), (290, 100), (340, 200), (160, 250), (250, 280))) + rect(80, 180, 300, 8, "#c9ae86") + rect(226, 60, 8, 260, "#c9ae86")
+    + rect(0, 560, W, 190, "#a8764e") + rect(0, 556, W, 12, "#8a5a3b")
+    + ellipse(600, 570, 260, 80, "#3f6b3a") + leaves + "".join(circle(600 + 225 * math.cos(math.radians(a)), 565 + 66 * math.sin(math.radians(a)), 9, "#c0392b") for a in range(20, 360, 45))
+    + candle(470, "#6b4a9b", True) + candle(560, "#6b4a9b", False) + candle(650, "#e7a1c0", False) + candle(740, "#6b4a9b", False),
+    "Una corona de Adviento sobre la mesa: un círculo de ramas verdes con cuatro velas, tres moradas y una rosa; la primera está encendida.",
+    '<radialGradient id="luz"><stop offset="0" stop-color="#ffe29a" stop-opacity="0.9"/><stop offset="1" stop-color="#ffe29a" stop-opacity="0"/></radialGradient>',
+)
+
+# 13. Un belén en casa
+mini = lambda x, y, **k: person(x, y, 0.32, **k)
+scenes["belen"] = svg(
+    rect(0, 0, W, H, "#efe3cd") + rect(0, 0, W, 380, "#1f2a52") + "".join(circle(x, y, 2.5, "#fff6d8") for x, y in ((100, 80), (260, 140), (420, 60), (700, 120), (880, 70), (1050, 150), (1150, 60), (560, 200)))
+    + path("M 600,40 L 612,80 L 652,80 L 620,104 L 632,144 L 600,120 L 568,144 L 580,104 L 548,80 L 588,80 Z", "#f6c24b") + path("M 600,120 L 560,330", extra='stroke="#f6c24b" stroke-width="3" opacity="0.5"')
+    + path("M 0,380 Q 200,330 420,370 T 820,360 T 1200,380 L 1200,750 L 0,750 Z", "#557f45")
+    + path("M 0,470 Q 300,420 600,470 T 1200,460 L 1200,750 L 0,750 Z", "#6f9a4f")
+    + path("M 120,750 Q 260,600 420,560 Q 560,530 640,600 Q 700,660 900,640 L 900,670 Q 700,690 620,630 Q 560,570 430,600 Q 300,640 170,750 Z", "#a9c7d8")
+    + house(860, 470, 140, 110, window=False) + house(1020, 500, 120, 90, shade=1, window=False) + house(80, 470, 130, 100, window=False)
+    + path("M 470,500 L 470,360 L 600,300 L 730,360 L 730,500 Z", "#8a5a3b") + path("M 450,370 L 600,290 L 750,370 L 740,385 L 600,312 L 460,385 Z", "#6e4a2f") + rect(490, 380, 220, 120, "#5a3a24")
+    + mini(540, 500, skin=C["skin2"], hair="beard", tunic=C["linen2"], mantle="#8b6b4a", left="down", right="down", look=1)
+    + mini(660, 500, skin=C["skin3"], hair="veil", tunic="#e9dcc0", mantle=C["blue"], seated=True, left="front", right="front", look=-1)
+    + rect(578, 470, 46, 26, "#c9a26a", 4) + ellipse(601, 470, 24, 9, "#efe3c0") + circle(592, 466, 8, C["skin1"])
+    + sheep(300, 560, 0.45) + sheep(360, 590, 0.4) + sheep(820, 600, 0.42)
+    + mini(250, 620, skin=C["skin2"], hair="beard", tunic=C["ochre"], left="up", right="down", look=1)
+    + mini(960, 640, skin=C["skin1"], hair="short", tunic="#9fb3c4", left="front", right="down", look=-1),
+    "Un belén en casa: el portal con María, José y el Niño, la estrella, los pastores con ovejas, casitas y un río de papel de plata.",
 )
 
 os.makedirs(OUT, exist_ok=True)

@@ -38,7 +38,7 @@ export default function SchoolsPage() {
         </h2>
         <p className="mt-3">
           La programación sigue el currículo de Religión Católica: Primaria en tres ciclos, ESO en dos y Bachillerato,
-          con tres temas por trimestre (cinco en Bachillerato). Cada tema dura unas cuatro semanas: una pregunta para
+          con tres temas por trimestre. Cada tema dura unas cuatro semanas: una pregunta para
           empezar, tres lecciones con imágenes, vídeos y actividades, una tarea final y un quiz. Cada tema tiene además
           una guía para el profesor (currículo, perfil IB, sesiones paso a paso, dinámicas, soluciones y rúbrica), que
           solo se abre con la contraseña del profesorado.
