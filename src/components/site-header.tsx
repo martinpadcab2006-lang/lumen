@@ -9,6 +9,7 @@ const navItems: readonly NavItem[] = [
   { href: "/descubre", label: "Descubre" },
   { href: "/colegios", label: "Colegios" },
   { href: "/universidad", label: "Universidad" },
+  { href: "/actualidad", label: "Actualidad" },
   { href: "/mapa", label: "Mapa" },
   { href: "/comparador", label: "Iglesias" },
 ];

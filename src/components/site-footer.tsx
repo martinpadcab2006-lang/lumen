@@ -17,6 +17,7 @@ export const SiteFooter = () => (
         <Link className="hover:text-tinta" href="/descubre">Descubre</Link>
         <Link className="hover:text-tinta" href="/colegios">Colegios: Primaria, ESO y Bachillerato</Link>
         <Link className="hover:text-tinta" href="/universidad">Universidad</Link>
+        <Link className="hover:text-tinta" href="/actualidad">Actualidad</Link>
         <Link className="hover:text-tinta" href="/comparador">Las iglesias cristianas</Link>
       </nav>
     </div>
