@@ -1,4 +1,6 @@
-export type LevelSlug = "primaria" | "eso" | "bachillerato";
+import type { SchoolAudience } from "./chapter-types";
+
+export type LevelSlug = SchoolAudience;
 
 export type Unit = { title: string; summary: string };
 
@@ -14,21 +16,40 @@ export type Level = {
 /** La sección de colegios se cuenta desde la fe católica, como la asignatura de Religión. */
 export const levels: readonly Level[] = [
   {
-    slug: "primaria",
-    name: "Primaria",
-    ages: "De 6 a 12 años",
+    slug: "primaria-1",
+    name: "Primaria 1.º–3.º",
+    ages: "De 6 a 9 años",
     intro:
-      "Descubrir quién es Jesús, cómo nos habla Dios a través de la Biblia y por qué los cristianos celebran la Navidad y la Pascua.",
+      "Conocer a Jesús, a María y a José, y descubrir cómo era su pueblo, de la mano de Natán, un niño de Nazaret.",
     units: [
-      { title: "Dios nos ha creado y nos quiere", summary: "La creación como regalo y el cuidado de la naturaleza y de los demás." },
-      { title: "Jesús nace en Belén", summary: "La Navidad, María y José, los pastores y los magos de Oriente." },
-      { title: "Jesús nos enseña a querernos", summary: "Las parábolas más conocidas: el buen samaritano, el hijo pródigo, la oveja perdida." },
+      { title: "Dios nos ha creado y nos quiere", summary: "La creación es un regalo que cuidamos entre todos." },
+      { title: "Jesús nace en Belén", summary: "La Navidad, María y José, los pastores y los magos." },
+      { title: "Jesús nos enseña a querernos", summary: "La oveja perdida y el buen samaritano." },
       { title: "Jesús muere y resucita", summary: "La Semana Santa y la alegría de la Pascua." },
-      { title: "La Iglesia, la familia de los cristianos", summary: "Los apóstoles, el bautismo y cómo se reúnen los cristianos el domingo." },
-      { title: "Hablar con Dios", summary: "Qué es rezar y el Padrenuestro, la oración que enseñó Jesús." },
+      { title: "La Iglesia es nuestra familia", summary: "El bautismo y la misa del domingo." },
+      { title: "Hablar con Dios", summary: "Qué es rezar y el Padrenuestro." },
     ],
     tools: [
-      { href: "/quiz", title: "Quiz", howTo: "Para jugar en grupo con el proyector, leyendo las preguntas en voz alta." },
+      { href: "/quiz", title: "Quiz", howTo: "Para jugar todos juntos con el proyector, leyendo las preguntas en voz alta." },
+    ],
+  },
+  {
+    slug: "primaria-2",
+    name: "Primaria 4.º–6.º",
+    ages: "De 9 a 12 años",
+    intro:
+      "Descubrir quién es Jesús, cómo nos habla Dios a través de la Biblia y cómo vivían las personas en su tiempo.",
+    units: [
+      { title: "La Biblia, el libro de Dios", summary: "Cómo es la Biblia y cómo buscar una cita." },
+      { title: "Jesús nace en Belén", summary: "La Navidad en los evangelios de Mateo y Lucas." },
+      { title: "Las parábolas de Jesús", summary: "El sembrador, el buen samaritano y el hijo pródigo." },
+      { title: "Jesús muere y resucita", summary: "La Semana Santa, día a día." },
+      { title: "Los sacramentos", summary: "Los siete signos con los que la Iglesia celebra la fe." },
+      { title: "Los santos, amigos de Dios", summary: "Santos de ayer y de hoy, y algunos de España." },
+    ],
+    tools: [
+      { href: "/mapa", title: "Mapa con línea del tiempo", howTo: "Para ver en la pizarra digital cómo se extiende el cristianismo." },
+      { href: "/quiz", title: "Quiz", howTo: "Para jugar por equipos al final del tema." },
     ],
   },
   {

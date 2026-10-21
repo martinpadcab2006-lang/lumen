@@ -20,7 +20,7 @@ export const SiteHeader = () => {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-linea">
+    <header className="border-b border-linea print:hidden">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-4 py-4 sm:px-6">
         <Link href="/" className="group flex items-center gap-2.5" aria-label="Lumen, inicio">
           <span

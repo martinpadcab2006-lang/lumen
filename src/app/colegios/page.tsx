@@ -16,7 +16,7 @@ export default function SchoolsPage() {
         lead="Para la clase de Religión: la historia del cristianismo y sus grandes temas, contados desde la fe católica y adaptados a cada etapa. Elige la tuya."
       />
 
-      <ul className="mt-12 grid gap-5 lg:grid-cols-3">
+      <ul className="mt-12 grid gap-5 md:grid-cols-2">
         {levels.map((level) => (
           <li key={level.slug}>
             <Link
@@ -37,8 +37,14 @@ export default function SchoolsPage() {
           Para el profesorado
         </h2>
         <p className="mt-3">
-          Cada capítulo y cada tema traen explicación adaptada a la etapa, imágenes, vídeos, actividades y un quiz. El
-          capítulo 1 de la historia ya está disponible en las tres etapas.
+          Cada capítulo trae explicación adaptada a la etapa, imágenes, vídeos, actividades y un quiz. Además, cada
+          capítulo tiene una guía para el profesor (objetivos, una sesión de 50 minutos paso a paso, dinámicas,
+          soluciones y rúbrica), que solo se abre con la contraseña del profesorado.
+        </p>
+        <p className="mt-5">
+          <Link href="/profesores" className="font-bold underline hover:text-lapis">
+            Entrar en la Zona Profesores
+          </Link>
         </p>
       </section>
     </div>

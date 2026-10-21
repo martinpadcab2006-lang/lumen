@@ -1,17 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import type { ChapterImage as ChapterImageData, Place, Section, Stop } from "@/content/chapter-types";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import type { Place, Stop } from "@/content/chapter-types";
 import type { HolyLandMap } from "@/lib/holy-land-map";
-import { ChapterImage } from "./chapter-image";
 import { HolyLandMapView } from "./holy-land-map-view";
 
+/** Cada parte llega ya dibujada desde el servidor; aquí solo se sigue el scroll. */
+export type ReaderSection = { heading: string; stop: string; content: ReactNode };
+
 type ChapterReaderProps = {
-  sections: readonly Section[];
+  sections: readonly ReaderSection[];
   stops: readonly Stop[];
   places: Readonly<Record<string, Place>>;
-  images: Readonly<Record<string, ChapterImageData>>;
   map: HolyLandMap;
+  large?: boolean;
 };
 
 /** Marca como activa la sección que cruza la mitad superior de la pantalla. */
@@ -37,7 +39,7 @@ const useActiveSection = (count: number) => {
   return { active, refs };
 };
 
-export const ChapterReader = ({ sections, stops, places, images, map }: ChapterReaderProps) => {
+export const ChapterReader = ({ sections, stops, places, map, large = false }: ChapterReaderProps) => {
   const { active, refs } = useActiveSection(sections.length);
   const stop = stops.find((candidate) => candidate.id === sections.at(active)?.stop);
   const place = stop ? places[stop.place] : undefined;
@@ -52,33 +54,19 @@ export const ChapterReader = ({ sections, stops, places, images, map }: ChapterR
           </p>
         </div>
 
-        {sections.map((section, index) => {
-          const image = section.image ? images[section.image] : undefined;
-          return (
-            <section
-              key={section.heading}
-              ref={(element) => {
-                refs.current[index] = element;
-              }}
-              data-index={index}
-              className="scroll-mt-24 border-t border-linea py-10 first:border-t-0 first:pt-0"
-            >
-              <h2 className="text-3xl font-bold tracking-tight">{section.heading}</h2>
-              <div className="mt-5 max-w-[68ch] space-y-4 text-lg leading-relaxed">
-                {section.body.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-              {section.aside && (
-                <aside className="mt-6 max-w-[60ch] rounded-2xl border-l-4 border-alba bg-superficie px-5 py-4">
-                  <p className="font-bold">{section.aside.label}</p>
-                  <p className="mt-1">{section.aside.text}</p>
-                </aside>
-              )}
-              {image && <ChapterImage image={image} />}
-            </section>
-          );
-        })}
+        {sections.map((section, index) => (
+          <section
+            key={section.heading}
+            ref={(element) => {
+              refs.current[index] = element;
+            }}
+            data-index={index}
+            className="scroll-mt-24 border-t border-linea py-10 first:border-t-0 first:pt-0"
+          >
+            <h2 className={`font-bold tracking-tight ${large ? "text-4xl" : "text-3xl"}`}>{section.heading}</h2>
+            <div className="mt-5">{section.content}</div>
+          </section>
+        ))}
       </div>
 
       <aside className="hidden lg:block" aria-label="Dónde y cuándo">

@@ -1,13 +1,23 @@
 import Link from "next/link";
-import { audienceName, chapterPath, type Audience, type Chapter } from "@/content/chapter-types";
+import {
+  audienceName,
+  chapterPath,
+  isSchoolAudience,
+  teacherGuidePath,
+  type Audience,
+  type Chapter,
+} from "@/content/chapter-types";
 import { nextInSeries } from "@/content/history";
+import { findPill, type Pill } from "@/content/pills";
 import { buildHolyLandMap } from "@/lib/holy-land-map";
+import { PillCard } from "../pill-card";
 import { Quiz } from "../quiz";
+import { Blocks, type ReadingSize } from "./blocks";
 import { ChapterReader } from "./chapter-reader";
 import { HolyLandMapView } from "./holy-land-map-view";
 import { MediaShelf } from "./media-shelf";
 
-const audiences: readonly Audience[] = ["descubre", "primaria", "eso", "bachillerato", "universidad"];
+const audiences: readonly Audience[] = ["descubre", "primaria-1", "primaria-2", "eso", "bachillerato", "universidad"];
 
 const backLink = (audience: Audience): { href: string; label: string } => {
   switch (audience) {
@@ -15,7 +25,8 @@ const backLink = (audience: Audience): { href: string; label: string } => {
       return { href: "/descubre/historia", label: "La historia del cristianismo" };
     case "universidad":
       return { href: "/universidad", label: "Universidad" };
-    case "primaria":
+    case "primaria-1":
+    case "primaria-2":
     case "eso":
     case "bachillerato":
       return { href: `/colegios/${audience}`, label: audienceName[audience] };
@@ -35,6 +46,15 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
   const media = chapter.media.filter((item) => item.audiences.includes(audience));
   const next = nextInSeries(chapter.number);
   const back = backLink(audience);
+  const size: ReadingSize = audience === "primaria-1" ? "grande" : "normal";
+  const context = { chapter, narratorName: version.narrator?.name, size };
+  const sections = version.sections.map((section) => ({
+    heading: section.heading,
+    stop: section.stop,
+    content: <Blocks blocks={section.blocks} context={context} />,
+  }));
+  const related = (version.relatedPills ?? []).map(findPill).filter((pill): pill is Pill => pill !== undefined);
+  const isKids = audience === "primaria-1" || audience === "primaria-2";
 
   return (
     <article className="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
@@ -47,8 +67,20 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
           Capítulo {chapter.number}, {chapter.period}
         </p>
         <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-6xl">{version.title}</h1>
-        <p className="mt-5 text-xl leading-relaxed">{version.intro}</p>
+        <p className={`mt-5 leading-relaxed ${size === "grande" ? "text-2xl" : "text-xl"}`}>{version.intro}</p>
+        {version.narrator && <p className="mt-4 text-sm text-piedra">{version.narrator.presentation}</p>}
       </header>
+
+      {isSchoolAudience(audience) && (
+        <p className="mt-6">
+          <Link
+            href={teacherGuidePath(audience, chapter.slug)}
+            className="inline-flex items-center gap-2 rounded-full bg-tinta px-4 py-2 text-sm font-semibold text-niebla hover:bg-lapis"
+          >
+            <span aria-hidden>🔒</span> Guía para el profesor
+          </Link>
+        </p>
+      )}
 
       <nav aria-label="Este capítulo en otras versiones" className="mt-8 flex flex-wrap items-center gap-2 text-sm">
         <span className="mr-1 text-piedra">{voiceNote(audience)} Otras versiones:</span>
@@ -82,21 +114,15 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
       </div>
 
       <div className="mt-14">
-        <ChapterReader
-          sections={version.sections}
-          stops={chapter.stops}
-          places={chapter.places}
-          images={chapter.images}
-          map={map}
-        />
+        <ChapterReader sections={sections} stops={chapter.stops} places={chapter.places} map={map} large={size === "grande"} />
       </div>
 
       {version.activities && (
         <section aria-labelledby="actividades" className="mt-16 max-w-4xl">
           <h2 id="actividades" className="text-3xl font-bold tracking-tight">
-            Actividades
+            {isKids ? "Ahora te toca a ti" : "Actividades"}
           </h2>
-          <ol className="mt-6 list-decimal space-y-3 pl-6 text-lg marker:font-bold">
+          <ol className={`mt-6 list-decimal space-y-3 pl-6 marker:font-bold ${size === "grande" ? "text-2xl" : "text-lg"}`}>
             {version.activities.map((activity) => (
               <li key={activity}>{activity}</li>
             ))}
@@ -132,12 +158,27 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
         </section>
       )}
 
-      <section aria-labelledby="quiz-capitulo" className="mt-16">
-        <h2 id="quiz-capitulo" className="mb-6 text-3xl font-bold tracking-tight">
-          ¿Lo has entendido?
-        </h2>
-        <Quiz quizId={`${chapter.slug}-${audience}`} questions={version.quiz} />
-      </section>
+      {version.quiz && (
+        <section aria-labelledby="quiz-capitulo" className="mt-16">
+          <h2 id="quiz-capitulo" className="mb-6 text-3xl font-bold tracking-tight">
+            ¿Lo has entendido?
+          </h2>
+          <Quiz quizId={`${chapter.slug}-${audience}`} questions={version.quiz} />
+        </section>
+      )}
+
+      {related.length > 0 && (
+        <section aria-labelledby="curiosidades" className="mt-16">
+          <h2 id="curiosidades" className="text-3xl font-bold tracking-tight">
+            Curiosidades relacionadas
+          </h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {related.map((pill) => (
+              <PillCard key={pill.slug} pill={pill} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {version.sources && (
         <section aria-labelledby="fuentes" className="mt-16 max-w-4xl">

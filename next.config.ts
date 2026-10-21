@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
     { source: "/curiosos/quiz/resultado/:puntos", destination: "/descubre/quiz/resultado/:puntos", permanent: true },
     { source: "/curiosos/:slug", destination: "/descubre/curiosidades/:slug", permanent: true },
     { source: "/religiones/:slug", destination: "/comparador", permanent: true },
+    { source: "/colegios/primaria", destination: "/colegios", permanent: true },
+    { source: "/colegios/primaria/historia/:capitulo", destination: "/colegios/primaria-2/historia/:capitulo", permanent: true },
   ],
   turbopack: {
     rules: {
