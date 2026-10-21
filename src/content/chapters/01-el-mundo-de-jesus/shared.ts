@@ -202,35 +202,42 @@ export const images: Chapter["images"] = {
   },
 };
 
-/** Ilustraciones para Primaria, pendientes de generar con Canva en estilo acuarela. */
+/** Ilustraciones de Lumen para Primaria (dibujos propios en public/ilustraciones). */
 export const illustrations: Chapter["illustrations"] = {
   natan: {
     description: "Natán, un niño de 8 años con el pelo oscuro y rizado y una túnica sencilla, saluda sonriendo en una calle de Nazaret.",
     alt: "Natán, un niño de Nazaret, saluda sonriendo.",
+    src: "/ilustraciones/natan.svg",
   },
   casa: {
     description: "Interior de una casa sencilla de piedra en Nazaret: una familia sentada en esteras comparte pan y aceitunas a la luz de una lámpara de aceite.",
     alt: "Una familia de Nazaret come junta dentro de su casa de piedra.",
+    src: "/ilustraciones/casa.svg",
   },
   pan: {
     description: "Una madre y su hijo hacen pan plano en un horno de barro, delante de su casa, por la mañana.",
     alt: "Una madre y su hijo hacen pan en un horno de barro.",
+    src: "/ilustraciones/pan.svg",
   },
   soldados: {
     description: "Dos soldados romanos con casco y escudo pasan por un camino de Galilea mientras unos campesinos los miran desde un campo de trigo.",
     alt: "Soldados romanos pasan por un camino de Galilea.",
+    src: "/ilustraciones/soldados.svg",
   },
   peregrinos: {
     description: "Familias con niños y burros caminan juntas por un camino de montaña hacia Jerusalén; al fondo se ve el gran Templo blanco y dorado.",
     alt: "Familias caminan hacia Jerusalén; al fondo se ve el Templo.",
+    src: "/ilustraciones/peregrinos.svg",
   },
   sinagoga: {
     description: "Un maestro enseña a un grupo de niños a leer un rollo de las Escrituras en una sinagoga sencilla de piedra.",
     alt: "Un maestro enseña a leer a unos niños en la sinagoga.",
+    src: "/ilustraciones/sinagoga.svg",
   },
   pescadores: {
     description: "Una barca de pescadores en el lago de Galilea al amanecer; dos hombres recogen la red llena de peces.",
     alt: "Pescadores recogen la red en el lago de Galilea.",
+    src: "/ilustraciones/pescadores.svg",
   },
 };
 

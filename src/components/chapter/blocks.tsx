@@ -16,7 +16,7 @@ const Illustration = ({ id, chapter }: { id: string; chapter: Chapter }) => {
     return (
       <figure className="my-8">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={illustration.src} alt={illustration.alt} loading="lazy" className="w-full rounded-3xl" />
+        <img src={illustration.src} alt={illustration.alt} loading="lazy" className="w-full rounded-3xl ring-1 ring-linea" />
       </figure>
     );
   }
@@ -36,11 +36,14 @@ const Illustration = ({ id, chapter }: { id: string; chapter: Chapter }) => {
   );
 };
 
-const NarratorAvatar = ({ chapter, name }: { chapter: Chapter; name: string }) => {
-  const src = chapter.illustrations.natan?.src;
+/** Cara de cada narrador, dibujada aparte para el bocadillo. */
+const narratorFaces: Readonly<Record<string, string>> = { Natán: "/ilustraciones/natan-cara.svg" };
+
+const NarratorAvatar = ({ name }: { name: string }) => {
+  const src = narratorFaces[name];
   if (src) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt="" className="size-16 shrink-0 rounded-full object-cover ring-4 ring-alba" />;
+    return <img src={src} alt="" className="size-16 shrink-0 rounded-full" />;
   }
   return (
     <span
@@ -140,7 +143,7 @@ const BlockView = ({ block, context }: { block: Block; context: BlockContext }) 
     case "narrator":
       return (
         <div className="my-8 flex max-w-[64ch] items-start gap-4">
-          <NarratorAvatar chapter={chapter} name={context.narratorName ?? "?"} />
+          <NarratorAvatar name={context.narratorName ?? "?"} />
           <p
             className={`relative rounded-3xl rounded-tl-md bg-alba/25 px-6 py-4 ring-2 ring-alba ${
               size === "grande" ? "text-2xl leading-relaxed" : "text-lg"
