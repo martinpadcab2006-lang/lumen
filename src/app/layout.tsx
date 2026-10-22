@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Lumen",
   },
   description:
-    "Historia, fe y cultura del cristianismo contada como una serie, con vídeos, mapas y arte. Para todos, para colegios y para la universidad.",
+    "Historia, fe y cultura del cristianismo contada como una serie, con curiosidades, mapas, arte y la actualidad explicada.",
   openGraph: { siteName: "Lumen", locale: "es_ES", type: "website" },
 };
 

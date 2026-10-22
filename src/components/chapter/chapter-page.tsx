@@ -3,6 +3,7 @@ import { audienceName, chapterPath, type Chapter, type ChapterAudience } from "@
 import { nextInSeries } from "@/content/history";
 import { findPill, type Pill } from "@/content/pills";
 import { buildHolyLandMap } from "@/lib/holy-land-map";
+import { schoolSectionsVisible } from "@/lib/visibility";
 import { PillCard } from "../pill-card";
 import { Quiz } from "../quiz";
 import { Blocks } from "./blocks";
@@ -48,21 +49,23 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
       </header>
 
 
-      <nav aria-label="Este capítulo en otras versiones" className="mt-8 flex flex-wrap items-center gap-2 text-sm">
-        <span className="mr-1 text-piedra">Contado desde la historia y la cultura. Otra versión:</span>
-        {audiences.map((other) => (
-          <Link
-            key={other}
-            href={chapterPath(other, chapter.slug)}
-            aria-current={other === audience ? "page" : undefined}
-            className={`rounded-full border px-3 py-1 ${
-              other === audience ? "border-tinta bg-tinta text-niebla" : "border-linea hover:border-tinta"
-            }`}
-          >
-            {audienceName[other]}
-          </Link>
-        ))}
-      </nav>
+      {schoolSectionsVisible && (
+        <nav aria-label="Este capítulo en otras versiones" className="mt-8 flex flex-wrap items-center gap-2 text-sm">
+          <span className="mr-1 text-piedra">Contado desde la historia y la cultura. Otra versión:</span>
+          {audiences.map((other) => (
+            <Link
+              key={other}
+              href={chapterPath(other, chapter.slug)}
+              aria-current={other === audience ? "page" : undefined}
+              className={`rounded-full border px-3 py-1 ${
+                other === audience ? "border-tinta bg-tinta text-niebla" : "border-linea hover:border-tinta"
+              }`}
+            >
+              {audienceName[other]}
+            </Link>
+          ))}
+        </nav>
+      )}
 
       <section aria-labelledby="en-un-minuto" className="mt-10 rounded-3xl bg-lapis p-7 text-niebla sm:p-9">
         <h2 id="en-un-minuto" className="text-2xl font-bold">

@@ -2,17 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { schoolSectionsVisible } from "@/lib/visibility";
 
-type NavItem = { href: string; label: string };
+type NavItem = { href: string; label: string; school?: boolean };
 
 const navItems: readonly NavItem[] = [
   { href: "/descubre", label: "Descubre" },
-  { href: "/colegios", label: "Colegios" },
-  { href: "/universidad", label: "Universidad" },
+  { href: "/colegios", label: "Colegios", school: true },
+  { href: "/universidad", label: "Universidad", school: true },
   { href: "/actualidad", label: "Actualidad" },
   { href: "/mapa", label: "Mapa" },
   { href: "/comparador", label: "Iglesias" },
-];
+].filter((item) => schoolSectionsVisible || !item.school);
 
 const isActive = (pathname: string, href: string): boolean =>
   pathname === href || pathname.startsWith(`${href}/`) || (href === "/comparador" && pathname.startsWith("/iglesias"));
