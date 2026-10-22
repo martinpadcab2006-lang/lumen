@@ -38,6 +38,7 @@ export const pills: readonly Pill[] = [
       "El 1 de noviembre los cristianos celebran a todos los santos, y el 2, a los difuntos. La noche anterior se llamaba en inglés All Hallows' Eve, «la víspera de Todos los Santos», y de ahí salió Halloween.",
       "Esa víspera se mezcló con antiguas fiestas celtas de final de la cosecha, como el Samhain irlandés, y viajó a Estados Unidos con los emigrantes irlandeses. Allí nació la fiesta de disfraces que conocemos.",
       "En España la tradición es otra: visitar los cementerios, comer buñuelos y huesos de santo, y ver el Don Juan Tenorio.",
+      "Y en Cádiz, los Tosantos (de «Todos los Santos»): la víspera, los puestos del Mercado Central se disfrazan. Frutas, verduras y pescados aparecen vestidos y montados en escenas que se ríen de la actualidad, con el humor gaditano de siempre. La tradición viene del siglo XIX y hoy tiene hasta concurso.",
     ],
   },
   {

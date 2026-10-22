@@ -512,6 +512,20 @@ scenes["procesion"] = svg(
     sky("noche", "#141c3c", "#2c3866") + '<radialGradient id="luz"><stop offset="0" stop-color="#ffe29a" stop-opacity="0.85"/><stop offset="1" stop-color="#ffe29a" stop-opacity="0"/></radialGradient>',
 )
 
+# 20. Un monje escribe en su celda (para la historia de los monasterios)
+scenes["monje"] = svg(
+    rect(0, 0, W, H, "#d9c29c") + "".join(rect(j * 110 + (55 if i % 2 else 0) - 30, i * 52 + 8, 96, 40, "#d0b78f", 10) for i in range(14) for j in range(12))
+    + path("M 860,330 L 860,170 Q 930,90 1000,170 L 1000,330 Z", "#22305a") + circle(930, 200, 3, "#fff6d8") + circle(960, 250, 2.5, "#fff6d8")
+    + rect(0, 600, W, 150, "#9b7b55")
+    + rect(400, 600, 240, 90, "#7a5534", 8) + person(520, 610, 1.05, skin="#e0b48a", hair="short", hair_color="#5a4632", tunic="#6b4a2b", mantle="#5a3c22", belt="#3b2a1a", seated=True, left="front", right="front", look=1)
+    + rect(560, 520, 420, 30, "#7a5534", 6) + rect(600, 550, 24, 140, "#6a4a2e") + rect(920, 550, 24, 140, "#6a4a2e")
+    + rect(640, 470, 220, 52, "#f1e4c6", 6) + "".join(rect(660, 482 + k * 10, 180, 3, "#8e7a5a") for k in range(3))
+    + rect(900, 440, 16, 80, "#f8f1df", 3) + path("M 908,438 Q 918,420 908,404 Q 898,420 908,438 Z", "#f6c24b") + circle(908, 420, 60, "url(#luz)")
+    + line(620, 470, 690, 400, "#efe6d6", 5) + path("M 690,400 q 30,-40 10,-70 q -20,30 -10,70 z", "#efe6d6"),
+    "Un monje con hábito marrón escribe a la luz de una vela, sentado a una mesa de su celda.",
+    '<radialGradient id="luz"><stop offset="0" stop-color="#ffe29a" stop-opacity="0.9"/><stop offset="1" stop-color="#ffe29a" stop-opacity="0"/></radialGradient>',
+)
+
 os.makedirs(OUT, exist_ok=True)
 for name, content in scenes.items():
     with open(os.path.join(OUT, f"{name}.svg"), "w") as f:
