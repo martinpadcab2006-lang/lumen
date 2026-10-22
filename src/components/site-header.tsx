@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { schoolSectionsVisible } from "@/lib/visibility";
+import { LumenMark } from "./lumen-mark";
 
 type NavItem = { href: string; label: string; school?: boolean };
 
@@ -22,16 +23,13 @@ export const SiteHeader = () => {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-linea print:hidden">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-4 py-4 sm:px-6">
-        <Link href="/" className="group flex items-center gap-2.5" aria-label="Lumen, inicio">
-          <span
-            aria-hidden
-            className="size-4 rounded-full bg-alba shadow-[0_0_18px_4px_var(--alba)] transition-transform group-hover:scale-110"
-          />
-          <span className="font-display text-2xl font-bold tracking-tight">Lumen</span>
+    <header className="banda print:hidden">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-2 px-4 py-3 sm:px-6">
+        <Link href="/" className="group flex items-center gap-2" aria-label="Lumen, inicio">
+          <LumenMark className="size-10 transition-transform group-hover:scale-105" />
+          <span className="font-display text-2xl font-bold tracking-tight text-oro-claro">Lumen</span>
         </Link>
-        <nav aria-label="Principal" className="-mx-2 flex flex-wrap gap-1">
+        <nav aria-label="Principal" className="no-scrollbar -mx-4 flex w-[calc(100%+2rem)] gap-1 overflow-x-auto px-3 sm:mx-0 sm:w-auto sm:px-0">
           {navItems.map((item) => {
             const active = isActive(pathname, item.href);
             return (
@@ -39,8 +37,8 @@ export const SiteHeader = () => {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-full px-3 py-1.5 text-[0.95rem] transition-colors ${
-                  active ? "bg-tinta text-niebla" : "text-piedra hover:bg-niebla-honda hover:text-tinta"
+                className={`shrink-0 border-b-2 px-2.5 py-1.5 text-[0.95rem] transition-colors ${
+                  active ? "border-oro-claro text-oro-claro" : "border-transparent opacity-80 hover:opacity-100"
                 }`}
               >
                 {item.label}

@@ -49,7 +49,7 @@ const ChurchSelect = ({
         const church = findChurch(event.target.value);
         if (church) onChange(church.slug);
       }}
-      className="w-full rounded-xl border-2 border-tinta bg-superficie px-3 py-2.5 font-display text-lg font-semibold"
+      className="w-full rounded-sm border-2 border-tinta bg-superficie px-3 py-2.5 font-display text-lg font-semibold"
     >
       {churches.map((church) => (
         <option key={church.slug} value={church.slug} disabled={church.slug === exclude}>
@@ -79,14 +79,14 @@ export const Comparator = ({ initialA = DEFAULT_A, initialB = DEFAULT_B }: Compa
         <button
           type="button"
           onClick={swap}
-          className="self-start rounded-full border-2 border-linea px-4 py-2 text-sm font-bold hover:border-tinta active:scale-[0.97] sm:self-auto sm:mb-1"
+          className="self-start rounded-sm border-2 border-linea px-4 py-2 text-sm font-bold hover:border-tinta active:scale-[0.97] sm:self-auto sm:mb-1"
         >
           Intercambiar
         </button>
         <ChurchSelect id="iglesia-b" label="Segunda iglesia" value={slugB} exclude={slugA} onChange={setSlugB} />
       </div>
 
-      <div className="overflow-hidden rounded-3xl ring-1 ring-linea">
+      <div className="overflow-hidden rounded-sm ring-1 ring-linea">
         <div className="grid grid-cols-2 md:grid-cols-[12rem_1fr_1fr]">
           <div className="hidden bg-superficie md:block" />
           {[a, b].map((church) => (

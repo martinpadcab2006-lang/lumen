@@ -156,4 +156,12 @@ export type Chapter = {
 };
 
 /** Ficha corta de un capítulo para los índices, esté escrito o no. */
-export type ChapterSummary = { number: number; slug: string; title: string; period: string; teaser: string };
+export type ChapterSummary = {
+  number: number;
+  slug: string;
+  title: string;
+  period: string;
+  teaser: string;
+  /** Cuadro de portada en Wikimedia Commons (nombre del archivo). */
+  cover?: string;
+};

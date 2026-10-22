@@ -73,7 +73,7 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_20rem]">
       <div className="min-w-0 space-y-5">
-        <div className="overflow-hidden rounded-3xl bg-superficie ring-1 ring-linea">
+        <div className="overflow-hidden rounded-sm bg-superficie ring-1 ring-linea">
           <svg
             viewBox={`0 0 ${geometry.width} ${geometry.height}`}
             className="block h-auto w-full"
@@ -110,7 +110,7 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
           <button
             type="button"
             onClick={toggle}
-            className="rounded-full bg-tinta px-5 py-2.5 font-bold text-niebla transition-transform active:scale-[0.97]"
+            className="rounded-sm bg-tinta px-5 py-2.5 font-bold text-niebla transition-transform active:scale-[0.97]"
           >
             {playing ? "Pausar" : year >= TIMELINE_END ? "Volver a empezar" : "Reproducir"}
           </button>
@@ -153,7 +153,7 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
                   type="button"
                   aria-pressed={shown}
                   onClick={() => toggleBranch(branch)}
-                  className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm transition-colors ${
+                  className={`inline-flex items-center gap-2 rounded-sm border px-3.5 py-1.5 text-sm transition-colors ${
                     shown ? "border-tinta" : "border-linea text-piedra line-through"
                   }`}
                 >
@@ -168,7 +168,7 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
 
       <aside className="space-y-6">
         {selected ? (
-          <div className="rounded-3xl bg-superficie p-6 ring-1 ring-linea">
+          <div className="rounded-sm bg-superficie p-6 ring-1 ring-linea">
             <p className="font-bold" style={{ color: branchColor[selected.branch] }}>
               {branchName[selected.branch]}
             </p>
@@ -177,7 +177,7 @@ export const MapExplorer = ({ geometry }: MapExplorerProps) => {
             <p className="mt-3">{selected.text}</p>
           </div>
         ) : (
-          <p className="rounded-3xl bg-superficie p-6 text-piedra ring-1 ring-linea">
+          <p className="rounded-sm bg-superficie p-6 text-piedra ring-1 ring-linea">
             Todavía no hay ningún hito en esta fecha. Pulsa «Reproducir» o mueve el control del año.
           </p>
         )}

@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="mt-4 text-lg text-piedra">
         Puede que el enlace esté mal escrito o que la página se haya movido. Desde el inicio puedes llegar a todo.
       </p>
-      <Link href="/" className="mt-8 inline-flex rounded-full bg-tinta px-5 py-2.5 font-bold text-niebla">
+      <Link href="/" className="mt-8 inline-flex rounded-sm bg-tinta px-5 py-2.5 font-bold text-niebla">
         Ir al inicio
       </Link>
     </div>

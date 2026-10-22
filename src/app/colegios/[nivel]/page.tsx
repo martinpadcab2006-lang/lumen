@@ -38,7 +38,7 @@ const TemaCard = ({ levelSlug, item }: { levelSlug: Parameters<typeof temaPath>[
       </span>
     </>
   );
-  const cardClass = "flex h-full flex-col rounded-3xl p-6 ring-1 ring-linea";
+  const cardClass = "flex h-full flex-col rounded-sm p-6 ring-1 ring-linea";
   return written ? (
     <Link href={temaPath(levelSlug, item.slug)} className={`group bg-superficie hover:ring-2 hover:ring-tinta ${cardClass}`}>
       {content}
@@ -99,7 +99,7 @@ export default async function LevelPage({ params }: PageProps<"/colegios/[nivel]
           <ul className="mt-5 flex flex-wrap gap-2">
             {otherLevels.map((other) => (
               <li key={other.slug}>
-                <Link href={`/colegios/${other.slug}`} className="inline-flex rounded-full border border-linea px-4 py-1.5 hover:border-tinta">
+                <Link href={`/colegios/${other.slug}`} className="inline-flex rounded-sm border border-linea px-4 py-1.5 hover:border-tinta">
                   {other.name}
                 </Link>
               </li>

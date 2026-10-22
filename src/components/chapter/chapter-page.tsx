@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { audienceName, chapterPath, type Chapter, type ChapterAudience } from "@/content/chapter-types";
-import { nextInSeries } from "@/content/history";
+import { nextInSeries, series } from "@/content/history";
 import { findPill, type Pill } from "@/content/pills";
 import { buildHolyLandMap } from "@/lib/holy-land-map";
 import { schoolSectionsVisible } from "@/lib/visibility";
 import { PillCard } from "../pill-card";
 import { Quiz } from "../quiz";
 import { Blocks } from "./blocks";
+import { commonsImageUrl } from "./chapter-image";
 import { ChapterReader } from "./chapter-reader";
 import { HolyLandMapView } from "./holy-land-map-view";
 import { MediaShelf } from "./media-shelf";
+import { SafeImg } from "./safe-img";
 
 const audiences: readonly ChapterAudience[] = ["descubre", "universidad"];
 
@@ -32,23 +34,36 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
     stop: section.stop,
     content: <Blocks blocks={section.blocks} context={context} />,
   }));
+  const cover = series.find((item) => item.slug === chapter.slug)?.cover;
   const related = (version.relatedPills ?? []).map(findPill).filter((pill): pill is Pill => pill !== undefined);
 
   return (
-    <article className="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
-      <Link href={back.href} className="text-piedra hover:text-tinta hover:underline">
-        Volver a {back.label}
-      </Link>
-
-      <header className="mt-8 max-w-4xl">
-        <p className="font-bold text-lapis">
-          Capítulo {chapter.number}, {chapter.period}
-        </p>
-        <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-6xl">{version.title}</h1>
-        <p className="mt-5 text-xl leading-relaxed">{version.intro}</p>
+    <article>
+      <header className="banda relative overflow-hidden">
+        {cover && (
+          <figure className="absolute inset-0">
+            <SafeImg src={commonsImageUrl(cover, 1600)} alt="" className="size-full object-cover opacity-45" />
+          </figure>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-granate via-granate/80 to-granate/40" />
+        <div className="relative mx-auto max-w-6xl px-4 pb-12 pt-8 sm:px-6 sm:pb-16">
+          <Link href={back.href} className="text-sm opacity-80 hover:underline hover:opacity-100">
+            ← {back.label}
+          </Link>
+          <div className="mt-16 max-w-4xl sm:mt-24">
+            <p className="flex items-baseline gap-4">
+              <span className="font-display text-7xl font-extrabold leading-none tabular-nums text-oro-claro sm:text-8xl">
+                {String(chapter.number).padStart(2, "0")}
+              </span>
+              <span className="text-sm font-bold uppercase tracking-[0.18em] text-alba">{chapter.period}</span>
+            </p>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-6xl">{version.title}</h1>
+            <p className="mt-5 max-w-[60ch] text-xl leading-relaxed opacity-90">{version.intro}</p>
+          </div>
+        </div>
       </header>
 
-
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
       {schoolSectionsVisible && (
         <nav aria-label="Este capítulo en otras versiones" className="mt-8 flex flex-wrap items-center gap-2 text-sm">
           <span className="mr-1 text-piedra">Contado desde la historia y la cultura. Otra versión:</span>
@@ -57,7 +72,7 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
               key={other}
               href={chapterPath(other, chapter.slug)}
               aria-current={other === audience ? "page" : undefined}
-              className={`rounded-full border px-3 py-1 ${
+              className={`rounded-sm border px-3 py-1 ${
                 other === audience ? "border-tinta bg-tinta text-niebla" : "border-linea hover:border-tinta"
               }`}
             >
@@ -67,18 +82,18 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
         </nav>
       )}
 
-      <section aria-labelledby="en-un-minuto" className="mt-10 rounded-3xl bg-lapis p-7 text-niebla sm:p-9">
+      <section aria-labelledby="en-un-minuto" className="mt-10 border-y border-linea py-8">
         <h2 id="en-un-minuto" className="text-2xl font-bold">
           En un minuto
         </h2>
-        <ul className="mt-4 max-w-[65ch] list-disc space-y-2 pl-5 text-lg marker:text-alba">
+        <ul className="mt-4 max-w-[65ch] list-disc space-y-2 pl-5 text-lg marker:text-oro">
           {version.inAMinute.map((point) => (
             <li key={point}>{point}</li>
           ))}
         </ul>
       </section>
 
-      <div className="mt-10 overflow-hidden rounded-3xl ring-1 ring-linea lg:hidden">
+      <div className="mt-10 overflow-hidden rounded-sm ring-1 ring-linea lg:hidden">
         <HolyLandMapView map={map} activePlace={null} />
       </div>
 
@@ -141,7 +156,7 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
           <h2 id="curiosidades" className="text-3xl font-bold tracking-tight">
             Curiosidades relacionadas
           </h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
             {related.map((pill) => (
               <PillCard key={pill.slug} pill={pill} />
             ))}
@@ -170,14 +185,15 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
         </section>
       )}
 
-      <section className="mt-20 rounded-3xl border-2 border-tinta p-7 sm:p-9">
+      <section className="banda mt-20 px-6 py-10 sm:px-10">
         <p className="text-xl">{version.next}</p>
         {next && (
-          <p className="mt-3 text-piedra">
+          <p className="mt-3 text-oro-claro">
             Capítulo {next.number}: {next.title}. Próximamente.
           </p>
         )}
       </section>
+      </div>
     </article>
   );
 };

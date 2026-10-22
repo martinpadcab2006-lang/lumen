@@ -17,7 +17,7 @@ export const PillBrowser = ({ pills }: { pills: readonly Pill[] }) => {
           type="button"
           aria-pressed={topic === null}
           onClick={() => setTopic(null)}
-          className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+          className={`rounded-sm border px-4 py-1.5 text-sm transition-colors ${
             topic === null ? "border-tinta bg-tinta text-niebla" : "border-linea hover:border-tinta"
           }`}
         >
@@ -29,7 +29,7 @@ export const PillBrowser = ({ pills }: { pills: readonly Pill[] }) => {
             type="button"
             aria-pressed={topic === item}
             onClick={() => setTopic(item)}
-            className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm transition-colors ${
+            className={`inline-flex items-center gap-2 rounded-sm border px-4 py-1.5 text-sm transition-colors ${
               topic === item ? "border-tinta bg-tinta text-niebla" : "border-linea hover:border-tinta"
             }`}
           >
@@ -38,7 +38,7 @@ export const PillBrowser = ({ pills }: { pills: readonly Pill[] }) => {
           </button>
         ))}
       </div>
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {shown.map((pill) => (
           <PillCard key={pill.slug} pill={pill} />
         ))}

@@ -1,32 +1,39 @@
 @import "tailwindcss";
 
 /*
-  Lumen: luz del alba sobre papel frío.
-  niebla = fondo, tinta = texto, lapis = acción, alba = luz/cursor, piedra = texto secundario.
+  Lumen: un libro antiguo a la luz de una vela.
+  niebla = papel, tinta = texto, lapis = granate (acción), oro = títulos, alba = la luz,
+  granate = bandas oscuras (cabecera, portada, pie), piedra = texto secundario.
+  Los nombres antiguos (niebla, lapis…) se mantienen para no tocar cada componente.
 */
 :root {
-  --niebla: #eef1f5;
-  --niebla-honda: #e2e7ee;
-  --tinta: #17203a;
-  --lapis: #2b44a0;
-  --lapis-suave: #dfe5f6;
-  --alba: #f2b53a;
-  --piedra: #5f6780;
-  --linea: #cfd6e2;
-  --superficie: #f8f9fb;
-  --tierra: #dbe1ea;
-  --acierto: #17804f;
+  --niebla: #f4ede1;
+  --niebla-honda: #e9dfcd;
+  --tinta: #2b1a17;
+  --lapis: #7a1c2b;
+  --lapis-suave: #f1e1d9;
+  --alba: #e2b44f;
+  --oro: #8a6316;
+  --oro-claro: #e6c47c;
+  --granate: #3f0d16;
+  --papel-claro: #f4ede1;
+  --piedra: #6e5d55;
+  --linea: #dccdb6;
+  --superficie: #faf5ec;
+  --tierra: #e3d5bd;
+  --mar: #efe6d5;
+  --acierto: #2f7a4a;
   --fallo: #b3261e;
 
-  --rama-primer-milenio: #7d6b55;
+  --rama-primer-milenio: #8a7457;
   --rama-catolica: #b4234c;
-  --rama-ortodoxa: #2f66d6;
+  --rama-ortodoxa: #2f5fbf;
   --rama-orientales: #13855f;
-  --rama-protestante: #d0610f;
+  --rama-protestante: #c95d10;
   --rama-anglicana: #6c43b8;
 
-  --tema-fiestas: #b7791f;
-  --tema-simbolos: #2b44a0;
+  --tema-fiestas: #a8700f;
+  --tema-simbolos: #2f5fbf;
   --tema-historia: #8a5a2b;
   --tema-biblia: #13855f;
   --tema-costumbres: #b4234c;
@@ -35,20 +42,24 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --niebla: #121830;
-    --niebla-honda: #1a2240;
-    --tinta: #e8ecf5;
-    --lapis: #9fb2f2;
-    --lapis-suave: #253263;
-    --alba: #f5c35c;
-    --piedra: #a3abc2;
-    --linea: #2c365a;
-    --superficie: #171f3a;
-    --tierra: #2a355e;
-    --acierto: #4cc48a;
+    --niebla: #1a0e10;
+    --niebla-honda: #261418;
+    --tinta: #f1e6d6;
+    --lapis: #e9a6b0;
+    --lapis-suave: #3a1a20;
+    --alba: #f0c25e;
+    --oro: #e6c47c;
+    --oro-claro: #e6c47c;
+    --granate: #2c0a11;
+    --piedra: #b8a99c;
+    --linea: #3d262a;
+    --superficie: #221316;
+    --tierra: #3a272a;
+    --mar: #1f1214;
+    --acierto: #5cc48a;
     --fallo: #ef6b62;
 
-    --rama-primer-milenio: #b9a68d;
+    --rama-primer-milenio: #c2ab8e;
     --rama-catolica: #e2557c;
     --rama-ortodoxa: #6b95f0;
     --rama-orientales: #3cbf8e;
@@ -56,7 +67,7 @@
     --rama-anglicana: #a283e6;
 
     --tema-fiestas: #e3b737;
-    --tema-simbolos: #9fb2f2;
+    --tema-simbolos: #8fb0f2;
     --tema-historia: #c48b57;
     --tema-biblia: #3cbf8e;
     --tema-costumbres: #e2557c;
@@ -71,6 +82,11 @@
   --color-lapis: var(--lapis);
   --color-lapis-suave: var(--lapis-suave);
   --color-alba: var(--alba);
+  --color-oro: var(--oro);
+  --color-oro-claro: var(--oro-claro);
+  --color-granate: var(--granate);
+  --color-papel-claro: var(--papel-claro);
+  --color-mar: var(--mar);
   --color-piedra: var(--piedra);
   --color-linea: var(--linea);
   --color-superficie: var(--superficie);
@@ -83,7 +99,7 @@
 }
 
 html {
-  background: var(--niebla);
+  background: var(--granate);
   color-scheme: light dark;
 }
 
@@ -103,6 +119,54 @@ h3 {
   font-family: var(--font-display);
   text-wrap: balance;
   line-height: 1.08;
+}
+
+h1,
+h2 {
+  color: var(--oro);
+}
+
+/* Sobre fondos oscuros (bandas granates y bloques de color) el dorado se aclara. */
+.banda,
+.bg-granate,
+.bg-lapis,
+.bg-tinta {
+  --oro: var(--oro-claro);
+}
+
+.banda {
+  background: var(--granate);
+  color: var(--papel-claro);
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-lapis,
+  .bg-tinta {
+    --oro: #7a5512;
+  }
+}
+
+/* Un filete fino con un punto de luz: separa secciones como en un libro. */
+.filete {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--oro);
+}
+.filete::before,
+.filete::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 p {

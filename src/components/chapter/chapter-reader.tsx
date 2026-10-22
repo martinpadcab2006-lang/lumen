@@ -75,7 +75,7 @@ export const ChapterReader = ({ sections, stops, places, map, large = false }: C
             <p className="font-display text-4xl font-bold tabular-nums tracking-tight">{stop?.year}</p>
             <p className="text-piedra">{place?.name}</p>
           </div>
-          <div className="overflow-hidden rounded-3xl ring-1 ring-linea">
+          <div className="overflow-hidden rounded-sm ring-1 ring-linea">
             <HolyLandMapView map={map} activePlace={stop?.place ?? null} />
           </div>
         </div>

@@ -15,7 +15,7 @@ export const YouTubeEmbed = ({ videoId, title, startAt }: YouTubeEmbedProps) => 
   if (playing) {
     return (
       <iframe
-        className="aspect-video w-full rounded-2xl"
+        className="aspect-video w-full rounded-sm"
         src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0${start}`}
         title={title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -28,7 +28,7 @@ export const YouTubeEmbed = ({ videoId, title, startAt }: YouTubeEmbedProps) => 
     <button
       type="button"
       onClick={() => setPlaying(true)}
-      className="group relative block aspect-video w-full overflow-hidden rounded-2xl bg-tinta"
+      className="group relative block aspect-video w-full overflow-hidden rounded-sm bg-tinta"
       aria-label={`Ver el vídeo: ${title}`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}

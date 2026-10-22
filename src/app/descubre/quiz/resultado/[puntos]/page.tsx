@@ -27,7 +27,7 @@ export default async function QuizResultPage({ params }: PageProps<"/descubre/qu
       </p>
       <Link
         href="/descubre/quiz"
-        className="mt-10 inline-flex rounded-full bg-tinta px-7 py-3.5 text-lg font-bold text-niebla transition-transform active:scale-[0.97]"
+        className="mt-10 inline-flex rounded-sm bg-tinta px-7 py-3.5 text-lg font-bold text-niebla transition-transform active:scale-[0.97]"
       >
         Aceptar el reto
       </Link>

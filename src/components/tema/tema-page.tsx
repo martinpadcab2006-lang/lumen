@@ -48,7 +48,7 @@ export const TemaPage = ({ level, summary, tema }: TemaPageProps) => {
         <p className="mt-6">
           <Link
             href={teacherGuidePath(level.slug, tema.slug)}
-            className="inline-flex items-center gap-2 rounded-full bg-tinta px-4 py-2 text-sm font-semibold text-niebla hover:bg-lapis"
+            className="inline-flex items-center gap-2 rounded-sm bg-tinta px-4 py-2 text-sm font-semibold text-niebla hover:bg-lapis"
           >
             <span aria-hidden>🔒</span> Guía para el profesor
           </Link>
@@ -56,13 +56,13 @@ export const TemaPage = ({ level, summary, tema }: TemaPageProps) => {
       </header>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
-        <section aria-labelledby="pregunta" className="rounded-3xl bg-alba p-7 text-[#17203a] sm:p-9">
+        <section aria-labelledby="pregunta" className="rounded-sm bg-alba p-7 text-[#2b1a17] sm:p-9">
           <h2 id="pregunta" className="text-sm font-bold uppercase tracking-wide">
             La gran pregunta
           </h2>
           <p className="mt-3 font-display text-3xl font-bold leading-tight sm:text-4xl">{tema.question}</p>
         </section>
-        <section aria-labelledby="vas-a-aprender" className="rounded-3xl bg-lapis p-7 text-niebla sm:p-9">
+        <section aria-labelledby="vas-a-aprender" className="rounded-sm bg-lapis p-7 text-niebla sm:p-9">
           <h2 id="vas-a-aprender" className="text-xl font-bold">
             En este tema vas a aprender
           </h2>
@@ -78,7 +78,7 @@ export const TemaPage = ({ level, summary, tema }: TemaPageProps) => {
         <ol className="flex flex-wrap gap-2 text-sm">
           {contents.map((item, itemIndex) => (
             <li key={item.id}>
-              <a href={`#${item.id}`} className="inline-flex rounded-full border border-linea px-3 py-1 hover:border-tinta">
+              <a href={`#${item.id}`} className="inline-flex rounded-sm border border-linea px-3 py-1 hover:border-tinta">
                 {itemIndex > 0 && itemIndex <= tema.lessons.length ? `${itemIndex}. ` : ""}
                 {item.label}
               </a>
@@ -112,7 +112,7 @@ export const TemaPage = ({ level, summary, tema }: TemaPageProps) => {
             <div className="mt-5">
               <Blocks blocks={lesson.blocks} context={context} />
             </div>
-            <aside className="mt-8 rounded-3xl border-2 border-dashed border-lapis p-6 sm:p-7">
+            <aside className="mt-8 rounded-sm border-2 border-dashed border-lapis p-6 sm:p-7">
               <h3 className="font-display text-xl font-bold">{isKids ? "✏️ Ahora te toca a ti" : "Actividades"}</h3>
               <ol className={`mt-3 list-decimal space-y-2 pl-6 marker:font-bold ${textSize}`}>
                 {lesson.activities.map((activity) => (
@@ -125,7 +125,7 @@ export const TemaPage = ({ level, summary, tema }: TemaPageProps) => {
 
         <section id="tarea-final" aria-labelledby="tarea-final-titulo" className="scroll-mt-6 border-t border-linea py-10">
           <SectionLabel>Tarea final</SectionLabel>
-          <div className="mt-3 rounded-3xl border-2 border-tinta p-7 sm:p-9">
+          <div className="mt-3 rounded-sm border-2 border-tinta p-7 sm:p-9">
             <h2 id="tarea-final-titulo" className="text-3xl font-bold tracking-tight">
               {tema.finalTask.title}
             </h2>
@@ -135,7 +135,7 @@ export const TemaPage = ({ level, summary, tema }: TemaPageProps) => {
                 <li key={step}>{step}</li>
               ))}
             </ol>
-            <p className="mt-6 rounded-2xl bg-superficie px-5 py-4">
+            <p className="mt-6 rounded-sm bg-superficie px-5 py-4">
               <span className="font-bold">Lo que entregamos: </span>
               {tema.finalTask.product}
             </p>
@@ -174,7 +174,7 @@ export const TemaPage = ({ level, summary, tema }: TemaPageProps) => {
 
       <nav aria-label="Otros temas" className="mt-6 grid gap-4 sm:grid-cols-2 print:hidden">
         {previous ? (
-          <Link href={temaPath(level.slug, previous.slug)} className="rounded-3xl p-6 ring-1 ring-linea hover:ring-tinta">
+          <Link href={temaPath(level.slug, previous.slug)} className="rounded-sm p-6 ring-1 ring-linea hover:ring-tinta">
             <span className="text-sm text-piedra">Tema anterior</span>
             <span className="mt-1 block font-display text-xl font-semibold">{previous.title}</span>
           </Link>
@@ -182,7 +182,7 @@ export const TemaPage = ({ level, summary, tema }: TemaPageProps) => {
           <span />
         )}
         {next && (
-          <Link href={temaPath(level.slug, next.slug)} className="rounded-3xl p-6 text-right ring-1 ring-linea hover:ring-tinta">
+          <Link href={temaPath(level.slug, next.slug)} className="rounded-sm p-6 text-right ring-1 ring-linea hover:ring-tinta">
             <span className="text-sm text-piedra">Tema siguiente</span>
             <span className="mt-1 block font-display text-xl font-semibold">{next.title}</span>
           </Link>

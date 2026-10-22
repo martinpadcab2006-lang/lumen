@@ -9,14 +9,14 @@ const kindName: Readonly<Record<MediaKind, string>> = {
   serie: "Serie",
 };
 
-const linkClass = "inline-flex rounded-full border-2 border-tinta px-4 py-1.5 text-sm font-bold active:scale-[0.97]";
+const linkClass = "inline-flex rounded-sm border-2 border-tinta px-4 py-1.5 text-sm font-bold active:scale-[0.97]";
 
 const MediaCard = ({ media }: { media: Media }) => {
   const videoId = media.youtubeId ?? media.trailerYoutubeId;
   const isScreen = media.kind === "pelicula" || media.kind === "serie";
 
   return (
-    <article className="flex flex-col gap-4 rounded-3xl bg-superficie p-5 ring-1 ring-linea sm:p-6">
+    <article className="flex flex-col gap-4 rounded-sm bg-superficie p-5 ring-1 ring-linea sm:p-6">
       {videoId && (
         <YouTubeEmbed
           videoId={videoId}

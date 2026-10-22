@@ -13,7 +13,7 @@ const Photo = ({ image }: { image: PhotoImage }) => (
       src={commonsImageUrl(image.commonsFile, 1200)}
       alt={image.alt}
       loading="lazy"
-      className="w-full rounded-2xl bg-niebla-honda object-cover ring-1 ring-linea"
+      className="w-full rounded-sm bg-niebla-honda object-cover ring-1 ring-linea"
     />
     <figcaption className="mt-3 text-sm text-piedra">
       {image.caption}{" "}
@@ -26,7 +26,7 @@ const Photo = ({ image }: { image: PhotoImage }) => (
 
 /** Las obras de arte se cuelgan como en un museo: marco oscuro y cartela. */
 const Artwork = ({ image }: { image: ArtImage }) => (
-  <figure className="my-10 rounded-3xl bg-[#1d1a17] p-4 sm:p-8">
+  <figure className="my-10 rounded-sm bg-[#1d1a17] p-4 sm:p-8">
     <SafeImg
       src={commonsImageUrl(image.commonsFile, 1400)}
       alt={image.alt}

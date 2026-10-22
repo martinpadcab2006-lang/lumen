@@ -19,7 +19,7 @@ const Headlines = async () => {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {feeds.map((feed) => (
-        <section key={feed.id} aria-labelledby={`medio-${feed.id}`} className="rounded-3xl bg-superficie p-6 ring-1 ring-linea">
+        <section key={feed.id} aria-labelledby={`medio-${feed.id}`} className="rounded-sm bg-superficie p-6 ring-1 ring-linea">
           <h3 id={`medio-${feed.id}`} className="font-display text-2xl font-bold">
             {feed.name}
           </h3>
@@ -55,12 +55,12 @@ export default function NewsPage() {
           <h2 id="noticia-semana" className="text-sm font-bold uppercase tracking-wide text-lapis">
             La noticia de la semana · {formatNewsDate(latest.date)}
           </h2>
-          <Link href={`/actualidad/${latest.slug}`} className="group mt-3 block rounded-3xl bg-lapis p-7 text-niebla sm:p-10">
+          <Link href={`/actualidad/${latest.slug}`} className="group mt-3 block rounded-sm bg-lapis p-7 text-niebla sm:p-10">
             <span className="block font-display text-4xl font-extrabold leading-tight tracking-tight group-hover:underline sm:text-5xl">
               {latest.title}
             </span>
             <span className="mt-4 block max-w-[65ch] text-lg">{latest.lead}</span>
-            <span className="mt-6 inline-flex rounded-full bg-alba px-5 py-2 font-bold text-[#17203a]">Leer la noticia explicada</span>
+            <span className="mt-6 inline-flex rounded-sm bg-alba px-5 py-2 font-bold text-[#2b1a17]">Leer la noticia explicada</span>
           </Link>
         </section>
       )}

@@ -14,7 +14,7 @@ type ShareButtonsProps = {
 const absoluteUrl = (path: string): string => new URL(path, window.location.origin).toString();
 
 const buttonClass =
-  "inline-flex items-center rounded-full border-2 border-tinta px-4 py-2 text-sm font-bold transition-transform active:scale-[0.97]";
+  "inline-flex items-center rounded-sm border-2 border-tinta px-4 py-2 text-sm font-bold transition-transform active:scale-[0.97]";
 
 export const ShareButtons = ({ path, text, imagePath, imageFileName }: ShareButtonsProps) => {
   const [copied, setCopied] = useState(false);

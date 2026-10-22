@@ -6,9 +6,9 @@ export const chapters: readonly Chapter[] = [chapter01];
 
 /** La serie completa: doce capítulos. Los que aún no están escritos aparecen como «próximamente». */
 export const series: readonly ChapterSummary[] = [
-  { number: 1, slug: "el-mundo-de-jesus", title: "El mundo en el que nació Jesús", period: "63 a. C. – 70 d. C.", teaser: "Roma, Herodes, el Templo y un pueblo que esperaba al Mesías." },
-  { number: 2, slug: "jesus-de-nazaret", title: "Jesús de Nazaret", period: "c. 6 a. C. – c. 30", teaser: "Su vida, su mensaje, su muerte y la fe en su resurrección." },
-  { number: 3, slug: "los-primeros-cristianos", title: "Los primeros cristianos", period: "30 – 100", teaser: "Pentecostés, Pedro y Pablo, y las primeras comunidades." },
+  { number: 1, slug: "el-mundo-de-jesus", title: "El mundo en el que nació Jesús", period: "63 a. C. – 70 d. C.", teaser: "Roma, Herodes, el Templo y un pueblo que esperaba al Mesías.", cover: "Pompée_dans_le_Temple_de_Jérusalem.jpg" },
+  { number: 2, slug: "jesus-de-nazaret", title: "Jesús de Nazaret", period: "c. 6 a. C. – c. 30", teaser: "Su vida, su mensaje, su muerte y la fe en su resurrección.", cover: "1602-3 Caravaggio,Supper at Emmaus National Gallery, London.jpg" },
+  { number: 3, slug: "los-primeros-cristianos", title: "Los primeros cristianos", period: "30 – 100", teaser: "Pentecostés, Pedro y Pablo, y las primeras comunidades.", cover: "Maino Pentecostés. Lienzo. 285 x 163 cm. Museo del Prado.jpg" },
   { number: 4, slug: "perseguidos", title: "Perseguidos", period: "64 – 313", teaser: "Nerón, los mártires y la Iglesia que crece en la sombra." },
   { number: 5, slug: "religion-del-imperio", title: "De perseguidos a religión del Imperio", period: "313 – 476", teaser: "Constantino, Nicea, Teodosio y san Agustín." },
   { number: 6, slug: "monjes-y-misioneros", title: "Monjes, misioneros y bárbaros", period: "476 – 1000", teaser: "San Benito, la conversión de Europa y Bizancio." },

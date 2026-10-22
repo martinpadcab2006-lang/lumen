@@ -65,7 +65,7 @@ const Guide = ({ level, summary, tema }: { level: Level; summary: TemaSummary; t
       <Heading>Si tu colegio es IB: perfil de la comunidad de aprendizaje</Heading>
       <dl className="mt-4 grid gap-3 sm:grid-cols-2 print:grid-cols-1">
         {guide.ibProfile.map((item) => (
-          <div key={item.attribute} className="rounded-2xl bg-superficie p-4 ring-1 ring-linea print:break-inside-avoid">
+          <div key={item.attribute} className="rounded-sm bg-superficie p-4 ring-1 ring-linea print:break-inside-avoid">
             <dt className="font-bold">{item.attribute}</dt>
             <dd className="mt-1">{item.how}</dd>
           </div>
@@ -82,7 +82,7 @@ const Guide = ({ level, summary, tema }: { level: Level; summary: TemaSummary; t
             <h3 className="text-xl font-bold">{session.title}</h3>
             <ol className="mt-3 space-y-3">
               {session.steps.map((step) => (
-                <li key={step.title} className="flex gap-5 rounded-2xl bg-superficie p-5 ring-1 ring-linea">
+                <li key={step.title} className="flex gap-5 rounded-sm bg-superficie p-5 ring-1 ring-linea">
                   <span className="w-14 shrink-0 font-display text-2xl font-bold tabular-nums text-lapis">{step.minutes}′</span>
                   <span>
                     <span className="block text-lg font-bold">{step.title}</span>
@@ -107,7 +107,7 @@ const Guide = ({ level, summary, tema }: { level: Level; summary: TemaSummary; t
       <Heading>Dinámicas para la clase</Heading>
       <div className="mt-5 grid gap-4 md:grid-cols-2 print:grid-cols-1">
         {guide.dynamics.map((dynamic) => (
-          <section key={dynamic.title} className="rounded-2xl border-2 border-tinta p-5 print:break-inside-avoid">
+          <section key={dynamic.title} className="rounded-sm border-2 border-tinta p-5 print:break-inside-avoid">
             <h3 className="text-lg font-bold">{dynamic.title}</h3>
             <p className="mt-2 leading-relaxed">{dynamic.description}</p>
           </section>

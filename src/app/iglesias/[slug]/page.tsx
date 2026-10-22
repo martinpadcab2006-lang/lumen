@@ -71,11 +71,11 @@ export default async function ChurchPage({ params }: PageProps<"/iglesias/[slug]
           <div className="flex flex-wrap gap-3">
             <Link
               href={`/comparador?a=${church.slug}`}
-              className="rounded-full bg-tinta px-5 py-2.5 font-bold text-niebla active:scale-[0.97]"
+              className="rounded-sm bg-tinta px-5 py-2.5 font-bold text-niebla active:scale-[0.97]"
             >
               Comparar con otra iglesia
             </Link>
-            <Link href="/mapa" className="rounded-full border-2 border-tinta px-5 py-2 font-bold active:scale-[0.97]">
+            <Link href="/mapa" className="rounded-sm border-2 border-tinta px-5 py-2 font-bold active:scale-[0.97]">
               Ver en el mapa
             </Link>
           </div>

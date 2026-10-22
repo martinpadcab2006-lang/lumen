@@ -31,7 +31,7 @@ const optionStyle = (isAnswered: boolean, isCorrect: boolean, isChosen: boolean)
   return "border-linea opacity-60";
 };
 
-const primaryButton = "rounded-full bg-tinta px-5 py-2.5 font-bold text-niebla active:scale-[0.97]";
+const primaryButton = "rounded-sm bg-tinta px-5 py-2.5 font-bold text-niebla active:scale-[0.97]";
 
 const Results = ({
   questions,
@@ -47,7 +47,7 @@ const Results = ({
   onRestart: () => void;
 }) => (
   <div className="space-y-10">
-    <div className="rounded-3xl bg-superficie p-7 ring-1 ring-linea sm:p-10">
+    <div className="rounded-sm bg-superficie p-7 ring-1 ring-linea sm:p-10">
       <p className="font-display text-6xl font-extrabold tabular-nums tracking-tight">
         {score} de {questions.length}
       </p>
@@ -104,7 +104,7 @@ export const Quiz = ({ quizId, questions: fixedQuestions, count = 5, shareable =
 
   if (!questions) {
     return (
-      <div className="max-w-3xl rounded-3xl bg-superficie p-7 ring-1 ring-linea sm:p-10">
+      <div className="max-w-3xl rounded-sm bg-superficie p-7 ring-1 ring-linea sm:p-10">
         <p className="font-display text-3xl font-bold tracking-tight">{fixedQuestions?.length ?? count} preguntas, sin prisa</p>
         <p className="mt-2 text-piedra">
           Después de cada respuesta verás la explicación.{fixedQuestions ? "" : " Cada partida trae preguntas distintas."}
@@ -162,7 +162,7 @@ export const Quiz = ({ quizId, questions: fixedQuestions, count = 5, shareable =
             type="button"
             disabled={isAnswered}
             onClick={() => setAnswers((current) => ({ ...current, [question.id]: option.id }))}
-            className={`rounded-2xl border-2 px-5 py-4 text-left text-lg transition-[transform,border-color,background-color] ${optionStyle(
+            className={`rounded-sm border-2 px-5 py-4 text-left text-lg transition-[transform,border-color,background-color] ${optionStyle(
               isAnswered,
               option.id === question.correctId,
               option.id === chosen,

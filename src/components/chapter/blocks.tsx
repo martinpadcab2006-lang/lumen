@@ -18,13 +18,13 @@ const Illustration = ({ id, library }: { id: string; library: Library }) => {
     return (
       <figure className="my-8">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={illustration.src} alt={illustration.alt} loading="lazy" className="w-full rounded-3xl ring-1 ring-linea" />
+        <img src={illustration.src} alt={illustration.alt} loading="lazy" className="w-full rounded-sm ring-1 ring-linea" />
       </figure>
     );
   }
   return (
     <figure
-      className="my-8 flex min-h-56 flex-col items-center justify-center gap-3 rounded-3xl border-2 border-dashed border-alba bg-superficie p-8 text-center"
+      className="my-8 flex min-h-56 flex-col items-center justify-center gap-3 rounded-sm border-2 border-dashed border-alba bg-superficie p-8 text-center"
       aria-label={illustration.alt}
     >
       <span aria-hidden className="text-5xl">
@@ -50,7 +50,7 @@ const NarratorAvatar = ({ name }: { name: string }) => {
   return (
     <span
       aria-hidden
-      className="flex size-16 shrink-0 items-center justify-center rounded-full bg-alba font-display text-3xl font-extrabold text-[#17203a]"
+      className="flex size-16 shrink-0 items-center justify-center rounded-full bg-alba font-display text-3xl font-extrabold text-[#2b1a17]"
     >
       {name.at(0)}
     </span>
@@ -62,14 +62,14 @@ const CharacterCard = ({ id, library }: { id: string; library: Library }) => {
   if (!character) return null;
   const image = character.image ? library.images[character.image] : undefined;
   return (
-    <aside className="my-8 flex max-w-[68ch] gap-5 rounded-3xl bg-superficie p-5 ring-1 ring-linea sm:p-6">
+    <aside className="my-8 flex max-w-[68ch] gap-5 rounded-sm bg-superficie p-5 ring-1 ring-linea sm:p-6">
       {image && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={commonsImageUrl(image.commonsFile, 300)}
           alt={image.alt}
           loading="lazy"
-          className="size-24 shrink-0 rounded-2xl object-cover ring-1 ring-linea sm:size-28"
+          className="size-24 shrink-0 rounded-sm object-cover ring-1 ring-linea sm:size-28"
         />
       )}
       <div>
@@ -97,7 +97,7 @@ const BlockView = ({ block, context }: { block: Block; context: BlockContext }) 
       return <Illustration id={block.id} library={library} />;
     case "fact":
       return (
-        <aside className="my-6 max-w-[60ch] rounded-2xl border-l-4 border-alba bg-superficie px-5 py-4">
+        <aside className="my-6 max-w-[60ch] rounded-sm border-l-4 border-alba bg-superficie px-5 py-4">
           <p className="font-bold">{block.label}</p>
           <p className="mt-1 leading-relaxed">{block.text}</p>
         </aside>
@@ -106,13 +106,13 @@ const BlockView = ({ block, context }: { block: Block; context: BlockContext }) 
       return <CharacterCard id={block.id} library={library} />;
     case "map":
       return library.places ? (
-        <figure className="my-8 max-w-md overflow-hidden rounded-3xl ring-1 ring-linea">
+        <figure className="my-8 max-w-md overflow-hidden rounded-sm ring-1 ring-linea">
           <HolyLandMapView map={buildHolyLandMap(library.places)} activePlace={block.place ?? null} />
         </figure>
       ) : null;
     case "numbers":
       return (
-        <section className="my-8 rounded-3xl bg-lapis-suave p-6 sm:p-8">
+        <section className="my-8 rounded-sm bg-lapis-suave p-6 sm:p-8">
           <p className="font-bold text-lapis">{block.title}</p>
           <dl className="mt-4 grid gap-6 sm:grid-cols-3">
             {block.items.map((item) => (
@@ -136,7 +136,7 @@ const BlockView = ({ block, context }: { block: Block; context: BlockContext }) 
       );
     case "words":
       return (
-        <aside className="my-8 max-w-[60ch] rounded-3xl bg-[#fff6e0] p-6 text-[#17203a] ring-2 ring-alba">
+        <aside className="my-8 max-w-[60ch] rounded-sm bg-[#fff6e0] p-6 text-[#2b1a17] ring-2 ring-alba">
           <p className="font-display text-xl font-bold">📖 Palabras nuevas</p>
           <dl className="mt-3 space-y-3">
             {block.items.map((item) => (
@@ -153,7 +153,7 @@ const BlockView = ({ block, context }: { block: Block; context: BlockContext }) 
         <div className="my-8 flex max-w-[64ch] items-start gap-4">
           <NarratorAvatar name={context.narratorName ?? "?"} />
           <p
-            className={`relative rounded-3xl rounded-tl-md bg-alba/25 px-6 py-4 ring-2 ring-alba ${
+            className={`relative rounded-sm rounded-tl-md bg-alba/25 px-6 py-4 ring-2 ring-alba ${
               size === "grande" ? "text-2xl leading-relaxed" : "text-lg"
             }`}
           >
@@ -164,7 +164,7 @@ const BlockView = ({ block, context }: { block: Block; context: BlockContext }) 
       );
     case "story":
       return (
-        <section className="my-10 max-w-[68ch] rounded-3xl bg-superficie p-6 ring-1 ring-linea sm:p-8">
+        <section className="my-10 max-w-[68ch] rounded-sm bg-superficie p-6 ring-1 ring-linea sm:p-8">
           <p className="text-sm font-bold uppercase tracking-wide text-lapis">Relato</p>
           <h3 className="mt-1 font-display text-2xl font-bold">{block.title}</h3>
           <div className="mt-4 space-y-4 text-lg leading-relaxed">

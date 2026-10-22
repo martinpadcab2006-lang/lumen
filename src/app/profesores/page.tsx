@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const LoginForm = ({ next, failed }: { next: string; failed: boolean }) => (
-  <form action={enterTeacherZone} className="max-w-md rounded-3xl bg-superficie p-7 ring-1 ring-linea sm:p-9">
+  <form action={enterTeacherZone} className="max-w-md rounded-sm bg-superficie p-7 ring-1 ring-linea sm:p-9">
     <input type="hidden" name="next" value={next} />
     <label htmlFor="password" className="block text-lg font-bold">
       Contraseña del profesorado
@@ -26,7 +26,7 @@ const LoginForm = ({ next, failed }: { next: string; failed: boolean }) => (
       type="password"
       required
       autoComplete="current-password"
-      className="mt-3 w-full rounded-xl border-2 border-linea bg-niebla px-4 py-3 text-lg focus:border-lapis focus:outline-none"
+      className="mt-3 w-full rounded-sm border-2 border-linea bg-niebla px-4 py-3 text-lg focus:border-lapis focus:outline-none"
     />
     {failed && (
       <p role="alert" className="mt-3 font-semibold text-fallo">
@@ -35,7 +35,7 @@ const LoginForm = ({ next, failed }: { next: string; failed: boolean }) => (
     )}
     <button
       type="submit"
-      className="mt-5 rounded-full bg-lapis px-6 py-3 font-bold text-niebla transition-transform active:scale-[0.97]"
+      className="mt-5 rounded-sm bg-lapis px-6 py-3 font-bold text-niebla transition-transform active:scale-[0.97]"
     >
       Entrar
     </button>
@@ -71,11 +71,11 @@ const GuideIndex = () => (
             return (
               <li key={item.slug}>
                 {written ? (
-                  <Link href={teacherGuidePath(level.slug, item.slug)} className="group block h-full rounded-3xl border-2 border-tinta p-5 hover:bg-superficie">
+                  <Link href={teacherGuidePath(level.slug, item.slug)} className="group block h-full rounded-sm border-2 border-tinta p-5 hover:bg-superficie">
                     {content}
                   </Link>
                 ) : (
-                  <div className="block h-full rounded-3xl p-5 opacity-70 ring-1 ring-linea">{content}</div>
+                  <div className="block h-full rounded-sm p-5 opacity-70 ring-1 ring-linea">{content}</div>
                 )}
               </li>
             );
@@ -96,7 +96,7 @@ const TeacherArea = async ({ searchParams }: { searchParams: PageProps<"/profeso
   const hasAccess = await hasTeacherAccess();
   if (!teacherPasswordConfigured()) {
     return (
-      <p className="max-w-[60ch] rounded-3xl bg-superficie p-7 ring-1 ring-linea">
+      <p className="max-w-[60ch] rounded-sm bg-superficie p-7 ring-1 ring-linea">
         La Zona Profesores todavía no tiene contraseña. Hay que añadir la variable TEACHER_PASSWORD en la
         configuración del proyecto en Vercel.
       </p>

@@ -34,7 +34,7 @@ export default async function WeeklyNewsPage({ params }: PageProps<"/actualidad/
       <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">{news.title}</h1>
       <p className="mt-5 text-xl leading-relaxed">{news.lead}</p>
 
-      <section className="mt-12 rounded-3xl bg-superficie p-7 ring-1 ring-linea">
+      <section className="mt-12 rounded-sm bg-superficie p-7 ring-1 ring-linea">
         <h2 className="text-2xl font-bold">Qué ha pasado</h2>
         <ul className="mt-4 list-disc space-y-3 pl-6 text-lg leading-relaxed">
           {news.facts.map((fact) => (
@@ -46,7 +46,7 @@ export default async function WeeklyNewsPage({ params }: PageProps<"/actualidad/
       <Section title="Por qué importa" items={news.why} />
       <Section title="Un poco de historia" items={news.history} />
 
-      <section className="mt-12 rounded-3xl border-2 border-dashed border-lapis p-7">
+      <section className="mt-12 rounded-sm border-2 border-dashed border-lapis p-7">
         <h2 className="text-2xl font-bold">Para comentar en clase</h2>
         <ol className="mt-4 list-decimal space-y-2 pl-6 text-lg">
           {news.classroom.map((question) => (

@@ -21,7 +21,7 @@ export default function SchoolsPage() {
           <li key={level.slug}>
             <Link
               href={`/colegios/${level.slug}`}
-              className="group flex h-full flex-col rounded-3xl border-2 border-tinta p-7 transition-colors hover:bg-superficie sm:p-8"
+              className="group flex h-full flex-col rounded-sm border-2 border-tinta p-7 transition-colors hover:bg-superficie sm:p-8"
             >
               <span className="text-sm text-piedra">{level.ages}</span>
               <span className="mt-1 font-display text-4xl font-bold tracking-tight group-hover:underline">{level.name}</span>
@@ -32,7 +32,7 @@ export default function SchoolsPage() {
         ))}
       </ul>
 
-      <section className="mt-16 max-w-3xl rounded-3xl bg-lapis-suave p-7 sm:p-9" aria-labelledby="profesorado">
+      <section className="mt-16 max-w-3xl rounded-sm bg-lapis-suave p-7 sm:p-9" aria-labelledby="profesorado">
         <h2 id="profesorado" className="text-2xl font-bold">
           Para el profesorado
         </h2>
