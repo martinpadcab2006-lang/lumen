@@ -22,6 +22,8 @@ const nextConfig: NextConfig = {
     { source: "/colegios/eso", destination: "/colegios/eso-1", permanent: false },
     { source: "/colegios/eso/:rest*", destination: "/colegios/eso-1", permanent: false },
     { source: "/colegios/:nivel/historia/:capitulo", destination: "/colegios/:nivel", permanent: false },
+    // Los capítulos pasaron a ser episodios de la serie por temporadas.
+    { source: "/descubre/historia/el-mundo-de-jesus", destination: "/descubre/historia/los-origenes/el-mundo-de-jesus", permanent: true },
   ],
   turbopack: {
     rules: {

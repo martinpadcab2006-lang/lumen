@@ -1,3 +1,4 @@
+import { episodePath, seasons } from "./seasons";
 import type { QuizQuestion } from "./quiz";
 
 /** Los ciclos de Colegios, como en el currículo: Primaria en tres, ESO en dos y Bachillerato. */
@@ -22,7 +23,12 @@ export const audienceName: Readonly<Record<Audience, string>> = {
 
 /** Ruta de un capítulo de historia. */
 export const chapterPath = (audience: ChapterAudience, slug: string): string =>
-  audience === "descubre" ? `/descubre/historia/${slug}` : `/universidad/historia/${slug}`;
+  audience === "descubre" ? descubrePath(slug) : `/universidad/historia/${slug}`;
+
+const descubrePath = (slug: string): string => {
+  const season = seasons.find((item) => item.episodes.some((episode) => episode.slug === slug));
+  return season ? episodePath(season.slug, slug) : "/descubre/historia";
+};
 
 export const temaPath = (level: SchoolAudience, slug: string): string => `/colegios/${level}/${slug}`;
 

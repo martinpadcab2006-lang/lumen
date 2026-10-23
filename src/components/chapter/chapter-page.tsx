@@ -20,21 +20,29 @@ const backLink = (audience: ChapterAudience): { href: string; label: string } =>
     ? { href: "/descubre/historia", label: "La historia del cristianismo" }
     : { href: "/universidad", label: "Universidad" };
 
-type ChapterPageProps = { chapter: Chapter; audience: ChapterAudience };
+/** Cuando el capítulo se lee como episodio de la serie de Descubre. */
+export type EpisodeContext = {
+  code: string;
+  back: { href: string; label: string };
+  cover?: string;
+  next?: { href: string; label: string; written: boolean };
+};
 
-export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
+type ChapterPageProps = { chapter: Chapter; audience: ChapterAudience; episode?: EpisodeContext };
+
+export const ChapterPage = ({ chapter, audience, episode }: ChapterPageProps) => {
   const version = chapter.versions[audience];
   const map = buildHolyLandMap(chapter.places);
   const media = chapter.media.filter((item) => item.audiences.includes(audience));
   const next = nextInSeries(chapter.number);
-  const back = backLink(audience);
+  const back = episode?.back ?? backLink(audience);
   const context = { library: chapter, size: "normal" as const };
   const sections = version.sections.map((section) => ({
     heading: section.heading,
     stop: section.stop,
     content: <Blocks blocks={section.blocks} context={context} />,
   }));
-  const cover = series.find((item) => item.slug === chapter.slug)?.cover;
+  const cover = series.find((item) => item.slug === chapter.slug)?.cover ?? episode?.cover;
   const related = (version.relatedPills ?? []).map(findPill).filter((pill): pill is Pill => pill !== undefined);
 
   return (
@@ -53,7 +61,7 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
           <div className="mt-16 max-w-4xl sm:mt-24">
             <p className="flex items-baseline gap-4">
               <span className="font-display text-7xl font-extrabold leading-none tabular-nums text-oro-claro sm:text-8xl">
-                {String(chapter.number).padStart(2, "0")}
+                {episode?.code ?? String(chapter.number).padStart(2, "0")}
               </span>
               <span className="text-sm font-bold uppercase tracking-[0.18em] text-alba">{chapter.period}</span>
             </p>
@@ -187,10 +195,20 @@ export const ChapterPage = ({ chapter, audience }: ChapterPageProps) => {
 
       <section className="banda mt-20 px-6 py-10 sm:px-10">
         <p className="text-xl">{version.next}</p>
-        {next && (
-          <p className="mt-3 text-oro-claro">
-            Capítulo {next.number}: {next.title}. Próximamente.
-          </p>
+        {episode?.next ? (
+          episode.next.written ? (
+            <Link href={episode.next.href} className="mt-6 inline-block rounded-sm bg-alba px-6 py-3 font-bold text-[#2b1a17] transition-transform active:scale-[0.97]">
+              Siguiente episodio: {episode.next.label} →
+            </Link>
+          ) : (
+            <p className="mt-3 text-oro-claro">Siguiente episodio: {episode.next.label}. Próximamente.</p>
+          )
+        ) : (
+          next && (
+            <p className="mt-3 text-oro-claro">
+              Capítulo {next.number}: {next.title}. Próximamente.
+            </p>
+          )
         )}
       </section>
       </div>

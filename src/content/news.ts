@@ -49,7 +49,10 @@ export const weeklyNews: readonly WeeklyNews[] = [
       "Busca en un mapa Uruguay, Argentina y Perú. ¿Por qué crees que el papa tiene un vínculo especial con Perú?",
       "El papa habla abiertamente de su enfermedad. ¿Qué nos enseña su forma de afrontarla?",
     ],
-    related: [{ href: "/comparador", label: "Las iglesias cristianas, comparadas" }],
+    related: [
+      { href: "/descubre/papas#papa-267", label: "León XIV y los 266 papas anteriores" },
+      { href: "/comparador", label: "Las iglesias cristianas, comparadas" },
+    ],
     sources: [
       { text: "Vatican News, «Exámenes histológicos del Papa: no es necesario ningún tratamiento adicional» (21-10-2026)", url: "https://www.vaticannews.va/es/papa/news/2026-10/papa-leon-comunicacion-medicos-examenes-histologicos-21-oct-2026.html" },
       { text: "Infobae, «El papa León XIV retomó las audiencias y volvió a subirse al papamóvil tras su operación» (21-10-2026)", url: "https://www.infobae.com/america/mundo/2026/10/21/el-papa-leon-xiv-retomo-las-audiencias-y-volvio-a-subirse-al-papamovil-tras-su-operacion/" },

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { EpisodeRail } from "@/components/episode-rail";
 import { PillCard } from "@/components/pill-card";
-import { chapterPath } from "@/content/chapter-types";
-import { chapters, series } from "@/content/history";
+import { seasons, totalEpisodes } from "@/content/seasons";
 import { pills } from "@/content/pills";
 
 export const metadata: Metadata = {
@@ -12,8 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default function DiscoverPage() {
-  const firstChapter = chapters.at(0);
-
   return (
     <>
       <section className="banda">
@@ -24,19 +21,17 @@ export default function DiscoverPage() {
             Dos mil años de cristianismo contados de forma amena, desde la historia y la cultura. Sin necesidad de saber nada
             antes.
           </p>
-          {firstChapter && (
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href={chapterPath("descubre", firstChapter.slug)}
-                className="rounded-sm bg-alba px-6 py-3 font-bold text-[#2b1a17] transition-transform active:scale-[0.97]"
-              >
-                Empezar el capítulo {firstChapter.number}
-              </Link>
-              <Link href="/descubre/historia" className="rounded-sm border border-current px-6 py-3 font-bold transition-transform active:scale-[0.97]">
-                Ver los {series.length} capítulos
-              </Link>
-            </div>
-          )}
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/descubre/historia/los-origenes"
+              className="rounded-sm bg-alba px-6 py-3 font-bold text-[#2b1a17] transition-transform active:scale-[0.97]"
+            >
+              Empezar la serie
+            </Link>
+            <Link href="/descubre/historia" className="rounded-sm border border-current px-6 py-3 font-bold transition-transform active:scale-[0.97]">
+              Ver las {seasons.length} temporadas
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -44,7 +39,7 @@ export default function DiscoverPage() {
         <section aria-labelledby="la-serie" className="pt-16">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-piedra">La serie</p>
           <h2 id="la-serie" className="mt-1 text-4xl font-bold tracking-tight sm:text-5xl">
-            La historia, capítulo a capítulo
+            {seasons.length} temporadas, {totalEpisodes} episodios
           </h2>
           <div className="mt-8">
             <EpisodeRail />
@@ -68,6 +63,27 @@ export default function DiscoverPage() {
               <PillCard key={pill.slug} pill={pill} />
             ))}
           </div>
+        </section>
+
+        <section aria-labelledby="mas" className="pt-20">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-piedra">Y además</p>
+          <h2 id="mas" className="mt-1 text-4xl font-bold tracking-tight sm:text-5xl">
+            Más para descubrir
+          </h2>
+          <ul className="mt-8 grid gap-px bg-linea sm:grid-cols-3">
+            {[
+              { href: "/descubre/papas", title: "Los papas", text: "Los 267, de san Pedro a León XIV, y qué hizo cada uno." },
+              { href: "/arte", title: "El arte cristiano", text: "De las catacumbas al Barroco: estilos, obras y lugares." },
+              { href: "/comparador", title: "Las iglesias, frente a frente", text: "Católicos, ortodoxos, protestantes…: en qué se parecen y en qué no." },
+            ].map((item) => (
+              <li key={item.href} className="bg-niebla">
+                <Link href={item.href} className="group block px-5 py-7">
+                  <span className="font-display text-2xl font-bold text-oro group-hover:underline">{item.title} →</span>
+                  <span className="mt-2 block text-piedra">{item.text}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className="banda mt-20 grid gap-6 px-6 py-10 sm:px-10 md:grid-cols-[1fr_auto] md:items-center">

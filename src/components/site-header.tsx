@@ -11,13 +11,15 @@ const navItems: readonly NavItem[] = [
   { href: "/descubre", label: "Descubre" },
   { href: "/colegios", label: "Colegios", school: true },
   { href: "/universidad", label: "Universidad", school: true },
-  { href: "/actualidad", label: "Actualidad" },
+  { href: "/arte", label: "Arte" },
   { href: "/mapa", label: "Mapa" },
-  { href: "/comparador", label: "Iglesias" },
+  { href: "/actualidad", label: "Actualidad" },
 ].filter((item) => schoolSectionsVisible || !item.school);
 
 const isActive = (pathname: string, href: string): boolean =>
-  pathname === href || pathname.startsWith(`${href}/`) || (href === "/comparador" && pathname.startsWith("/iglesias"));
+  pathname === href ||
+  pathname.startsWith(`${href}/`) ||
+  (href === "/descubre" && (pathname.startsWith("/comparador") || pathname.startsWith("/iglesias")));
 
 export const SiteHeader = () => {
   const pathname = usePathname();

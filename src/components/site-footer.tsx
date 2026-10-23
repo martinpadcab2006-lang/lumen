@@ -33,6 +33,9 @@ export const SiteFooter = () => (
             <Link className="opacity-80 hover:opacity-100" href="/universidad">Universidad</Link>
           </>
         )}
+        <Link className="opacity-80 hover:opacity-100" href="/descubre/historia">La serie</Link>
+        <Link className="opacity-80 hover:opacity-100" href="/descubre/papas">Los papas</Link>
+        <Link className="opacity-80 hover:opacity-100" href="/arte">Arte</Link>
         <Link className="opacity-80 hover:opacity-100" href="/actualidad">Actualidad</Link>
         <Link className="opacity-80 hover:opacity-100" href="/mapa">Mapa</Link>
         <Link className="opacity-80 hover:opacity-100" href="/comparador">Las iglesias cristianas</Link>

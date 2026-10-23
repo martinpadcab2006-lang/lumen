@@ -4,10 +4,10 @@ import { SafeImg } from "@/components/chapter/safe-img";
 import { EpisodeRail } from "@/components/episode-rail";
 import { PillCard } from "@/components/pill-card";
 import { TimeSpectrum } from "@/components/time-spectrum";
-import { chapterPath } from "@/content/chapter-types";
 import { levels } from "@/content/levels";
 import { formatNewsDate, weeklyNews } from "@/content/news";
 import { pills } from "@/content/pills";
+import { seasons, totalEpisodes } from "@/content/seasons";
 import { schoolSectionsVisible } from "@/lib/visibility";
 
 const HERO_PAINTING = "1602-3 Caravaggio,Supper at Emmaus National Gallery, London.jpg";
@@ -47,10 +47,10 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href={chapterPath("descubre", "el-mundo-de-jesus")}
+              href="/descubre/historia/los-origenes"
               className="rounded-sm bg-alba px-6 py-3 font-bold text-[#2b1a17] transition-transform active:scale-[0.97]"
             >
-              Empezar por el capítulo 1
+              Empezar la serie
             </Link>
             <Link href="/descubre/curiosidades" className="rounded-sm border border-current px-6 py-3 font-bold transition-transform active:scale-[0.97]">
               Ver curiosidades
@@ -60,7 +60,7 @@ export default function HomePage() {
       </section>
 
       <section aria-labelledby="la-serie" className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
-        <SectionTitle id="la-serie" kicker="La serie" title="Dos mil años en doce capítulos" link={{ href: "/descubre/historia", label: "Ver todos" }} />
+        <SectionTitle id="la-serie" kicker="La serie" title={`${seasons.length} temporadas, ${totalEpisodes} episodios`} link={{ href: "/descubre/historia", label: "Ver la serie" }} />
         <div className="mt-8">
           <EpisodeRail />
         </div>
