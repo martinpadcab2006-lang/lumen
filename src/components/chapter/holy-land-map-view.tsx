@@ -37,10 +37,13 @@ export const HolyLandMapView = ({ map, activePlace, className = "" }: HolyLandMa
     ))}
     {map.places.map((place) => {
       const active = place.id === activePlace;
+      // En el mapa grande los nombres se pisan: solo se escribe el del lugar activo.
+      const showLabel = active || map.seaName !== "Mare Nostrum";
       return (
         <g key={place.id} transform={`translate(${place.x} ${place.y})`}>
           {active && <circle r={18} className="fill-alba motion-safe:animate-ping" opacity={0.35} />}
           <circle r={active ? 7 : 4} className={active ? "fill-alba stroke-tinta" : "fill-tinta"} strokeWidth={active ? 2 : 0} />
+          {showLabel && (
           <text
             x={9}
             y={4}
@@ -51,6 +54,7 @@ export const HolyLandMapView = ({ map, activePlace, className = "" }: HolyLandMa
           >
             {place.name}
           </text>
+          )}
         </g>
       );
     })}

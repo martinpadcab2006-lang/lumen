@@ -22,6 +22,15 @@ import { laPasion } from "./s2/09-la-pasion";
 import { laResurreccion } from "./s2/10-la-resurreccion";
 import { laAscension } from "./s2/11-la-ascension";
 import { quienEsJesucristo } from "./s2/12-quien-es-jesucristo";
+import { pentecostes } from "./s3/01-pentecostes";
+import { laComunidadDeJerusalen } from "./s3/02-la-comunidad-de-jerusalen";
+import { pedro } from "./s3/03-pedro";
+import { pablo } from "./s3/04-pablo";
+import { losViajesDePablo } from "./s3/05-los-viajes-de-pablo";
+import { lasPrimerasCartas } from "./s3/06-las-primeras-cartas";
+import { lasPrimerasComunidades } from "./s3/07-las-primeras-comunidades";
+import { cristianosYJudios } from "./s3/08-cristianos-y-judios";
+import { lasMujeresEnLasComunidades } from "./s3/09-las-mujeres-en-las-comunidades";
 
 /** Un episodio escrito: su sitio en la serie y su contenido (con el mismo formato que los capítulos). */
 export type Episode = { season: string; slug: string; content: Chapter };
@@ -55,6 +64,17 @@ const written: readonly Episode[] = [
     laResurreccion,
     laAscension,
     quienEsJesucristo,
+  ]),
+  ...inSeason("los-primeros-cristianos", [
+    pentecostes,
+    laComunidadDeJerusalen,
+    pedro,
+    pablo,
+    losViajesDePablo,
+    lasPrimerasCartas,
+    lasPrimerasComunidades,
+    cristianosYJudios,
+    lasMujeresEnLasComunidades,
   ]),
 ];
 
