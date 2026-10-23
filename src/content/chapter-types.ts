@@ -148,6 +148,10 @@ export type Library = {
 };
 
 export type Chapter = {
+  /** Escala del mapa del capítulo (por defecto, la tierra de Jesús). */
+  mapRegion?: "tierra-santa" | "mediterraneo";
+  /** Cuadro de portada en Wikimedia Commons (si no, se usa el de la serie o la temporada). */
+  cover?: string;
   slug: string;
   number: number;
   title: string;

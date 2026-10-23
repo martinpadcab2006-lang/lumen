@@ -24,10 +24,10 @@ export default function HistorySeriesPage() {
             con mapas, arte y curiosidades. Empieza por el principio o salta a la época que te interese.
           </p>
           <Link
-            href={`/descubre/historia/${first.slug}`}
+            href={`/descubre/historia/${first.slug}/${first.episodes[0].slug}`}
             className="mt-8 inline-block rounded-sm bg-alba px-6 py-3 font-bold text-[#2b1a17] transition-transform active:scale-[0.97]"
           >
-            Empezar por la temporada 1
+            Empezar por el episodio 1.01
           </Link>
         </div>
       </section>

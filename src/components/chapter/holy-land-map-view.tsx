@@ -12,15 +12,15 @@ export const HolyLandMapView = ({ map, activePlace, className = "" }: HolyLandMa
     viewBox={`0 0 ${map.width} ${map.height}`}
     className={`block h-auto w-full ${className}`}
     role="img"
-    aria-label="Mapa de Galilea, Samaria y Judea en tiempos de Jesús"
+    aria-label={map.seaName === "Mare Nostrum" ? "Mapa del Mediterráneo en época romana" : "Mapa de Galilea, Samaria y Judea en tiempos de Jesús"}
   >
     <rect width={map.width} height={map.height} className="fill-lapis-suave" />
     <path d={map.land} className="fill-superficie stroke-superficie" strokeWidth={1.2} />
-    <path d={map.jordan} fill="none" className="stroke-lapis" strokeWidth={1.6} strokeLinecap="round" opacity={0.55} />
-    <path d={map.galilee} className="fill-lapis-suave stroke-lapis" strokeWidth={0.8} />
-    <path d={map.deadSea} className="fill-lapis-suave stroke-lapis" strokeWidth={0.8} />
+    {map.jordan && <path d={map.jordan} fill="none" className="stroke-lapis" strokeWidth={1.6} strokeLinecap="round" opacity={0.55} />}
+    {map.galilee && <path d={map.galilee} className="fill-lapis-suave stroke-lapis" strokeWidth={0.8} />}
+    {map.deadSea && <path d={map.deadSea} className="fill-lapis-suave stroke-lapis" strokeWidth={0.8} />}
     <text x={map.sea.x} y={map.sea.y} textAnchor="middle" className="fill-lapis text-[13px] italic" opacity={0.7}>
-      Mar Mediterráneo
+      {map.seaName}
     </text>
     {map.regions.map((region) => (
       <text

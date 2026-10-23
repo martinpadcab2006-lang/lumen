@@ -23,7 +23,7 @@ export default function DiscoverPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/descubre/historia/los-origenes"
+              href="/descubre/historia/los-origenes/que-es-el-cristianismo"
               className="rounded-sm bg-alba px-6 py-3 font-bold text-[#2b1a17] transition-transform active:scale-[0.97]"
             >
               Empezar la serie

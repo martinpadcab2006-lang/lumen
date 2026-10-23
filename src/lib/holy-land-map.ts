@@ -3,10 +3,44 @@ import type { Feature, LineString, Polygon } from "geojson";
 import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import countriesTopology from "world-atlas/countries-10m.json";
+import mediumTopology from "world-atlas/countries-50m.json";
 import type { Place } from "@/content/chapter-types";
 
 const WIDTH = 420;
 const HEIGHT = 620;
+
+/** Las dos escalas de mapa de la serie: la tierra de Jesús o todo el Mediterráneo romano. */
+export type MapRegion = "tierra-santa" | "mediterraneo";
+
+const MED_WIDTH = 640;
+const MED_HEIGHT = 400;
+
+const MED_BOUNDS: Feature<Polygon> = {
+  type: "Feature",
+  properties: {},
+  geometry: {
+    type: "Polygon",
+    coordinates: [
+      [
+        [-10, 29],
+        [-10, 48],
+        [46, 48],
+        [46, 29],
+        [-10, 29],
+      ],
+    ],
+  },
+};
+
+const MED_REGIONS: readonly Place[] = [
+  { name: "Hispania", lat: 40.2, lon: -4 },
+  { name: "Galia", lat: 46.5, lon: 2.5 },
+  { name: "Italia", lat: 42.6, lon: 12.8 },
+  { name: "Grecia", lat: 39.6, lon: 21.8 },
+  { name: "Asia Menor", lat: 39, lon: 32 },
+  { name: "Egipto", lat: 29.8, lon: 29.5 },
+  { name: "África", lat: 31.5, lon: 8 },
+];
 
 /** Recuadro de la tierra de Jesús: del sur del mar Muerto al norte de Galilea. */
 const BOUNDS: Feature<Polygon> = {
@@ -106,11 +140,13 @@ export type HolyLandMap = {
   jordan: string;
   regions: readonly { name: string; x: number; y: number }[];
   sea: { x: number; y: number };
+  seaName: string;
   places: readonly ProjectedPlace[];
 };
 
 type CountriesTopology = Topology<{ countries: GeometryCollection<{ name: string }> }>;
 const world = countriesTopology as unknown as CountriesTopology;
+const mediumWorld = mediumTopology as unknown as CountriesTopology;
 
 /**
  * Países actuales que cubren la zona. Se dibujan juntos, sin fronteras, como una sola
@@ -122,7 +158,35 @@ const REGION_COUNTRIES = new Set(["Israel", "Palestine", "Jordan", "Lebanon", "S
 const round = (path: string | null): string => (path ?? "").replace(/\d+\.\d+/g, (n) => Number(n).toFixed(1));
 
 /** Se calcula en el servidor: al navegador solo llegan las rutas SVG. */
-export const buildHolyLandMap = (places: Readonly<Record<string, Place>>): HolyLandMap => {
+export const buildHolyLandMap = (places: Readonly<Record<string, Place>>, region: MapRegion = "tierra-santa"): HolyLandMap =>
+  region === "mediterraneo" ? buildMediterraneanMap(places) : buildHolyLand(places);
+
+const buildMediterraneanMap = (places: Readonly<Record<string, Place>>): HolyLandMap => {
+  const projection = geoMercator().fitSize([MED_WIDTH, MED_HEIGHT], MED_BOUNDS);
+  projection.clipExtent([
+    [0, 0],
+    [MED_WIDTH, MED_HEIGHT],
+  ]);
+  const toPath = geoPath(projection);
+  const project = (lon: number, lat: number) => {
+    const [x, y] = projection([lon, lat]) ?? [0, 0];
+    return { x, y };
+  };
+  return {
+    width: MED_WIDTH,
+    height: MED_HEIGHT,
+    land: round(toPath(feature(mediumWorld, mediumWorld.objects.countries))),
+    galilee: "",
+    deadSea: "",
+    jordan: "",
+    regions: MED_REGIONS.map((item) => ({ name: item.name, ...project(item.lon, item.lat) })),
+    sea: project(18, 34.6),
+    seaName: "Mare Nostrum",
+    places: Object.entries(places).map(([id, place]) => ({ id, name: place.name, ...project(place.lon, place.lat) })),
+  };
+};
+
+const buildHolyLand = (places: Readonly<Record<string, Place>>): HolyLandMap => {
   const projection = geoMercator().fitSize([WIDTH, HEIGHT], BOUNDS);
   projection.clipExtent([
     [0, 0],
@@ -150,6 +214,7 @@ export const buildHolyLandMap = (places: Readonly<Record<string, Place>>): HolyL
     jordan: round(toPath(JORDAN_RIVER)),
     regions: REGIONS.map((region) => ({ name: region.name, ...project(region.lon, region.lat) })),
     sea: project(34.48, 32.62),
+    seaName: "Mar Mediterráneo",
     places: Object.entries(places).map(([id, place]) => ({ id, name: place.name, ...project(place.lon, place.lat) })),
   };
 };

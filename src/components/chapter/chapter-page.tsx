@@ -32,7 +32,7 @@ type ChapterPageProps = { chapter: Chapter; audience: ChapterAudience; episode?:
 
 export const ChapterPage = ({ chapter, audience, episode }: ChapterPageProps) => {
   const version = chapter.versions[audience];
-  const map = buildHolyLandMap(chapter.places);
+  const map = buildHolyLandMap(chapter.places, chapter.mapRegion);
   const media = chapter.media.filter((item) => item.audiences.includes(audience));
   const next = nextInSeries(chapter.number);
   const back = episode?.back ?? backLink(audience);
@@ -42,7 +42,7 @@ export const ChapterPage = ({ chapter, audience, episode }: ChapterPageProps) =>
     stop: section.stop,
     content: <Blocks blocks={section.blocks} context={context} />,
   }));
-  const cover = series.find((item) => item.slug === chapter.slug)?.cover ?? episode?.cover;
+  const cover = chapter.cover ?? series.find((item) => item.slug === chapter.slug)?.cover ?? episode?.cover;
   const related = (version.relatedPills ?? []).map(findPill).filter((pill): pill is Pill => pill !== undefined);
 
   return (

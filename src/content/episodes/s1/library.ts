@@ -1,0 +1,276 @@
+import type { Chapter, Library, Place } from "../../chapter-types";
+import {
+  characters as chapterCharacters,
+  illustrations,
+  images as chapterImages,
+  media as chapterMedia,
+} from "../../chapters/01-el-mundo-de-jesus/shared";
+
+/** Lugares de la tierra de Jesús (mapa de Tierra Santa). */
+export const holyLand = {
+  jerusalen: { name: "Jerusalén", lat: 31.778, lon: 35.235 },
+  belen: { name: "Belén", lat: 31.705, lon: 35.2 },
+  nazaret: { name: "Nazaret", lat: 32.7, lon: 35.3 },
+  seforis: { name: "Séforis", lat: 32.753, lon: 35.279 },
+  cafarnaum: { name: "Cafarnaúm", lat: 32.881, lon: 35.575 },
+  magdala: { name: "Magdala", lat: 32.825, lon: 35.517 },
+  cesarea: { name: "Cesarea Marítima", lat: 32.5, lon: 34.89 },
+  qumran: { name: "Qumrán", lat: 31.741, lon: 35.459 },
+  masada: { name: "Masada", lat: 31.316, lon: 35.354 },
+  jerico: { name: "Jericó", lat: 31.871, lon: 35.444 },
+  jordan: { name: "Betania del Jordán", lat: 31.837, lon: 35.55 },
+  maqueronte: { name: "Maqueronte", lat: 31.561, lon: 35.625 },
+  tiberiades: { name: "Tiberíades", lat: 32.79, lon: 35.53 },
+} satisfies Record<string, Place>;
+
+/** Lugares del Mediterráneo romano (mapa grande). */
+export const mediterranean = {
+  roma: { name: "Roma", lat: 41.9, lon: 12.5 },
+  jerusalen: { name: "Jerusalén", lat: 31.778, lon: 35.235 },
+  antioquia: { name: "Antioquía", lat: 36.2, lon: 36.16 },
+  alejandria: { name: "Alejandría", lat: 31.2, lon: 29.92 },
+  atenas: { name: "Atenas", lat: 37.98, lon: 23.73 },
+  efeso: { name: "Éfeso", lat: 37.94, lon: 27.34 },
+  cartago: { name: "Cartago", lat: 36.85, lon: 10.33 },
+  tarraco: { name: "Tarraco", lat: 41.12, lon: 1.25 },
+  babilonia: { name: "Babilonia", lat: 32.54, lon: 44.42 },
+} satisfies Record<string, Place>;
+
+export const images: Chapter["images"] = {
+  ...chapterImages,
+  pantocrator: {
+    kind: "arte",
+    commonsFile: "Spas vsederzhitel sinay.jpg",
+    alt: "Icono antiguo de Cristo de medio cuerpo, con barba, sosteniendo un libro y bendiciendo.",
+    title: "Cristo Pantocrátor",
+    artist: "Anónimo bizantino",
+    date: "siglo VI",
+    museum: "Monasterio de Santa Catalina del Sinaí (Egipto)",
+    caption: "Uno de los iconos de Cristo más antiguos que se conservan. «Pantocrátor» significa «el que lo gobierna todo».",
+  },
+  muro: {
+    kind: "foto",
+    commonsFile: "Western Wall, Jerusalem, Shavuot.JPG",
+    alt: "Gran muro de piedras antiguas con muchas personas rezando delante.",
+    caption: "El Muro Occidental de Jerusalén, el resto más venerado del recinto del Templo de Herodes. Hoy es el lugar de oración más importante del judaísmo.",
+    credit: "Wikimedia Commons",
+  },
+  tora: {
+    kind: "foto",
+    commonsFile: "Open Torah scroll.jpg",
+    alt: "Rollo de pergamino abierto con columnas de texto en hebreo.",
+    caption: "Un rollo de la Torá, los cinco primeros libros de la Biblia. En las sinagogas se sigue leyendo así, en rollos escritos a mano.",
+    credit: "Wikimedia Commons",
+  },
+  cafarnaum: {
+    kind: "foto",
+    commonsFile: "Capernaum synagogue by David Shankbone.jpg",
+    alt: "Ruinas de una sinagoga de piedra blanca con columnas, junto al lago.",
+    caption: "Ruinas de la sinagoga de Cafarnaúm. La que se ve es de unos siglos después, pero está construida sobre los cimientos de la sinagoga del siglo I.",
+    credit: "Foto: David Shankbone, Wikimedia Commons",
+  },
+  augusto: {
+    kind: "arte",
+    commonsFile: "Statue-Augustus.jpg",
+    alt: "Estatua de mármol de un emperador romano con coraza, el brazo derecho levantado.",
+    title: "Augusto de Prima Porta",
+    artist: "Escultor romano",
+    date: "siglo I",
+    museum: "Museos Vaticanos",
+    caption: "Augusto, el primer emperador. Jesús nació durante su reinado, que duró del 27 a. C. al 14 d. C.",
+  },
+  viaApia: {
+    kind: "foto",
+    commonsFile: "Via Appia Antica Rome 2006.jpg",
+    alt: "Calzada romana de grandes losas de piedra entre pinos y ruinas.",
+    caption: "La Vía Apia, a las afueras de Roma, todavía con sus losas originales. Por calzadas como esta viajarán después los primeros misioneros cristianos.",
+    credit: "Wikimedia Commons",
+  },
+  columnaTrajano: {
+    kind: "arte",
+    commonsFile: "028 Conrad Cichorius, Die Reliefs der Traianssäule, Tafel XXVIII.jpg",
+    alt: "Dibujo de un relieve romano con soldados en marcha, con cascos, escudos y estandartes.",
+    title: "Relieves de la Columna de Trajano",
+    artist: "Dibujo de Conrad Cichorius",
+    date: "1896-1900 (relieves del año 113)",
+    museum: "Wikimedia Commons",
+    caption: "Legionarios romanos en marcha. El ejército era la columna vertebral del Imperio.",
+  },
+  isaias: {
+    kind: "arte",
+    commonsFile: "Michelangelo, profeti, Isaiah 01.jpg",
+    alt: "Fresco de un profeta joven que se gira al oír una voz, con un libro en la mano.",
+    title: "El profeta Isaías",
+    artist: "Miguel Ángel",
+    date: "1508-1512",
+    museum: "Capilla Sixtina, Ciudad del Vaticano",
+    caption: "Isaías es el profeta más citado en los evangelios. Miguel Ángel lo pintó en el techo de la Capilla Sixtina.",
+  },
+  jeremias: {
+    kind: "arte",
+    commonsFile: "Rembrandt - Jeremiah Lamenting the Destruction of Jerusalem - WGA19091.jpg",
+    alt: "Pintura de un anciano pensativo apoyado en una roca; al fondo, una ciudad en llamas.",
+    title: "Jeremías lamenta la destrucción de Jerusalén",
+    artist: "Rembrandt",
+    date: "1630",
+    museum: "Rijksmuseum, Ámsterdam",
+    caption: "El profeta Jeremías ante la Jerusalén destruida por Babilonia en el 587 a. C., la gran catástrofe del pueblo judío.",
+  },
+  p52: {
+    kind: "foto",
+    commonsFile: "P52 recto.jpg",
+    alt: "Pequeño fragmento de papiro con unas pocas líneas de letras griegas.",
+    caption: "El papiro P52, del tamaño de una tarjeta de crédito. Contiene unos versículos del evangelio de Juan y se suele fechar en la primera mitad del siglo II.",
+    credit: "Biblioteca John Rylands, Mánchester. Wikimedia Commons",
+  },
+  tacito: {
+    kind: "foto",
+    commonsFile:
+      'Florence, Biblioteca Medicea Laurenziana Ms Codex Laurentianus Mediceus 68 II fol. 38r Tacitus, Annales, xv 44.3–8 "Chrı ſtıanoſ" highlighted.jpg',
+    alt: "Página de un manuscrito medieval en latín con una palabra resaltada.",
+    caption: "El manuscrito más antiguo de los Anales de Tácito (siglo XI). En la palabra resaltada habla de los «cristianos» y de Cristo, ejecutado por Poncio Pilato.",
+    credit: "Biblioteca Medicea Laurenziana, Florencia. Wikimedia Commons",
+  },
+  natividad: {
+    kind: "foto",
+    commonsFile: "Grotto of the Nativity, Church of the Nativity, Bethlehem, Palestine4.jpg",
+    alt: "Pequeña gruta iluminada con lámparas y una estrella de plata en el suelo.",
+    caption: "La gruta de la basílica de la Natividad de Belén. La estrella de plata marca el lugar donde, según la tradición, nació Jesús.",
+    credit: "Wikimedia Commons",
+  },
+  honthorst: {
+    kind: "arte",
+    commonsFile: "Gerard van Honthorst - Adoration of the Child - WGA11655.jpg",
+    alt: "Pintura nocturna de María y unos ángeles alrededor de un recién nacido que irradia luz.",
+    title: "Adoración del Niño",
+    artist: "Gerard van Honthorst",
+    date: "hacia 1620",
+    museum: "Galería de los Uffizi, Florencia",
+    caption: "Muchos pintores imaginaron el nacimiento de Jesús de noche, con el niño como única fuente de luz.",
+  },
+  murilloPastores: {
+    kind: "arte",
+    commonsFile: "Adoration of the Shepherds, Murillo (Prado Museum).jpg",
+    alt: "Pintura de unos pastores que adoran al niño Jesús junto a María y José.",
+    title: "La adoración de los pastores",
+    artist: "Bartolomé Esteban Murillo",
+    date: "hacia 1650",
+    museum: "Museo del Prado, Madrid",
+    caption: "Según el evangelio de Lucas, los primeros en visitar al niño fueron unos pastores, gente humilde y mal vista.",
+  },
+  giottoMagos: {
+    kind: "arte",
+    commonsFile: "Giotto - Scrovegni - -18- - Adoration of the Magi.jpg",
+    alt: "Fresco medieval de tres magos que ofrecen regalos al niño; arriba, un cometa.",
+    title: "La adoración de los Magos",
+    artist: "Giotto",
+    date: "hacia 1305",
+    museum: "Capilla de los Scrovegni, Padua",
+    caption: "Giotto pintó la estrella como un cometa: probablemente acababa de ver el cometa Halley, que pasó en 1301.",
+  },
+  bautismo: {
+    kind: "arte",
+    commonsFile: "Andrea del Verrocchio, Leonardo da Vinci - Baptism of Christ - Uffizi.jpg",
+    alt: "Pintura de Juan el Bautista derramando agua sobre la cabeza de Jesús en un río, con dos ángeles a la izquierda.",
+    title: "El bautismo de Cristo",
+    artist: "Andrea del Verrocchio y Leonardo da Vinci",
+    date: "1470-1475",
+    museum: "Galería de los Uffizi, Florencia",
+    caption: "Uno de los ángeles lo pintó un jovencísimo Leonardo, alumno de Verrocchio.",
+  },
+  jordan: {
+    kind: "foto",
+    commonsFile: "Baptism Site-Jordan River.jpg",
+    alt: "Un río estrecho de aguas verdes entre cañas y escalones de piedra.",
+    caption: "El río Jordán, en la zona donde la tradición sitúa el bautismo de Jesús, cerca de Jericó.",
+    credit: "Wikimedia Commons",
+  },
+  bloch: {
+    kind: "arte",
+    commonsFile: "Bloch-SermonOnTheMount.jpg",
+    alt: "Pintura de Jesús sentado en una ladera hablando a una multitud de personas de todas las edades.",
+    title: "El Sermón de la Montaña",
+    artist: "Carl Bloch",
+    date: "1877",
+    museum: "Palacio de Frederiksborg, Dinamarca",
+    caption: "Jesús enseñaba al aire libre, en el campo y junto al lago, a cualquiera que quisiera escuchar.",
+  },
+  tissotPedro: {
+    kind: "arte",
+    commonsFile:
+      "Brooklyn Museum - The Calling of Saint Peter and Saint Andrew (Vocation de Saint Pierre et Saint André) - James Tissot - overall.jpg",
+    alt: "Acuarela de dos pescadores en una barca que escuchan a Jesús desde la orilla.",
+    title: "La llamada de Pedro y Andrés",
+    artist: "James Tissot",
+    date: "1886-1894",
+    museum: "Museo de Brooklyn",
+    caption: "Los primeros en seguir a Jesús fueron pescadores del lago de Galilea.",
+  },
+};
+
+export const characters: Chapter["characters"] = {
+  ...chapterCharacters,
+  augusto: {
+    name: "César Augusto",
+    role: "Primer emperador de Roma",
+    dates: "63 a. C. – 14 d. C.",
+    text: "Sobrino nieto e hijo adoptivo de Julio César. Acabó con las guerras civiles y gobernó como emperador durante cuarenta años. El evangelio de Lucas dice que Jesús nació cuando Augusto mandó hacer un censo.",
+    image: "augusto",
+  },
+  tiberio: {
+    name: "Tiberio",
+    role: "Segundo emperador de Roma",
+    dates: "42 a. C. – 37 d. C.",
+    text: "Hijo adoptivo de Augusto. Gobernó del 14 al 37: es el emperador de toda la vida adulta de Jesús. Su cara aparece en el denario del que habla el evangelio.",
+    image: "denario",
+  },
+  isaias: {
+    name: "Isaías",
+    role: "Profeta de Jerusalén",
+    dates: "siglo VIII a. C.",
+    text: "El libro que lleva su nombre reúne profecías de varias épocas. Habla de un niño que nacerá, de un rey justo de la familia de David y de un «siervo» que sufre por los demás. Los primeros cristianos lo leyeron pensando en Jesús.",
+    image: "isaias",
+  },
+  juan: {
+    name: "Juan el Bautista",
+    role: "Profeta en el desierto",
+    dates: "c. 5 a. C. – c. 29 d. C.",
+    text: "Predicaba junto al Jordán y bautizaba a quienes querían cambiar de vida. Herodes Antipas lo encarceló y lo mandó ejecutar en la fortaleza de Maqueronte. Lo mencionan tanto los evangelios como Flavio Josefo.",
+    image: "bautismo",
+  },
+  tacito: {
+    name: "Tácito",
+    role: "Historiador romano",
+    dates: "c. 56 – c. 120",
+    text: "Senador y uno de los grandes historiadores de Roma. En sus Anales, escritos hacia el año 116, cuenta que Cristo fue ejecutado por Poncio Pilato en tiempos de Tiberio.",
+    image: "tacito",
+  },
+};
+
+const allIllustrations: Chapter["illustrations"] = {
+  ...illustrations,
+  procesion: {
+    description: "Una procesión de Semana Santa recorre una calle estrecha de una ciudad española.",
+    alt: "Una procesión de Semana Santa por una calle de la ciudad.",
+    src: "/ilustraciones/procesion.svg",
+  },
+  belen: {
+    description: "Un establo sencillo en Belén por la noche, con una estrella brillante en el cielo.",
+    alt: "Un establo en Belén bajo una estrella.",
+    src: "/ilustraciones/belen.svg",
+  },
+  rio: {
+    description: "Un río entre cañas, con gente que se acerca a la orilla.",
+    alt: "Gente junto a la orilla de un río.",
+    src: "/ilustraciones/rio.svg",
+  },
+  pastor: {
+    description: "Un pastor con su rebaño de ovejas en el campo.",
+    alt: "Un pastor con sus ovejas.",
+    src: "/ilustraciones/pastor.svg",
+  },
+};
+
+export const library: Library = { images, illustrations: allIllustrations, characters, places: holyLand };
+
+export const media = chapterMedia;

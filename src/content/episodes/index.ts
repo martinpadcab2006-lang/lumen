@@ -1,11 +1,36 @@
 import type { Chapter } from "../chapter-types";
-import { chapter01 } from "../chapters/01-el-mundo-de-jesus";
 import { episodePath, findSeason, seasons, type EpisodeSummary, type Season } from "../seasons";
+import { queEsElCristianismo } from "./s1/01-que-es-el-cristianismo";
+import { elMundoDeJesus } from "./s1/02-el-mundo-de-jesus";
+import { elJudaismo } from "./s1/03-el-judaismo";
+import { elImperioRomano } from "./s1/04-el-imperio-romano";
+import { laEsperanzaDeIsrael } from "./s1/05-la-esperanza-de-israel";
+import { lasFuentesSobreJesus } from "./s1/06-las-fuentes-sobre-jesus";
+import { elNacimientoDeJesus } from "./s1/07-el-nacimiento-de-jesus";
+import { laInfanciaDeJesus } from "./s1/08-la-infancia-de-jesus";
+import { juanElBautista } from "./s1/09-juan-el-bautista";
+import { elReinoDeDios } from "./s1/10-el-reino-de-dios";
 
 /** Un episodio escrito: su sitio en la serie y su contenido (con el mismo formato que los capítulos). */
 export type Episode = { season: string; slug: string; content: Chapter };
 
-const written: readonly Episode[] = [{ season: "los-origenes", slug: "el-mundo-de-jesus", content: chapter01 }];
+const inSeason = (season: string, contents: readonly Chapter[]): Episode[] =>
+  contents.map((content) => ({ season, slug: content.slug, content }));
+
+const written: readonly Episode[] = [
+  ...inSeason("los-origenes", [
+    queEsElCristianismo,
+    elMundoDeJesus,
+    elJudaismo,
+    elImperioRomano,
+    laEsperanzaDeIsrael,
+    lasFuentesSobreJesus,
+    elNacimientoDeJesus,
+    laInfanciaDeJesus,
+    juanElBautista,
+    elReinoDeDios,
+  ]),
+];
 
 export const writtenEpisodes = written;
 
