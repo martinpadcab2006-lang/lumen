@@ -32,3 +32,12 @@ export const makeEpisode = (input: EpisodeInput): Chapter => ({
   media: input.media ?? [],
   versions: { descubre: input.version, universidad: input.version },
 });
+
+/** Pregunta de quiz con las opciones en orden (a, b, c, d). */
+export const question = (id: string, prompt: string, texts: readonly string[], correct: number, explanation: string) => ({
+  id,
+  prompt,
+  options: texts.map((text, index) => ({ id: String.fromCharCode(97 + index), text })),
+  correctId: String.fromCharCode(97 + correct),
+  explanation,
+});

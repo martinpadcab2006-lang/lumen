@@ -264,6 +264,16 @@ const allIllustrations: Chapter["illustrations"] = {
     alt: "Gente junto a la orilla de un río.",
     src: "/ilustraciones/rio.svg",
   },
+  naturaleza: {
+    description: "Campos de trigo, olivos y un camino entre colinas de Galilea.",
+    alt: "Campos y olivos en las colinas de Galilea.",
+    src: "/ilustraciones/naturaleza.svg",
+  },
+  zaqueo: {
+    description: "Un hombre bajito subido a un árbol para ver pasar a Jesús entre la multitud.",
+    alt: "Zaqueo subido a un árbol entre la multitud.",
+    src: "/ilustraciones/zaqueo.svg",
+  },
   pastor: {
     description: "Un pastor con su rebaño de ovejas en el campo.",
     alt: "Un pastor con sus ovejas.",

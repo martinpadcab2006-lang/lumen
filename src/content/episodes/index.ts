@@ -10,6 +10,18 @@ import { elNacimientoDeJesus } from "./s1/07-el-nacimiento-de-jesus";
 import { laInfanciaDeJesus } from "./s1/08-la-infancia-de-jesus";
 import { juanElBautista } from "./s1/09-juan-el-bautista";
 import { elReinoDeDios } from "./s1/10-el-reino-de-dios";
+import { laVidaPublica } from "./s2/01-la-vida-publica";
+import { losApostoles } from "./s2/02-los-apostoles";
+import { lasParabolas } from "./s2/03-las-parabolas";
+import { losMilagros } from "./s2/04-los-milagros";
+import { elSermonDeLaMontana } from "./s2/05-el-sermon-de-la-montana";
+import { mujeresPobresYMarginados } from "./s2/06-mujeres-pobres-y-marginados";
+import { conflictosConLasAutoridades } from "./s2/07-conflictos-con-las-autoridades";
+import { laUltimaCena } from "./s2/08-la-ultima-cena";
+import { laPasion } from "./s2/09-la-pasion";
+import { laResurreccion } from "./s2/10-la-resurreccion";
+import { laAscension } from "./s2/11-la-ascension";
+import { quienEsJesucristo } from "./s2/12-quien-es-jesucristo";
 
 /** Un episodio escrito: su sitio en la serie y su contenido (con el mismo formato que los capítulos). */
 export type Episode = { season: string; slug: string; content: Chapter };
@@ -29,6 +41,20 @@ const written: readonly Episode[] = [
     laInfanciaDeJesus,
     juanElBautista,
     elReinoDeDios,
+  ]),
+  ...inSeason("jesucristo", [
+    laVidaPublica,
+    losApostoles,
+    lasParabolas,
+    losMilagros,
+    elSermonDeLaMontana,
+    mujeresPobresYMarginados,
+    conflictosConLasAutoridades,
+    laUltimaCena,
+    laPasion,
+    laResurreccion,
+    laAscension,
+    quienEsJesucristo,
   ]),
 ];
 

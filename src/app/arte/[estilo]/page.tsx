@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { commonsImageUrl } from "@/components/chapter/chapter-image";
 import { SafeImg } from "@/components/chapter/safe-img";
 import { artKindName, artStyles, findArtStyle } from "@/content/art";
+import { hasArtWork } from "@/content/art-works";
 import { findSeason } from "@/content/seasons";
 
 export const generateStaticParams = () => artStyles.map((style) => ({ estilo: style.slug }));
@@ -62,15 +63,32 @@ export default async function ArtStylePage({ params }: PageProps<"/arte/[estilo]
           Obras, lugares y artistas
         </h2>
         <ul className="mt-6 grid gap-px bg-linea sm:grid-cols-2">
-          {style.works.map((item) => (
-            <li key={item.slug} className="bg-niebla px-5 py-5">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-piedra">
-                {artKindName[item.kind]} · Ficha próximamente
-              </p>
-              <p className="mt-1 font-display text-xl font-semibold">{item.name}</p>
-              <p className="text-piedra">{item.where}</p>
-            </li>
-          ))}
+          {style.works.map((item) => {
+            const ready = hasArtWork(item.slug);
+            const body = (
+              <>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-piedra">
+                  {artKindName[item.kind]} · {ready ? "Ver la ficha" : "Ficha próximamente"}
+                </p>
+                <p className={`mt-1 font-display text-xl font-semibold ${ready ? "text-oro group-hover:underline" : ""}`}>
+                  {item.name}
+                  {ready && " →"}
+                </p>
+                <p className="text-piedra">{item.where}</p>
+              </>
+            );
+            return (
+              <li key={item.slug} className="bg-niebla">
+                {ready ? (
+                  <Link href={`/arte/${style.slug}/${item.slug}`} className="group block px-5 py-5">
+                    {body}
+                  </Link>
+                ) : (
+                  <div className="px-5 py-5">{body}</div>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </section>
 
