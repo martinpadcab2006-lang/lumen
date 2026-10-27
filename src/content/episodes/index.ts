@@ -73,6 +73,14 @@ import { lasMisiones } from "./s7/07-las-misiones";
 import { lasGuerras } from "./s7/08-las-guerras-de-religion";
 import { galileo } from "./s7/09-galileo";
 import { laIlustracion } from "./s7/10-la-ilustracion";
+import { laRevolucion } from "./s8/01-la-revolucion-francesa";
+import { elSigloXIX } from "./s8/02-el-siglo-xix";
+import { rerumNovarum } from "./s8/03-rerum-novarum";
+import { guerrasYTotalitarismos } from "./s8/04-guerras-y-totalitarismos";
+import { elVaticanoII } from "./s8/05-el-vaticano-ii";
+import { evangelicos } from "./s8/06-evangelicos-y-pentecostales";
+import { elSurGlobal } from "./s8/07-el-sur-global";
+import { elSigloXXI } from "./s8/08-el-siglo-xxi";
 
 /** Un episodio escrito: su sitio en la serie y su contenido (con el mismo formato que los capítulos). */
 export type Episode = { season: string; slug: string; content: Chapter };
@@ -122,6 +130,7 @@ const written: readonly Episode[] = [
   ...inSeason("la-doctrina", [laBiblia, antiguoYNuevo, elCanon, losPadres, laTrinidad, diosYHombre, debatesYHerejias, losSacramentos, oracionYLiturgia]),
   ...inSeason("la-edad-media", [losPrimerosMonjes, sanBenito, bizancio, laExpansion, losPueblosGermanicos, alAndalus, carlomagno, elGranCisma, lasCruzadas, lasOrdenes, elCamino, lasUniversidades, laInquisicion, elCismaDeOccidente]),
   ...inSeason("la-edad-moderna", [elRenacimiento, lutero, calvino, trento, ignacio, laMistica, lasMisiones, lasGuerras, galileo, laIlustracion]),
+  ...inSeason("el-cristianismo-hoy", [laRevolucion, elSigloXIX, rerumNovarum, guerrasYTotalitarismos, elVaticanoII, evangelicos, elSurGlobal, elSigloXXI]),
 ];
 
 export const writtenEpisodes = written;
