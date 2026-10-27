@@ -31,6 +31,15 @@ import { lasPrimerasCartas } from "./s3/06-las-primeras-cartas";
 import { lasPrimerasComunidades } from "./s3/07-las-primeras-comunidades";
 import { cristianosYJudios } from "./s3/08-cristianos-y-judios";
 import { lasMujeresEnLasComunidades } from "./s3/09-las-mujeres-en-las-comunidades";
+import { neron } from "./s4/01-neron";
+import { losMartires } from "./s4/02-los-martires";
+import { lasCatacumbas } from "./s4/03-las-catacumbas";
+import { persecuciones } from "./s4/04-persecuciones";
+import { laVidaCotidiana } from "./s4/05-la-vida-cotidiana";
+import { constantino } from "./s4/06-constantino";
+import { nicea } from "./s4/07-nicea";
+import { teodosio } from "./s4/08-teodosio";
+import { laCaidaDeRoma } from "./s4/09-la-caida-de-roma";
 
 /** Un episodio escrito: su sitio en la serie y su contenido (con el mismo formato que los capítulos). */
 export type Episode = { season: string; slug: string; content: Chapter };
@@ -76,6 +85,7 @@ const written: readonly Episode[] = [
     cristianosYJudios,
     lasMujeresEnLasComunidades,
   ]),
+  ...inSeason("perseguidos", [neron, losMartires, lasCatacumbas, persecuciones, laVidaCotidiana, constantino, nicea, teodosio, laCaidaDeRoma]),
 ];
 
 export const writtenEpisodes = written;
