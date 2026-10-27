@@ -40,6 +40,15 @@ import { constantino } from "./s4/06-constantino";
 import { nicea } from "./s4/07-nicea";
 import { teodosio } from "./s4/08-teodosio";
 import { laCaidaDeRoma } from "./s4/09-la-caida-de-roma";
+import { laBiblia } from "./s5/01-la-biblia";
+import { antiguoYNuevo } from "./s5/02-antiguo-y-nuevo-testamento";
+import { elCanon } from "./s5/03-el-canon";
+import { losPadres } from "./s5/04-los-padres-de-la-iglesia";
+import { laTrinidad } from "./s5/05-la-trinidad";
+import { diosYHombre } from "./s5/06-dios-y-hombre";
+import { debatesYHerejias } from "./s5/07-debates-y-herejias";
+import { losSacramentos } from "./s5/08-los-sacramentos";
+import { oracionYLiturgia } from "./s5/09-oracion-y-liturgia";
 
 /** Un episodio escrito: su sitio en la serie y su contenido (con el mismo formato que los capítulos). */
 export type Episode = { season: string; slug: string; content: Chapter };
@@ -86,6 +95,7 @@ const written: readonly Episode[] = [
     lasMujeresEnLasComunidades,
   ]),
   ...inSeason("perseguidos", [neron, losMartires, lasCatacumbas, persecuciones, laVidaCotidiana, constantino, nicea, teodosio, laCaidaDeRoma]),
+  ...inSeason("la-doctrina", [laBiblia, antiguoYNuevo, elCanon, losPadres, laTrinidad, diosYHombre, debatesYHerejias, losSacramentos, oracionYLiturgia]),
 ];
 
 export const writtenEpisodes = written;
