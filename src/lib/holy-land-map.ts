@@ -9,8 +9,8 @@ import type { Place } from "@/content/chapter-types";
 const WIDTH = 420;
 const HEIGHT = 620;
 
-/** Las dos escalas de mapa de la serie: la tierra de Jesús o todo el Mediterráneo romano. */
-export type MapRegion = "tierra-santa" | "mediterraneo";
+/** Las escalas de mapa de la serie: la tierra de Jesús, el Mediterráneo romano, la Europa medieval o la península ibérica. */
+export type MapRegion = "tierra-santa" | "mediterraneo" | "europa" | "peninsula";
 
 const MED_WIDTH = 640;
 const MED_HEIGHT = 400;
@@ -31,6 +31,42 @@ const MED_BOUNDS: Feature<Polygon> = {
     ],
   },
 };
+
+const box = (west: number, south: number, east: number, north: number): Feature<Polygon> => ({
+  type: "Feature",
+  properties: {},
+  geometry: {
+    type: "Polygon",
+    coordinates: [
+      [
+        [west, south],
+        [west, north],
+        [east, north],
+        [east, south],
+        [west, south],
+      ],
+    ],
+  },
+});
+
+const EUROPE_WIDTH = 640;
+const EUROPE_HEIGHT = 470;
+const EUROPE_BOUNDS = box(-11, 29, 46, 58);
+
+const EUROPE_REGIONS: readonly Place[] = [
+  { name: "Iberia", lat: 40.2, lon: -4 },
+  { name: "Francia", lat: 47.5, lon: 2.6 },
+  { name: "Italia", lat: 42.6, lon: 12.8 },
+  { name: "Germania", lat: 51.3, lon: 10.5 },
+  { name: "Britania", lat: 52.6, lon: -1.6 },
+  { name: "Anatolia", lat: 39, lon: 32 },
+  { name: "Egipto", lat: 29.8, lon: 29.5 },
+  { name: "África", lat: 31.5, lon: 8 },
+];
+
+const PENINSULA_WIDTH = 640;
+const PENINSULA_HEIGHT = 540;
+const PENINSULA_BOUNDS = box(-10, 35.5, 4, 44.5);
 
 const MED_REGIONS: readonly Place[] = [
   { name: "Hispania", lat: 40.2, lon: -4 },
@@ -141,6 +177,9 @@ export type HolyLandMap = {
   regions: readonly { name: string; x: number; y: number }[];
   sea: { x: number; y: number };
   seaName: string;
+  ariaLabel: string;
+  /** En los mapas grandes los nombres se pisan: solo se escribe el del lugar activo. */
+  labelOnlyActive: boolean;
   places: readonly ProjectedPlace[];
 };
 
@@ -158,14 +197,56 @@ const REGION_COUNTRIES = new Set(["Israel", "Palestine", "Jordan", "Lebanon", "S
 const round = (path: string | null): string => (path ?? "").replace(/\d+\.\d+/g, (n) => Number(n).toFixed(1));
 
 /** Se calcula en el servidor: al navegador solo llegan las rutas SVG. */
-export const buildHolyLandMap = (places: Readonly<Record<string, Place>>, region: MapRegion = "tierra-santa"): HolyLandMap =>
-  region === "mediterraneo" ? buildMediterraneanMap(places) : buildHolyLand(places);
+export const buildHolyLandMap = (places: Readonly<Record<string, Place>>, region: MapRegion = "tierra-santa"): HolyLandMap => {
+  if (region === "mediterraneo")
+    return buildWideMap(places, {
+      width: MED_WIDTH,
+      height: MED_HEIGHT,
+      bounds: MED_BOUNDS,
+      regions: MED_REGIONS,
+      sea: { lon: 18, lat: 34.6 },
+      seaName: "Mare Nostrum",
+      ariaLabel: "Mapa del Mediterráneo en época romana",
+    });
+  if (region === "europa")
+    return buildWideMap(places, {
+      width: EUROPE_WIDTH,
+      height: EUROPE_HEIGHT,
+      bounds: EUROPE_BOUNDS,
+      regions: EUROPE_REGIONS,
+      sea: { lon: 18, lat: 34.6 },
+      seaName: "Mar Mediterráneo",
+      ariaLabel: "Mapa de Europa y el Mediterráneo en la Edad Media",
+    });
+  if (region === "peninsula")
+    return buildWideMap(places, {
+      width: PENINSULA_WIDTH,
+      height: PENINSULA_HEIGHT,
+      bounds: PENINSULA_BOUNDS,
+      regions: [],
+      sea: { lon: 1.6, lat: 37.6 },
+      seaName: "Mar Mediterráneo",
+      ariaLabel: "Mapa de la península ibérica",
+    });
+  return buildHolyLand(places);
+};
 
-const buildMediterraneanMap = (places: Readonly<Record<string, Place>>): HolyLandMap => {
-  const projection = geoMercator().fitSize([MED_WIDTH, MED_HEIGHT], MED_BOUNDS);
+type WideMapConfig = {
+  width: number;
+  height: number;
+  bounds: Feature<Polygon>;
+  regions: readonly Place[];
+  sea: { lon: number; lat: number };
+  seaName: string;
+  ariaLabel: string;
+};
+
+/** Mapas de gran escala: muchos lugares, así que solo se rotula el activo. */
+const buildWideMap = (places: Readonly<Record<string, Place>>, config: WideMapConfig): HolyLandMap => {
+  const projection = geoMercator().fitSize([config.width, config.height], config.bounds);
   projection.clipExtent([
     [0, 0],
-    [MED_WIDTH, MED_HEIGHT],
+    [config.width, config.height],
   ]);
   const toPath = geoPath(projection);
   const project = (lon: number, lat: number) => {
@@ -173,15 +254,17 @@ const buildMediterraneanMap = (places: Readonly<Record<string, Place>>): HolyLan
     return { x, y };
   };
   return {
-    width: MED_WIDTH,
-    height: MED_HEIGHT,
+    width: config.width,
+    height: config.height,
     land: round(toPath(feature(mediumWorld, mediumWorld.objects.countries))),
     galilee: "",
     deadSea: "",
     jordan: "",
-    regions: MED_REGIONS.map((item) => ({ name: item.name, ...project(item.lon, item.lat) })),
-    sea: project(18, 34.6),
-    seaName: "Mare Nostrum",
+    regions: config.regions.map((item) => ({ name: item.name, ...project(item.lon, item.lat) })),
+    sea: project(config.sea.lon, config.sea.lat),
+    seaName: config.seaName,
+    ariaLabel: config.ariaLabel,
+    labelOnlyActive: true,
     places: Object.entries(places).map(([id, place]) => ({ id, name: place.name, ...project(place.lon, place.lat) })),
   };
 };
@@ -215,6 +298,8 @@ const buildHolyLand = (places: Readonly<Record<string, Place>>): HolyLandMap => 
     regions: REGIONS.map((region) => ({ name: region.name, ...project(region.lon, region.lat) })),
     sea: project(34.48, 32.62),
     seaName: "Mar Mediterráneo",
+    ariaLabel: "Mapa de Galilea, Samaria y Judea en tiempos de Jesús",
+    labelOnlyActive: false,
     places: Object.entries(places).map(([id, place]) => ({ id, name: place.name, ...project(place.lon, place.lat) })),
   };
 };

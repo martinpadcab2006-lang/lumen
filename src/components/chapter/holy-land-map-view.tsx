@@ -12,7 +12,7 @@ export const HolyLandMapView = ({ map, activePlace, className = "" }: HolyLandMa
     viewBox={`0 0 ${map.width} ${map.height}`}
     className={`block h-auto w-full ${className}`}
     role="img"
-    aria-label={map.seaName === "Mare Nostrum" ? "Mapa del Mediterráneo en época romana" : "Mapa de Galilea, Samaria y Judea en tiempos de Jesús"}
+    aria-label={map.ariaLabel}
   >
     <rect width={map.width} height={map.height} className="fill-lapis-suave" />
     <path d={map.land} className="fill-superficie stroke-superficie" strokeWidth={1.2} />
@@ -37,8 +37,7 @@ export const HolyLandMapView = ({ map, activePlace, className = "" }: HolyLandMa
     ))}
     {map.places.map((place) => {
       const active = place.id === activePlace;
-      // En el mapa grande los nombres se pisan: solo se escribe el del lugar activo.
-      const showLabel = active || map.seaName !== "Mare Nostrum";
+      const showLabel = active || !map.labelOnlyActive;
       return (
         <g key={place.id} transform={`translate(${place.x} ${place.y})`}>
           {active && <circle r={18} className="fill-alba motion-safe:animate-ping" opacity={0.35} />}

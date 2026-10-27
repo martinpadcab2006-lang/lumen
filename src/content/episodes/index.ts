@@ -49,6 +49,20 @@ import { diosYHombre } from "./s5/06-dios-y-hombre";
 import { debatesYHerejias } from "./s5/07-debates-y-herejias";
 import { losSacramentos } from "./s5/08-los-sacramentos";
 import { oracionYLiturgia } from "./s5/09-oracion-y-liturgia";
+import { losPrimerosMonjes } from "./s6/01-los-primeros-monjes";
+import { sanBenito } from "./s6/02-san-benito";
+import { bizancio } from "./s6/03-bizancio";
+import { laExpansion } from "./s6/04-la-expansion-por-europa";
+import { losPueblosGermanicos } from "./s6/05-los-pueblos-germanicos";
+import { alAndalus } from "./s6/06-al-andalus";
+import { carlomagno } from "./s6/07-carlomagno";
+import { elGranCisma } from "./s6/08-el-gran-cisma";
+import { lasCruzadas } from "./s6/09-las-cruzadas";
+import { lasOrdenes } from "./s6/10-las-ordenes-medievales";
+import { elCamino } from "./s6/11-el-camino-de-santiago";
+import { lasUniversidades } from "./s6/12-las-universidades";
+import { laInquisicion } from "./s6/13-la-inquisicion";
+import { elCismaDeOccidente } from "./s6/14-el-cisma-de-occidente";
 
 /** Un episodio escrito: su sitio en la serie y su contenido (con el mismo formato que los capítulos). */
 export type Episode = { season: string; slug: string; content: Chapter };
@@ -96,6 +110,7 @@ const written: readonly Episode[] = [
   ]),
   ...inSeason("perseguidos", [neron, losMartires, lasCatacumbas, persecuciones, laVidaCotidiana, constantino, nicea, teodosio, laCaidaDeRoma]),
   ...inSeason("la-doctrina", [laBiblia, antiguoYNuevo, elCanon, losPadres, laTrinidad, diosYHombre, debatesYHerejias, losSacramentos, oracionYLiturgia]),
+  ...inSeason("la-edad-media", [losPrimerosMonjes, sanBenito, bizancio, laExpansion, losPueblosGermanicos, alAndalus, carlomagno, elGranCisma, lasCruzadas, lasOrdenes, elCamino, lasUniversidades, laInquisicion, elCismaDeOccidente]),
 ];
 
 export const writtenEpisodes = written;
