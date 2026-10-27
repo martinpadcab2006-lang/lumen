@@ -63,6 +63,16 @@ import { elCamino } from "./s6/11-el-camino-de-santiago";
 import { lasUniversidades } from "./s6/12-las-universidades";
 import { laInquisicion } from "./s6/13-la-inquisicion";
 import { elCismaDeOccidente } from "./s6/14-el-cisma-de-occidente";
+import { elRenacimiento } from "./s7/01-el-renacimiento";
+import { lutero } from "./s7/02-lutero";
+import { calvino } from "./s7/03-calvino-y-otras-reformas";
+import { trento } from "./s7/04-trento-y-la-contrarreforma";
+import { ignacio } from "./s7/05-ignacio-y-los-jesuitas";
+import { laMistica } from "./s7/06-la-mistica-espanola";
+import { lasMisiones } from "./s7/07-las-misiones";
+import { lasGuerras } from "./s7/08-las-guerras-de-religion";
+import { galileo } from "./s7/09-galileo";
+import { laIlustracion } from "./s7/10-la-ilustracion";
 
 /** Un episodio escrito: su sitio en la serie y su contenido (con el mismo formato que los capítulos). */
 export type Episode = { season: string; slug: string; content: Chapter };
@@ -111,6 +121,7 @@ const written: readonly Episode[] = [
   ...inSeason("perseguidos", [neron, losMartires, lasCatacumbas, persecuciones, laVidaCotidiana, constantino, nicea, teodosio, laCaidaDeRoma]),
   ...inSeason("la-doctrina", [laBiblia, antiguoYNuevo, elCanon, losPadres, laTrinidad, diosYHombre, debatesYHerejias, losSacramentos, oracionYLiturgia]),
   ...inSeason("la-edad-media", [losPrimerosMonjes, sanBenito, bizancio, laExpansion, losPueblosGermanicos, alAndalus, carlomagno, elGranCisma, lasCruzadas, lasOrdenes, elCamino, lasUniversidades, laInquisicion, elCismaDeOccidente]),
+  ...inSeason("la-edad-moderna", [elRenacimiento, lutero, calvino, trento, ignacio, laMistica, lasMisiones, lasGuerras, galileo, laIlustracion]),
 ];
 
 export const writtenEpisodes = written;

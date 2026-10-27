@@ -1,4 +1,4 @@
-import { geoMercator, geoPath } from "d3-geo";
+import { geoMercator, geoPath, type GeoPermissibleObjects } from "d3-geo";
 import type { Feature, LineString, Polygon } from "geojson";
 import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
@@ -9,8 +9,8 @@ import type { Place } from "@/content/chapter-types";
 const WIDTH = 420;
 const HEIGHT = 620;
 
-/** Las escalas de mapa de la serie: la tierra de Jesús, el Mediterráneo romano, la Europa medieval o la península ibérica. */
-export type MapRegion = "tierra-santa" | "mediterraneo" | "europa" | "peninsula";
+/** Las escalas de mapa de la serie: de la tierra de Jesús al mundo entero. */
+export type MapRegion = "tierra-santa" | "mediterraneo" | "europa" | "peninsula" | "mundo";
 
 const MED_WIDTH = 640;
 const MED_HEIGHT = 400;
@@ -67,6 +67,26 @@ const EUROPE_REGIONS: readonly Place[] = [
 const PENINSULA_WIDTH = 640;
 const PENINSULA_HEIGHT = 540;
 const PENINSULA_BOUNDS = box(-10, 35.5, 4, 44.5);
+
+const WORLD_WIDTH = 640;
+const WORLD_HEIGHT = 330;
+/** Más de 180° de ancho: un rectángulo esférico daría la vuelta por el otro lado, así que se encuadran sus esquinas. */
+const WORLD_BOUNDS: GeoPermissibleObjects = {
+  type: "MultiPoint",
+  coordinates: [
+    [-125, -45],
+    [-125, 62],
+    [150, 62],
+    [150, -45],
+  ],
+};
+
+const WORLD_REGIONS: readonly Place[] = [
+  { name: "América", lat: 2, lon: -62 },
+  { name: "Europa", lat: 52, lon: 18 },
+  { name: "África", lat: 6, lon: 20 },
+  { name: "Asia", lat: 47, lon: 90 },
+];
 
 const MED_REGIONS: readonly Place[] = [
   { name: "Hispania", lat: 40.2, lon: -4 },
@@ -228,13 +248,23 @@ export const buildHolyLandMap = (places: Readonly<Record<string, Place>>, region
       seaName: "Mar Mediterráneo",
       ariaLabel: "Mapa de la península ibérica",
     });
+  if (region === "mundo")
+    return buildWideMap(places, {
+      width: WORLD_WIDTH,
+      height: WORLD_HEIGHT,
+      bounds: WORLD_BOUNDS,
+      regions: WORLD_REGIONS,
+      sea: { lon: -38, lat: 22 },
+      seaName: "Océano Atlántico",
+      ariaLabel: "Mapa del mundo",
+    });
   return buildHolyLand(places);
 };
 
 type WideMapConfig = {
   width: number;
   height: number;
-  bounds: Feature<Polygon>;
+  bounds: GeoPermissibleObjects;
   regions: readonly Place[];
   sea: { lon: number; lat: number };
   seaName: string;
