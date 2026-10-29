@@ -1,5 +1,5 @@
 import { makeEpisode } from "../make";
-import { holyLand, library, media } from "./library";
+import { holyLand, library } from "./library";
 
 const places = { belen: holyLand.belen, nazaret: holyLand.nazaret, jerusalen: holyLand.jerusalen };
 
@@ -17,7 +17,6 @@ export const elNacimientoDeJesus = makeEpisode({
     { id: "belenes", year: "1223 – hoy", place: "belen" },
   ],
   library: { ...library, places },
-  media,
   version: {
     title: "El nacimiento de Jesús",
     inAMinute: [

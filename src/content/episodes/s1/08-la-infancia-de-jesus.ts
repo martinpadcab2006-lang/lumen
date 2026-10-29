@@ -1,5 +1,5 @@
 import { makeEpisode } from "../make";
-import { holyLand, library, media } from "./library";
+import { holyLand, library } from "./library";
 
 const places = { nazaret: holyLand.nazaret, seforis: holyLand.seforis, jerusalen: holyLand.jerusalen, cafarnaum: holyLand.cafarnaum };
 
@@ -18,7 +18,6 @@ export const laInfanciaDeJesus = makeEpisode({
     { id: "pintores", year: "Siglos XVII – XIX", place: "nazaret" },
   ],
   library: { ...library, places },
-  media,
   version: {
     title: "La infancia y la juventud de Jesús",
     inAMinute: [

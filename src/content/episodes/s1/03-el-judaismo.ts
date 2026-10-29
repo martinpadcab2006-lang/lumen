@@ -1,7 +1,7 @@
 import { descubre as chapterOne } from "../../chapters/01-el-mundo-de-jesus/descubre";
 import type { Section } from "../../chapter-types";
 import { makeEpisode } from "../make";
-import { holyLand, library, media } from "./library";
+import { holyLand, library } from "./library";
 
 const fromChapterOne = (stop: string): Section["blocks"] => chapterOne.sections.find((section) => section.stop === stop)?.blocks ?? [];
 
@@ -20,7 +20,6 @@ export const elJudaismo = makeEpisode({
     { id: "judio", year: "Siglo I", place: "nazaret" },
   ],
   library,
-  media,
   version: {
     title: "El judaísmo en tiempos de Jesús",
     inAMinute: [

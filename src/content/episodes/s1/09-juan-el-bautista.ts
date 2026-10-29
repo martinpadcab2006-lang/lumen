@@ -1,5 +1,5 @@
 import { makeEpisode } from "../make";
-import { holyLand, library, media } from "./library";
+import { holyLand, library } from "./library";
 
 const places = {
   jordan: holyLand.jordan,
@@ -24,7 +24,6 @@ export const juanElBautista = makeEpisode({
     { id: "relevo", year: "c. 29", place: "tiberiades" },
   ],
   library: { ...library, places },
-  media,
   version: {
     title: "Juan el Bautista",
     inAMinute: [

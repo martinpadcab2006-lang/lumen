@@ -1,6 +1,7 @@
 /** Comprueba que cada bloque cita imágenes, dibujos, personajes y lugares que existen. Uso: npx tsx scripts/comprobar-contenido.ts */
 import type { Block, Library } from "../src/content/chapter-types";
 import { writtenEpisodes } from "../src/content/episodes";
+import { episodeMedia } from "../src/content/episodes/media";
 import { chapters } from "../src/content/history";
 import { findSeason } from "../src/content/seasons";
 import { levels } from "../src/content/levels";
@@ -36,6 +37,13 @@ for (const episode of writtenEpisodes) {
   for (const question of version.quiz ?? [])
     if (!question.options.some((option) => option.id === question.correctId)) problems.push(`${where}: pregunta ${question.id} sin respuesta válida`);
 }
+
+const episodeSlugs = new Set(writtenEpisodes.map((episode) => episode.slug));
+for (const slug of Object.keys(episodeMedia)) if (!episodeSlugs.has(slug)) problems.push(`vídeos: «${slug}» no es ningún episodio`);
+for (const episode of writtenEpisodes)
+  if (episode.content.media.length === 0) problems.push(`${episode.season}/${episode.slug}: no tiene vídeos`);
+const youtubeIds = Object.values(episodeMedia).flat().flatMap((item) => (item.youtubeId ? [item.youtubeId] : []));
+for (const id of youtubeIds) if (!/^[\w-]{11}$/.test(id)) problems.push(`vídeos: identificador de YouTube raro «${id}»`);
 
 for (const tema of temas) {
   const level = levels.find((item) => item.slug === tema.level);

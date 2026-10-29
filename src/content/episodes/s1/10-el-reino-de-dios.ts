@@ -1,5 +1,5 @@
 import { makeEpisode } from "../make";
-import { holyLand, library, media } from "./library";
+import { holyLand, library } from "./library";
 
 const places = {
   cafarnaum: holyLand.cafarnaum,
@@ -24,7 +24,6 @@ export const elReinoDeDios = makeEpisode({
     { id: "final", year: "c. 30", place: "jerusalen" },
   ],
   library: { ...library, places },
-  media,
   version: {
     title: "El Reino de Dios",
     inAMinute: [

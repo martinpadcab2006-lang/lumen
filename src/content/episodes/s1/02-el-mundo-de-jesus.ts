@@ -1,6 +1,6 @@
 import { descubre as chapterOne } from "../../chapters/01-el-mundo-de-jesus/descubre";
 import { makeEpisode } from "../make";
-import { holyLand, library, media } from "./library";
+import { holyLand, library } from "./library";
 
 const keep = new Set(["roma", "herodes", "galilea", "impuestos", "guerra"]);
 
@@ -18,7 +18,6 @@ export const elMundoDeJesus = makeEpisode({
     { id: "guerra", year: "66 – 73 d. C.", place: "masada" },
   ],
   library,
-  media,
   version: {
     ...chapterOne,
     inAMinute: [

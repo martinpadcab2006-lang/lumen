@@ -1,4 +1,5 @@
 import type { Chapter, ChapterVersion, Library, Media, Place, Stop } from "../chapter-types";
+import { episodeMedia } from "./media";
 
 type EpisodeInput = {
   slug: string;
@@ -29,7 +30,7 @@ export const makeEpisode = (input: EpisodeInput): Chapter => ({
   images: input.library.images,
   illustrations: input.library.illustrations,
   characters: input.library.characters,
-  media: input.media ?? [],
+  media: episodeMedia[input.slug] ?? input.media ?? [],
   versions: { descubre: input.version, universidad: input.version },
 });
 
